@@ -1,0 +1,166 @@
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\ApplicationInsights.config
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\LocationTracking.dll.config
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\LocationTracking.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\LocationTracking.pdb
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Antlr3.Runtime.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\EntityFramework.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\EntityFramework.SqlServer.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.Agent.Intercept.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.DependencyCollector.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.PerfCounterCollector.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.ServerTelemetryChannel.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.Web.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.WindowsServer.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.ApplicationInsights.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Core.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Owin.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.Core.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Host.SystemWeb.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Cookies.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Facebook.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Google.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.OAuth.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Twitter.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Web.Infrastructure.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Newtonsoft.Json.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Owin.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Net.Http.Formatting.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Helpers.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.Owin.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.WebHost.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Mvc.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Optimization.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Razor.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Deployment.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Razor.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\WebGrease.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.Core.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Newtonsoft.Json.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Net.Http.Formatting.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Helpers.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.WebHost.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Mvc.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Optimization.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Razor.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Deployment.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Razor.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Antlr3.Runtime.pdb
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\EntityFramework.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\EntityFramework.SqlServer.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Core.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Owin.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Host.SystemWeb.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Facebook.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Cookies.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.OAuth.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Google.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Twitter.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.Owin.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.ApplicationInsights.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.DependencyCollector.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.ServerTelemetryChannel.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.WindowsServer.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.Web.xml
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.csproj.CoreCompileInputs.cache
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.dll
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.pdb
+W:\Information Systems\ReubenProjects\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.csprojResolveAssemblyReference.cache
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\ApplicationInsights.config
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\LocationTracking.dll.config
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\LocationTracking.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\LocationTracking.pdb
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Antlr3.Runtime.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\EntityFramework.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\EntityFramework.SqlServer.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.Web.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Newtonsoft.Json.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Owin.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Net.Http.Formatting.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Helpers.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.Owin.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.WebHost.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Mvc.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Optimization.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Razor.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Razor.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\WebGrease.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Newtonsoft.Json.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Net.Http.Formatting.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Helpers.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.WebHost.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Mvc.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Optimization.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Razor.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.WebPages.Razor.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Antlr3.Runtime.pdb
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\EntityFramework.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\EntityFramework.SqlServer.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\System.Web.Http.Owin.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\bin\Microsoft.AI.Web.xml
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.csproj.CoreCompileInputs.cache
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.dll
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.pdb
+C:\Users\Reuben\Documents\Visual Studio 2017\Projects\LocationTracking\LocationTracking\obj\Debug\LocationTracking.csprojResolveAssemblyReference.cache

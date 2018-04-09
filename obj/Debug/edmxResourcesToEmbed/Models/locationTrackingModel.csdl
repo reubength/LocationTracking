@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ph13696936071_ElectionReportingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="election_Precinct">
+    <Key>
+      <PropertyRef Name="precinct_Id" />
+    </Key>
+    <Property Name="poll_Id" Type="Int32" Nullable="false" />
+    <Property Name="precinct_Id" Type="Int32" Nullable="false" />
+    <Property Name="ward_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="precinct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="poll_Location">
+    <Key>
+      <PropertyRef Name="poll_Id" />
+    </Key>
+    <Property Name="poll_Id" Type="Int32" Nullable="false" />
+    <Property Name="poll_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="poll_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Zone" Type="Int32" />
+    <Property Name="Monday_Arrival" Type="Int32" />
+    <Property Name="Tuesday_Arrival" Type="Int32" />
+    <Property Name="OpenReady" Type="Int32" />
+    <Property Name="ClosePollReady" Type="Int32" />
+    <Property Name="Monday_Delivery" Type="Int32" />
+    <Property Name="Monday_Close" Type="Int32" />
+    <Property Name="Building_Open" Type="Int32" />
+  </EntityType>
+  <EntityType Name="poll_Location_All">
+    <Key>
+      <PropertyRef Name="poll_id" />
+    </Key>
+    <Property Name="poll_id" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="latitude" Type="Double" />
+    <Property Name="longitude" Type="Double" />
+    <Property Name="location_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="location_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="ElectionReportingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="election_Precinct" EntityType="Self.election_Precinct" />
+    <EntitySet Name="poll_Location" EntityType="Self.poll_Location" />
+    <EntitySet Name="poll_Location_All" EntityType="Self.poll_Location_All" />
+    <EntitySet Name="LocTrackMains" EntityType="ph13696936071_ElectionReportingModel.LocTrackMain" />
+    <EntitySet Name="C__MigrationHistory" EntityType="ph13696936071_ElectionReportingModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="ph13696936071_ElectionReportingModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="ph13696936071_ElectionReportingModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="ph13696936071_ElectionReportingModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="ph13696936071_ElectionReportingModel.AspNetUser" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ph13696936071_ElectionReportingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ph13696936071_ElectionReportingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="ph13696936071_ElectionReportingModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="dbo_zones" EntityType="ph13696936071_ElectionReportingModel.dbo_zones" />
+    <EntitySet Name="dbo_poll_ContactDetails" EntityType="ph13696936071_ElectionReportingModel.dbo_poll_ContactDetails" />
+  </EntityContainer>
+  <EntityType Name="LocTrackMain">
+    <Key>
+      <PropertyRef Name="poll_Id" />
+      <PropertyRef Name="poll_Name" />
+      <PropertyRef Name="poll_Address" />
+      <PropertyRef Name="ward_Name" />
+    </Key>
+    <Property Name="poll_Id" Type="Int32" Nullable="false" />
+    <Property Name="poll_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="poll_Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Zone" Type="Int32" />
+    <Property Name="ward_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="precincts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Monday_Arrival" Type="Int32" />
+    <Property Name="Tuesday_Arrival" Type="Int32" />
+    <Property Name="OpenReady" Type="Int32" />
+    <Property Name="ClosePollReady" Type="Int32" />
+    <Property Name="Monday_Delivery" Type="Int32" />
+    <Property Name="Monday_Close" Type="Int32" />
+    <Property Name="Building_Open" Type="Int32" />
+  </EntityType>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="ph13696936071_ElectionReportingModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ph13696936071_ElectionReportingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ph13696936071_ElectionReportingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="ph13696936071_ElectionReportingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="ph13696936071_ElectionReportingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="ph13696936071_ElectionReportingModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="ph13696936071_ElectionReportingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ph13696936071_ElectionReportingModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="ph13696936071_ElectionReportingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ph13696936071_ElectionReportingModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="ph13696936071_ElectionReportingModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="ph13696936071_ElectionReportingModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityType Name="dbo_zones">
+    <Key>
+      <PropertyRef Name="id_zone" />
+    </Key>
+    <Property Name="id_zone" Type="Int32" Nullable="false" />
+    <Property Name="zone" Type="Int32" />
+    <Property Name="zone_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="zone_Kml" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="zone_Active" Type="Int32" />
+  </EntityType>
+  <EntityType Name="dbo_poll_ContactDetails">
+    <Key>
+      <PropertyRef Name="r_Id" />
+    </Key>
+    <Property Name="r_Id" Type="Int32" Nullable="false" />
+    <Property Name="poll_Id" Type="Int32" Nullable="false" />
+    <Property Name="contact_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact_Info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

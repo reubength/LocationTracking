@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>  Location Tracking   </title>
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-touch.min.js"></script>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+    <script src="Scripts/ng-map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHlI2lKUMykO3mHXvoBnDkI1yQcFgRR8s"></script>
+
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/ui-bootstrap-tpls-2.5.0.js"></script>
+    <link href="Content/angular-bootstrap-toggle.css" rel="stylesheet" />
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+
+    <script src="Scripts/angular-bootstrap-toggle.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.2.min.js"></script>
+
+    <script src="SPA/MainController.js"></script>
+    <script src="SPA/UploadFile/fileUploadController.js"></script>
+    <script src="SPA/GreenBubbleController/EquipmentController.js"></script>
+    <script src="SPA/UserProfile/userProfileService.js"></script>
+    <script src="SPA/SignalRServices/SignalRService.js"></script>
+    <script src="SPA/Home/homeService.js"></script>
+    <script src="SPA/Login/loginServices.js"></script>
+    <script src="SPA/Login/loginController.js"></script>
+    <script src="SPA/ElectionSetup/ElectionSetupController.js"></script>
+    <script src="SPA/ModalController/ModalController.js"></script>
+
+    <script src="/signalr/hubs"></script>
+    <script src="SPA/app.js"></script>
+
+    <!-- <script src="SPA/routes.js"></script>-->
+    <!-- <script src="SPA/mapApp.js"></script>-->
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding-top:60px;
+            font-family: Calibri,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+        }
+        /*.col-centered{
+            float: none;
+            margin: 0 auto;
+        }*/
+
+        .container {
+            /*margin-top: 100px;
+            border: 1px solid blue;
+            border-right: 1px solid blue;*/
+            max-width:80%;
+        }
+        .slow .toggle-group {
+            transition: left 0.7s;
+            -webkit-transition: left 0.7s;
+        }
+        .navbar-default {
+            background-color: #a5a3a3;
+            border-color: #e7e7e7;
+        }
+
+        .navbar {
+            width: 100%;
+            background: #a5a3a3;
+        }
+
+        .brand {
+            position: relative;
+            margin-top: -21px;
+            margin-right: 20px;
+            top: 12px;
+            height: 60px;
+            /*color:#ffffff;*/
+        }
+
+        .navbar-default .navbar-brand {
+            color: #ffffff;
+            font-size: 25px;
+            text-align: center;
+            /*background-color: #BB9F06;*/
+        }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #4183bd;
+            background-color: #ffffff;
+        }
+        
+        .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+            color: #8a8a8a;
+            background-color: #888888;
+            border-color: #606060;
+        }
+        a {
+            color: #4183bd;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .navbar-default .navbar-nav > li > a {
+            padding-top: 25px;
+            padding-bottom: 15px;
+        }
+
+        .navbar-nav > li > .dropdown-menu {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        .navbar-default .navbar-nav > li {
+            /*text-align: center;*/
+            float: none;
+            /*display: inline-block;*/
+            /*background-color: #61b6f6;*/
+        }
+        .navbar-default .navbar-nav > .open > a,
+        .navbar-default .navbar-nav > .open > a:hover,
+        .navbar-default .navbar-nav > .open > a:focus {
+            color: #d4d4d4;
+            background-color: #888888;
+        }
+        
+
+        .btn-default, .btn-default.active, .open > .dropdown-toggle.btn-default {
+            color: #a9a9a9;
+            background-color: #efefef;
+            border-color: #9E9E9E;
+        }
+        table tr {
+            
+        }
+        .colorBar {
+            /*background-color: #6aa0af;*/
+            background-color: #3e80ab;
+            top: 10px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: relative;
+            width: 100%;
+            height: 10px;
+        }
+
+        .btn {
+            margin-bottom: 2px;
+            margin-top: 2.5px;
+        }
+
+        .modal-dialog {
+            position: absolute;
+            top: 35% !important;
+            transform: translate(0, -50%) !important;
+            -ms-transform: translate(0, -50%) !important;
+            -webkit-transform: translate(0, -30%) !important;
+            left: 37%;
+            margin: auto 5%;
+            width: 20%;
+            
+            min-height: 400px;
+            display: table;
+        }
+
+        /*.modal-content {
+            min-height: 100px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: auto;
+        }
+
+        .modal-body {
+            position: relative;
+            display: table;
+            top: 45px;
+            right: 0;
+            overflow-y: auto;
+            height: auto;
+        }
+
+        .modal-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }*/
+
+
+        /*in Bootstrap Theme*/
+        /*.alert-success {
+            color: #437498;
+            background-color: #437498;
+            border-color: #5a99c7;
+        }*/
+
+    </style>
+
+</head>
+<body>
+    <div ng-app="app" class="container">
+        <div ng-controller="MainController" id="navigation">
+            <!--navbar navbar-expand-lg fixed-top navbar-dark bg-primary-->            
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <!--<a class="navbar-brand" href="#"><img class="brand" src="SPA/Images/BOE_SEAL.png" />Location Tracking</a>-->
+                <a class="navbar-brand" href="#"><img class="brand" src="Images/BOE_SEAL.png" />Location Tracking</a>
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                  
+                        <div class=" navbar-default navbar-right ">
+                            <ul class="nav navbar-nav ">
+                                <li class="dropdown nav-item">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" ng-show='loggedin==true' aria-expanded="false"><i   class="glyphicon glyphicon-user"></i> {{username}} <span class="caret"></span></a>
+                                    <a class="dropdown-toggle" ng-show='loggedin==false' ng-click="login()"><i  class="glyphicon glyphicon-user" ></i>  Login</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'" ng-click="register()"><a>Add Users</a></li>                                        
+                                        <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'"><a href="#!/ElectionSetup">Election Setup</a></li>
+                                        <li ng-click="logout()"><a>Logout</a></li>
+                                    </ul>
+                                 </li>
+                            </ul>
+                        </div>  
+                        </div>
+                </div>
+
+                <div class="colorBar" ng-show='loggedin==true'>
+                    
+                </div>
+              
+            </nav>           
+        </div>
+
+        <div ng-view class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+        </div>
+        <div  class="modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

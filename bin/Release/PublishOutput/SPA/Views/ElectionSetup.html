@@ -1,0 +1,147 @@
+﻿<style>
+    #mainContainer 
+    {
+        margin-left: -1px;
+        display: block;
+        width: 100%;
+        min-height:612px;
+    }
+    .glyphicon-trash  {
+        color:#f14b4b;
+    }
+    .glyphicon-edit:before {
+        color: #5ebff1;
+    }
+    #leftCol 
+    {
+        display: block;
+        float: left;
+        min-height: 300px;
+        padding: 20px 0 0 1px;
+        position: relative;
+        width: 200px;
+        word-wrap: break-word;
+    }
+    #ContentArea 
+    {
+        border-left: 1px solid #ccc;
+        margin-left: 181px;
+        min-height: 600px;
+        background-color:#fbfbfb;
+    }
+    .uiSideNav .sideNavItem {
+        margin-left: -20px;
+        padding-right: 20px;
+        width: 100%;
+    }
+    li {
+        display: list-item;
+        list-style-type: none;
+        padding:5px 0px;
+        /*text-align: -webkit-match-parent;*/
+    }
+    .dynamicContent{
+        min-height: 300px;
+
+    }
+    a {
+        color: #4183bd;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .registerDiv {
+        /*border: 1px solid #c7c4c4;*/
+        padding: 40px;
+        /*box-shadow: 2px 3px #bfbfbf;*/
+        /*border-radius: 6px;*/
+        height: 500px;
+    }
+
+</style>
+<div id="mainContainer"  ng-controller="ElectionSetupController">     
+        <div id="leftCol">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nav">
+                <ul class="uiSideNav" role="menu">
+                    <li class="sideNavItem" ng-click="changeView('Upload')"><a><i class="fa fa-upload" aria-hidden="true"></i> Upload </a></li>
+                    <li class="sideNavItem" ng-click="changeView('ManageZones')"><a><i class="fa fa-map" aria-hidden="true"></i> Manage Zones</a></li>
+                    <li class="sideNavItem" ng-click="changeView('ManageUsers')"><a><i class="fa fa-users" aria-hidden="true"></i> Manage Users</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="ContentArea" >
+            <div class="dynamicContent" ng-show="FileUpload == true">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 registerDiv container" ng-controller="uploadFileController">
+                    <div class="form-group has-danger ">
+                        <div>
+                            <!-- Error Upload -->
+                            <div ng-show="erroUpload==true" class="invalid-feedback">Your file(s) did not upload Successfully!</div>
+                        </div>
+                    </div>
+
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="uploadFileSel">Select File</label>
+                            <select class="form-control" id="uploadFileSel" ng-model="selFilename" ng-options="i.Name for i in fileName" ng-change="ChangeFileName(selFilename)">
+                                <!--<option ng-repeat="i in fileName" ng-click="ChangeFileName(i)">{{i.Name}}</option>-->
+                                <!--<option>Precinct List</option>-->
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="file" class="  control-label">File Location</label>
+                            <div>
+                                <input type="file" placeholder="file" class="form-control" onchange="angular.element(this).scope().getFileDetails(this)" accept=".csv" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+                                <button type="button" ng-click="uploadFiles()" value="Upload" class="btn btn-success">Upload</button>
+                                <!-- <input type="button" ng-click="uploadFiles()" value="Upload" />-->
+                                <button type="reset" class="btn btn-warning">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="dynamicContent" ng-show="Zones == true">
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-6">
+                    <button class="btn btn-success"><i class="glyohicon glyphicon-plus"></i></button>
+                    <table class="table"> 
+                        <thead>
+                            <tr>                               
+                                <th scope="col">Zone Name</th>                                
+                                <th scope="col">Zone #</th>
+                                <th scope="col">Zone Status</th>
+                               <!-- <th scope="col">Zone KML</th>-->
+                                <th scope="col"> </th>
+                                <th scope="col"> </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr scope="row" ng-repeat="z in ZonesAll | filter: {zone_Name:'!All' }  " class="active">
+                                <!--<td ng-class-odd="'odd'">{{z.id_zone}}</td>-->
+                                <td ng-class-odd="'odd'">{{z.zone_Name}} </td>
+                                <td ng-class-odd="'odd'">{{z.zone}} </td>
+                                <td ng-class-odd="'odd'">{{z.zone_Active}}</td>
+                               <!-- <td ng-class-odd="'odd'">{{z.zone_Kml}}</td>-->
+                                <td ng-class-odd="'odd'" ng-click="openModal(z,'editZones')"><i class="glyphicon glyphicon-edit"></i></td>
+                                <td ng-class-odd="'odd'" ng-click="delteZone(z)"><i class="glyphicon glyphicon-trash"></i></td>
+                                <!--<td class="btn btn-warning" ng-click="clicked(e,d)">Edit</td>-->
+                                <!--<td class="btn btn-info" ng-click="clicked(d)">Info</td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="dynamicContent" ng-show="UsersManage == true">
+            </div>
+        
+    </div>
+     
+</div>

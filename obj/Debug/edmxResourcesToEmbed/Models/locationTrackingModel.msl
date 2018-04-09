@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ph13696936071_ElectionReportingModelStoreContainer" CdmEntityContainer="ElectionReportingEntities">
+    <EntitySetMapping Name="election_Precinct">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.election_Precinct">
+        <MappingFragment StoreEntitySet="election_Precinct">
+          <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
+          <ScalarProperty Name="precinct_Id" ColumnName="precinct_Id" />
+          <ScalarProperty Name="ward_Name" ColumnName="ward_Name" />
+          <ScalarProperty Name="precinct" ColumnName="precinct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="poll_Location">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.poll_Location">
+        <MappingFragment StoreEntitySet="poll_Location">
+          <ScalarProperty Name="Building_Open" ColumnName="Building_Open" />
+          <ScalarProperty Name="Monday_Close" ColumnName="Monday_Close" />
+          <ScalarProperty Name="Monday_Delivery" ColumnName="Monday_Delivery" />
+          <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
+          <ScalarProperty Name="poll_Name" ColumnName="poll_Name" />
+          <ScalarProperty Name="poll_Address" ColumnName="poll_Address" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Monday_Arrival" ColumnName="Monday_Arrival" />
+          <ScalarProperty Name="Tuesday_Arrival" ColumnName="Tuesday_Arrival" />
+          <ScalarProperty Name="OpenReady" ColumnName="OpenReady" />
+          <ScalarProperty Name="ClosePollReady" ColumnName="ClosePollReady" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="poll_Location_All">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.poll_Location_All">
+        <MappingFragment StoreEntitySet="poll_Location_All">
+          <ScalarProperty Name="poll_id" ColumnName="poll_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="location_Name" ColumnName="location_Name" />
+          <ScalarProperty Name="location_Address" ColumnName="location_Address" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocTrackMains">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.LocTrackMain">
+        <MappingFragment StoreEntitySet="LocTrackMain">
+          <ScalarProperty Name="Building_Open" ColumnName="Building_Open" />
+          <ScalarProperty Name="Monday_Close" ColumnName="Monday_Close" />
+          <ScalarProperty Name="Monday_Delivery" ColumnName="Monday_Delivery" />
+          <ScalarProperty Name="ClosePollReady" ColumnName="ClosePollReady" />
+          <ScalarProperty Name="OpenReady" ColumnName="OpenReady" />
+          <ScalarProperty Name="Tuesday_Arrival" ColumnName="Tuesday_Arrival" />
+          <ScalarProperty Name="Monday_Arrival" ColumnName="Monday_Arrival" />
+          <ScalarProperty Name="precincts" ColumnName="precincts" />
+          <ScalarProperty Name="ward_Name" ColumnName="ward_Name" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="poll_Address" ColumnName="poll_Address" />
+          <ScalarProperty Name="poll_Name" ColumnName="poll_Name" />
+          <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="ph13696936071_ElectionReportingModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="dbo_zones">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.dbo_zones">
+        <MappingFragment StoreEntitySet="dbo_zones">
+          <ScalarProperty Name="zone_Active" ColumnName="zone_Active" />
+          <ScalarProperty Name="zone_Kml" ColumnName="zone_Kml" />
+          <ScalarProperty Name="zone_Name" ColumnName="zone_Name" />
+          <ScalarProperty Name="zone" ColumnName="zone" />
+          <ScalarProperty Name="id_zone" ColumnName="id_zone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dbo_poll_ContactDetails">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.dbo_poll_ContactDetails">
+        <MappingFragment StoreEntitySet="dbo_poll_ContactDetails">
+          <ScalarProperty Name="contact_Info" ColumnName="contact_Info" />
+          <ScalarProperty Name="contact_Type" ColumnName="contact_Type" />
+          <ScalarProperty Name="contact_LastName" ColumnName="contact_LastName" />
+          <ScalarProperty Name="contact_FirstName" ColumnName="contact_FirstName" />
+          <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
+          <ScalarProperty Name="r_Id" ColumnName="r_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

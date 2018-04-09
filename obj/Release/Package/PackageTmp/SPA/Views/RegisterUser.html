@@ -1,0 +1,61 @@
+﻿<style>
+    .registerDiv {
+        border: 1px solid #c7c4c4;
+        padding: 40px;
+        box-shadow: 10px 20px 13px #bfbfbf;        
+        border-radius: 6px;
+        height: 500px;
+    }
+</style>
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 registerDiv container" ng-controller="loginController">
+    <h4>Create New User</h4>
+    <form class="form-horizontal  ">
+        <div class="form-group">
+            <label for="userLoginEmail" class="  control-label">User Name</label>
+            <div class=" ">
+                <input type="text" class="form-control" placeholder="E-mail"
+                       ng-model="userRegistrationEmail" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class=" control-label">Password</label>
+            <div class=" ">
+                <input type="password" placeholder="Password"
+                       class="form-control"
+                       ng-model="userRegistrationPassword" />
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="control-label">Confirm Password</label>
+            <div class=" ">
+                <input type="password" placeholder="Confirm Password"
+                       class="form-control"
+                       ng-model="userRegistrationConfirmPassword" />
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="userRole" class=" control-label">User Role</label>
+            <div class=" ">
+                <input placeholder="User Role"
+                       class="form-control"
+                       ng-model="userRegistrationRole" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class=" ">
+                <!-- <small id="newUser" class="form-text text-muted">New User? <a href="#!/Register"><span class="badge badge-pill badge-success">Register</span></a></small>-->
+                <button type="submit" ng-click="registerUser()" class="btn btn-success"><i ng-show="Loading==true" class="fa fa-spinner fa-spin"></i> Register</button>
+                <button type="reset" class="btn btn-warning">Cancel</button>
+
+            </div>
+
+
+        </div>
+    </form>
+</div>

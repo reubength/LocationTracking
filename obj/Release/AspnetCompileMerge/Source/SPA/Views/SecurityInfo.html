@@ -1,0 +1,112 @@
+﻿<style>
+    .invalid-feedback{
+        color:crimson;
+    }
+    .loginDiv {
+        border: 1px solid #c7c4c4;
+        padding: 40px;
+        box-shadow: 10px 20px 13px #bfbfbf;
+        border-radius: 6px;
+        height: 500px;
+    }
+   
+</style>
+<div class="container  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="loginController" >
+    <!--<div class="loginDiv">
+        <div class="form-group has-danger ">
+            <div class="col-lg-10  col-lg-offset-2">
+                <div ng-show="erroLogin==true" class="invalid-feedback">Invalid Username or Password!</div>
+            </div>
+        </div>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="userLoginEmail" class="col-lg-2 control-label">User Name</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" placeholder="E-mail"
+                           ng-model="userLoginEmail" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-3">
+                    <input type="password" placeholder="Password"
+                           class="form-control"
+                           ng-model="userLoginPassword" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <small id="newUser" class="form-text text-muted">New User? <a href="#!/Register"><span class="badge badge-pill badge-success">Register</span></a></small>
+                  
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" ng-click="login()" class="btn btn-success">Login</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <small id="forgotPassword"> <a href="#!/Register">Forgot Password?</a> </small>
+                    
+                </div>
+            </div>
+
+        </form>
+    </div>-->
+
+    <div class="loginDiv col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3" >
+        <div class="form-group has-danger ">
+            <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+                <div ng-show="erroLogin==true" class="invalid-feedback">Invalid Username or Password!</div>
+            </div>
+        </div>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="userLoginEmail" class="  control-label">User Name</label>
+                <div  >
+                    <input type="text" class="form-control" placeholder="E-mail"
+                           ng-model="userLoginEmail" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="  control-label">Password</label>
+                <div >
+                    <input type="password" placeholder="Password"
+                           class="form-control"
+                           ng-model="userLoginPassword" />
+                </div>
+            </div>
+
+            <!--<div class="form-group">
+                <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4">
+                    <small id="newUser" class="form-text text-muted">New User? <a href="#!/Register"><span class="badge badge-pill badge-success">Register</span></a></small>
+
+                </div>
+            </div>-->
+
+            <div class="form-group ">
+                <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5"> 
+                    <button type="submit" ng-click="login()" class="btn btn-success"><i ng-show="Loading==true" class="fa fa-spinner fa-spin"></i> Login</button>
+                    <!-- <button type="reset" class="btn btn-warning">Cancel</button>-->
+                
+
+
+                    <div class="form-group">
+                        <div>
+                            <small id="forgotPassword"> <a href="#!/Register">Forgot Password?</a> </small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
