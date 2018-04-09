@@ -262,7 +262,7 @@
             '<div class="iw-bottom-gradient"></div>' +
             '</div>';
 
-        $scope.InfoWindow.setContent(content);
+        $scope.InfoWindow.setContent(content);  
 
         //$scope.InfoWindow = new google.maps.InfoWindow({
         //    content: content,
