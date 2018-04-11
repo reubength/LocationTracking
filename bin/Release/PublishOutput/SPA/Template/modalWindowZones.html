@@ -7,12 +7,12 @@
     <h3 class="modal-title" id="modal-title">{{modalTitle}}</h3>
 </div>
 <div class="modal-body" id="modal-body" >
-    <ul  >
+    <ul>
 
-        <li ng-repeat="z in modalBody" class="nav-item"> <input type='checkbox' value="{{z.zone_Name}}" ng-model="Selected" ng-click="checkSelected(z)"> {{z.zone_Name}}</li>
+        <li ng-repeat="z in modalBody" class="nav-item"> <input type='checkbox' value="{{z.zone_Name}}" ng-model="Selected" ng-click="checkSelected(this,z)"> {{z.zone_Name}}</li>
     </ul>
     
-    <!--<p>{{modalWard}}</p>-->
+    
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>

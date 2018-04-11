@@ -111,24 +111,25 @@
                     <button class="btn btn-success"><i class="glyohicon glyphicon-plus"></i></button>
                     <table class="table"> 
                         <thead>
-                            <tr>                               
+                            <tr> 
+                                <th scope="col"> </th>
                                 <th scope="col">Zone Name</th>                                
                                 <th scope="col">Zone #</th>
                                 <th scope="col">Zone Status</th>
-                               <!-- <th scope="col">Zone KML</th>-->
-                                <th scope="col"> </th>
+                               <!-- <th scope="col">Zone KML</th>-->                               
                                 <th scope="col"> </th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr scope="row" ng-repeat="z in ZonesAll | filter: {zone_Name:'!All' }  " class="active">
+                                <td ng-class-odd="'odd'" ng-click="openModal(z,'editZones')"><i class="glyphicon glyphicon-edit"></i></td>
                                 <!--<td ng-class-odd="'odd'">{{z.id_zone}}</td>-->
                                 <td ng-class-odd="'odd'">{{z.zone_Name}} </td>
                                 <td ng-class-odd="'odd'">{{z.zone}} </td>
                                 <td ng-class-odd="'odd'">{{z.zone_Active}}</td>
                                <!-- <td ng-class-odd="'odd'">{{z.zone_Kml}}</td>-->
-                                <td ng-class-odd="'odd'" ng-click="openModal(z,'editZones')"><i class="glyphicon glyphicon-edit"></i></td>
+                                
                                 <td ng-class-odd="'odd'" ng-click="delteZone(z)"><i class="glyphicon glyphicon-trash"></i></td>
                                 <!--<td class="btn btn-warning" ng-click="clicked(e,d)">Edit</td>-->
                                 <!--<td class="btn btn-info" ng-click="clicked(d)">Info</td>-->

@@ -52,6 +52,13 @@
             float: none;
             margin: 0 auto;
         }*/
+
+        .container {
+            /*margin-top: 100px;
+            border: 1px solid blue;
+            border-right: 1px solid blue;*/
+            max-width:80%;
+        }
         .slow .toggle-group {
             transition: left 0.7s;
             -webkit-transition: left 0.7s;
@@ -152,10 +159,9 @@
             transform: translate(0, -50%) !important;
             -ms-transform: translate(0, -50%) !important;
             -webkit-transform: translate(0, -30%) !important;
-            left: 25%;
+            left: 37%;
             margin: auto 5%;
-            width: 40%;
-            
+            width: 20%;            
             min-height: 400px;
             display: table;
         }
@@ -200,8 +206,7 @@
 <body>
     <div ng-app="app" class="container">
         <div ng-controller="MainController" id="navigation">
-            <!--navbar navbar-expand-lg fixed-top navbar-dark bg-primary-->
-            
+            <!--navbar navbar-expand-lg fixed-top navbar-dark bg-primary-->            
             <nav class="navbar navbar-default navbar-fixed-top">
                 <!--<a class="navbar-brand" href="#"><img class="brand" src="SPA/Images/BOE_SEAL.png" />Location Tracking</a>-->
                 <a class="navbar-brand" href="#"><img class="brand" src="Images/BOE_SEAL.png" />Location Tracking</a>
@@ -214,38 +219,20 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <!--    <ul class="nav navbar-nav">-->
-                            <!--<li><a href="#">Dashboard</a></li>
-                            <li><a href="#!/mapView">Map View</a></li>-->
-                            
-                        <!-- </ul> -->
-                            <!--<li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{selectedLocation.district_Name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-                <li ng-repeat="x in Districts" ng-click="ChangeLocation(x)"><a>{{x.district_Name}}</a></li>
-            </ul>
-    </li>-->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                  
                         <div class=" navbar-default navbar-right ">
                             <ul class="nav navbar-nav ">
                                 <li class="dropdown nav-item">
                                     <a class="dropdown-toggle" data-toggle="dropdown" ng-show='loggedin==true' aria-expanded="false"><i   class="glyphicon glyphicon-user"></i> {{username}} <span class="caret"></span></a>
                                     <a class="dropdown-toggle" ng-show='loggedin==false' ng-click="login()"><i  class="glyphicon glyphicon-user" ></i>  Login</a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li ng-show="Role =='Admin'||'Manager'||'Supervisor'" ng-click="register()"><a>Add Users</a></li>                                        
-                                        <li ng-show="Role =='Admin'||'Manager'||'Supervisor'"><a href="#!/ElectionSetup">Election Setup</a></li>
+                                        <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'" ng-click="register()"><a>Add Users</a></li>                                        
+                                        <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'"><a href="#!/ElectionSetup">Election Setup</a></li>
                                         <li ng-click="logout()"><a>Logout</a></li>
                                     </ul>
                                  </li>
                             </ul>
-                        </div>
-               
-                            <!--<form class="navbar-form navbar-right form-inline my-2 my-lg-0">
-            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" ng-show='loggedin==false' ng-click="login()">Login</button>
-            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" ng-show='loggedin==true' ng-click="logout()">{{username}}(Logout)</button>
-            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" ng-show='loggedin==false'>Register</button>
-        </form>-->
+                        </div>  
                         </div>
                 </div>
 

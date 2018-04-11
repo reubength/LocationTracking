@@ -1,5 +1,5 @@
 ﻿angular.module('myAppUserService', [])
-    .factory('userProfile', ['$http', function ($http)
+    .factory('userProfile',  ['$http','domain', function ($http,domain)
     {
         var obj = {};
         var profile = {};

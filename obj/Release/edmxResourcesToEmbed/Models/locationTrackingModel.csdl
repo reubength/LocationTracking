@@ -21,6 +21,9 @@
     <Property Name="Tuesday_Arrival" Type="Int32" />
     <Property Name="OpenReady" Type="Int32" />
     <Property Name="ClosePollReady" Type="Int32" />
+    <Property Name="Monday_Delivery" Type="Int32" />
+    <Property Name="Monday_Close" Type="Int32" />
+    <Property Name="Building_Open" Type="Int32" />
   </EntityType>
   <EntityType Name="poll_Location_All">
     <Key>
@@ -58,6 +61,7 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
     </AssociationSet>
     <EntitySet Name="dbo_zones" EntityType="ph13696936071_ElectionReportingModel.dbo_zones" />
+    <EntitySet Name="dbo_poll_ContactDetails" EntityType="ph13696936071_ElectionReportingModel.dbo_poll_ContactDetails" />
   </EntityContainer>
   <EntityType Name="LocTrackMain">
     <Key>
@@ -76,6 +80,9 @@
     <Property Name="Tuesday_Arrival" Type="Int32" />
     <Property Name="OpenReady" Type="Int32" />
     <Property Name="ClosePollReady" Type="Int32" />
+    <Property Name="Monday_Delivery" Type="Int32" />
+    <Property Name="Monday_Close" Type="Int32" />
+    <Property Name="Building_Open" Type="Int32" />
   </EntityType>
   <EntityType Name="C__MigrationHistory">
     <Key>
@@ -177,5 +184,16 @@
     <Property Name="zone_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="zone_Kml" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="zone_Active" Type="Int32" />
+  </EntityType>
+  <EntityType Name="dbo_poll_ContactDetails">
+    <Key>
+      <PropertyRef Name="r_Id" />
+    </Key>
+    <Property Name="r_Id" Type="Int32" Nullable="false" />
+    <Property Name="poll_Id" Type="Int32" Nullable="false" />
+    <Property Name="contact_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact_Info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

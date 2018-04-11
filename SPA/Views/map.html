@@ -51,6 +51,10 @@
         margin-left: 3%;
         padding-bottom:25px;
     }
+    /*info-window
+    {
+        min-height:200px;
+    }*/
 </style>
 
 <div ng-controller="EquipmentController">
@@ -78,9 +82,18 @@
         </div>-->
 
         <div class="map">
-            <ng-map ng-init="getMap()" center="41.5027736,-81.6700112" zoom="13" ng-dblclick="openModal('','Zone')" disable-double-click-zoom="true"r>
+            <ng-map ng-init="getMap()" center="41.5027736,-81.6700112" zoom="13" ng-dblclick="openModal('','Zone')" disable-double-click-zoom="true" >
                 <kml-layer ng-repeat="k in ZonesAll| filter:filterMakes()" url="{{k.zone_Kml}}" on-click="selectZones(k,k.zone)"></kml-layer>
-                <marker ng-repeat="p in dynMarkers | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}" animation="Animation.DROP" optimized="true" on-click="showDetail(p)">
+                <marker ng-repeat="p in dynMarkers | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}" animation="Animation.DROP" optimized="true" on-click="showDetail(p)"> </marker>
+                <!--<info-window id="foo-iw" position="[{{p.lat}},{{p.lng}}]">
+
+                    <div >
+                        
+                        
+                      
+                    </div>
+                </info-window>-->
+            </ng-map>
 
         </div>
     </div>

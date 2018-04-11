@@ -167,7 +167,7 @@
 
                  <tbody>
                      <tr scope="row" ng-repeat="pl in PollLoc | orderBy:sortType:sortReverse | filter:filterMakes()" class="active">
-                         <td ng-class-odd="'odd'"><span class="fa fa-info-circle" ng-click="clickIfoPane(pl)"> </span>  {{pl.Poll_Id}}</td>
+                         <td ng-class-odd="'odd'"><span class="fa fa-info-circle" ng-click="openModal(pl,'Poll Details')""> </span>  {{pl.Poll_Id}}</td>
                          <td ng-class-odd="'odd'">{{pl.Poll_Name}} </td>
                          <td ng-class-odd="'odd'">{{pl.Poll_Address}}</td>
                          <td ng-class-odd="'odd'">{{pl.Zone}}</td>

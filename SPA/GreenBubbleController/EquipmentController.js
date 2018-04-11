@@ -1,4 +1,4 @@
-﻿var EquipmentController = function ($rootScope, $scope, $http, $timeout, $uibModal, $location, NgMap, SignalService, userProfile, $routeParams, pollLoc) {
+﻿var EquipmentController = function ($rootScope, $scope, $http, $timeout, $compile, $uibModal, $location, NgMap, SignalService, userProfile, $routeParams, pollLoc) {
 
     $scope.gridView = false;
     $scope.Monday = true;
@@ -131,6 +131,8 @@
     $scope.getMap = function () {
         ///marker_green.png'       
 
+       
+
         NgMap.getMap().then(function (map) {
             //$scope.marpOptions = {
               
@@ -140,7 +142,6 @@
             $scope.InfoWindow = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -25) });
             $scope.map = map;
             
-
             $scope.populateForm();
 
             //new google.maps.KmlLayer( { suppressInfoWindows: true, preserveViewport: false, map: $scope.map })
@@ -248,21 +249,37 @@
         //$scope.InfoWindow.setContent(
         //        );
 
+        pollLoc.getPollDetails($scope.Location.Id).then(function (response) {
+            $scope.PollDlts = response; 
+            console.log($scope.PollDlts);
+        })    
 
-        var content = '<div id="iw-container" ng-click="clicked(d) ">' +
+
+        var content = '<div id="iw-container" ng-controller="EquipmentController" ng-click="clicked(d) ">' +
             '<div class="iw-title">' + $scope.Location.title + '</div>' +
             '<div class="iw-content">' +
             '<div class="iw-subTitle" ">' + $scope.Location.ward + $scope.Location.Precinct + '</div>' +
-            '<img src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg" alt="' + $scope.Location.title + '" height="115" width="83">' +
-            '<p>' + $scope.Location.Id + '</p>' +
-            '<div class="iw-subTitle">PLM: </div>' +
-            '<div class="iw-subTitle">Rover: </div>' +
+           
+            '<img src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg"   alt="' + $scope.Location.title + '" height="115" width="83">' +
+            '<p>' + $scope.Location.Id + '</p>' +            
+            '<ul>' +           
+            '<li ng-repeat="pd in PollDlts" class="iw-subTitle" >' +
+            '<label>{{pd.contact_FirstName}} {{pd.contact_LastName}} :</label>' +
+            '{{pd.contact_Type}} : {{pd.contact_Info}} '+
+            '</li>'+
+            '</ul>'+
+            
             '<br>Phone... <br>e-mail: geral@vaa.pt' +
             '</div>' +
             '<div class="iw-bottom-gradient"></div>' +
             '</div>';
+          var el = $compile(content)($scope);
+            $scope.$apply();
+            $scope.items = el.html();
+            $scope.InfoWindow.setContent($scope.items);  
+        // onerror="this.src = "http://locationtracking.electionchief.com/PollLocImgs/noImage.jpg""
 
-        $scope.InfoWindow.setContent(content);  
+            
 
         //$scope.InfoWindow = new google.maps.InfoWindow({
         //    content: content,
@@ -272,8 +289,15 @@
         //    minwidth: 325,
         //    maxWidth: 350
         //});
+       
+        //$scope.map.showInfoWindow('foo-iw', p);
+        //var pos = new google.maps.LatLng( p.lat, p.lng);         
+        //$scope.map.showInfoWindow.setPostion(pos);
 
+        console.log($scope.map);
+        console.log(p);
         $scope.InfoWindow.open($scope.map);
+
         //$scope.map.showInfoWindow('foo-iw', $scope.HydranLoc1.id);
     };
 
@@ -288,6 +312,7 @@
                     ariaDescribedBy: 'modal-body',
                     templateUrl: 'SPA/Template/modalWindowZones.html',
                     controller: 'modalController',
+                    backdrop: false,
                     controllerAs: '$ctrl',
                     size: 'lg',
                     resolve:
@@ -306,6 +331,34 @@
                 });
             }
         }
+        else if (x === 'Poll Details')
+        {
+            if (userProfile.getProfile().username != null) {
+                $scope.Clicked = x;
+                $scope.modalInstance = $uibModal.open({
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: 'SPA/Template/modalPollDetails.html',
+                    controller: 'modalController',
+                    controllerAs: '$ctrl',
+                   
+                    size: 'lg',
+                    resolve:
+                    {
+                        x: function () {
+                            return x;
+                        },
+                        address: function () {
+                            return e;
+                        }
+                    }
+                });
+                $scope.modalInstance.result.then(function (response) {
+                    //   console.log(response);
+                    //$scope.ZoneDefault = response;
+                });
+            }
+        }
        
         else
         {
@@ -317,6 +370,7 @@
                     ariaDescribedBy: 'modal-body',
                     templateUrl: 'SPA/Template/modalWindow.html',
                     controller: 'modalController',
+                    backdrop: false,
                     controllerAs: '$ctrl',
                     size: 'lg',
                     resolve:
@@ -393,8 +447,7 @@
 
             }
         }
-    }
-    
+    }    
 
     $scope.changeView = function ()
     {
@@ -439,13 +492,10 @@
     {
         //console.log(poll);
         $scope.showPane = true;
-        pollLoc.getPollDetails(poll).then(function (response) {
-            $scope.PollDlts = response;
-
-           // console.log($scope.PollDlts);
-        })        
+        
+       
     }      
 }
-EquipmentController.$inject = ['$rootScope', '$scope', '$http', '$timeout', '$uibModal', '$location', 'NgMap', 'SignalService', 'userProfile', '$routeParams', 'pollLoc'];
+EquipmentController.$inject = ['$rootScope', '$scope', '$http', '$timeout','$compile', '$uibModal', '$location', 'NgMap', 'SignalService', 'userProfile', '$routeParams', 'pollLoc'];
 
  

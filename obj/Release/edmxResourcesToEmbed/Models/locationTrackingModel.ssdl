@@ -78,7 +78,10 @@
     <Property Name="poll_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="poll_Address" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Zone" Type="int" />
+    <Property Name="Monday_Delivery" Type="int" />
     <Property Name="Monday_Arrival" Type="int" />
+    <Property Name="Monday_Close" Type="int" />
+    <Property Name="Building_Open" Type="int" />
     <Property Name="Tuesday_Arrival" Type="int" />
     <Property Name="OpenReady" Type="int" />
     <Property Name="ClosePollReady" Type="int" />
@@ -95,6 +98,17 @@
     <Property Name="location_Address" Type="nvarchar" MaxLength="255" />
     <Property Name="city" Type="nvarchar" MaxLength="255" />
     <Property Name="state" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="dbo_poll_ContactDetails">
+    <Key>
+      <PropertyRef Name="r_Id" />
+    </Key>
+    <Property Name="r_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="poll_Id" Type="int" Nullable="false" />
+    <Property Name="contact_FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="contact_LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="contact_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="contact_Info" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="dbo_zones">
     <Key>
@@ -121,7 +135,10 @@ warning 6002: The table/view 'ph13696936071_ElectionReporting.dbo.LocTrackMain' 
     <Property Name="Zone" Type="int" />
     <Property Name="ward_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="precincts" Type="nvarchar(max)" />
+    <Property Name="Monday_Delivery" Type="int" />
     <Property Name="Monday_Arrival" Type="int" />
+    <Property Name="Monday_Close" Type="int" />
+    <Property Name="Building_Open" Type="int" />
     <Property Name="Tuesday_Arrival" Type="int" />
     <Property Name="OpenReady" Type="int" />
     <Property Name="ClosePollReady" Type="int" />
@@ -192,6 +209,7 @@ warning 6002: The table/view 'ph13696936071_ElectionReporting.dbo.LocTrackMain' 
     <EntitySet Name="election_Precinct" EntityType="Self.election_Precinct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="poll_Location" EntityType="Self.poll_Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="poll_Location_All" EntityType="Self.poll_Location_All" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dbo_poll_ContactDetails" EntityType="Self.dbo_poll_ContactDetails" Schema="tadmin" Table="dbo.poll_ContactDetails" store:Type="Tables" />
     <EntitySet Name="dbo_zones" EntityType="Self.dbo_zones" Schema="tadmin" Table="dbo.zones" store:Type="Tables" />
     <EntitySet Name="LocTrackMain" EntityType="Self.LocTrackMain" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -201,7 +219,10 @@ warning 6002: The table/view 'ph13696936071_ElectionReporting.dbo.LocTrackMain' 
     [LocTrackMain].[Zone] AS [Zone], 
     [LocTrackMain].[ward_Name] AS [ward_Name], 
     [LocTrackMain].[precincts] AS [precincts], 
+    [LocTrackMain].[Monday_Delivery] AS [Monday_Delivery], 
     [LocTrackMain].[Monday_Arrival] AS [Monday_Arrival], 
+    [LocTrackMain].[Monday_Close] AS [Monday_Close], 
+    [LocTrackMain].[Building_Open] AS [Building_Open], 
     [LocTrackMain].[Tuesday_Arrival] AS [Tuesday_Arrival], 
     [LocTrackMain].[OpenReady] AS [OpenReady], 
     [LocTrackMain].[ClosePollReady] AS [ClosePollReady]

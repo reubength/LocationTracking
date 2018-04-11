@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngTouch', 'myAppHomeService', 'myLoginService', 'myAppUserService', 'mySignalRService', 'ngMap', 'ui.toggle','ui.bootstrap']);
+﻿var app = angular.module('app', ['ngRoute', 'ngTouch', 'myAppHomeService', 'myLoginService', 'myAppUserService', 'mySignalRService', 'ngMap', 'ui.toggle', 'ui.bootstrap']).constant('domain','http://localhost:60855/api') ;
 
 app.controller('MainController', MainController);
 app.controller('loginController', loginController);
@@ -12,6 +12,8 @@ app.controller('modalController', modalController);
 
 
 app.controller('uploadFileController', uploadFileController);
+
+ 
 
 
     var configFunction = function ($routeProvider, $httpProvider) {

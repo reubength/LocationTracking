@@ -1,8 +1,9 @@
-﻿var EquipmentController = function ($rootScope, $scope, $http, $timeout, $uibModal, $location, NgMap, SignalService, userProfile, $routeParams, pollLoc) {
+﻿var EquipmentController = function ($rootScope, $scope, $http, $timeout, $compile, $uibModal, $location, NgMap, SignalService, userProfile, $routeParams, pollLoc) {
 
     $scope.gridView = false;
     $scope.Monday = true;
     $scope.toggleValue = true;
+    $scope.showPane = false;
     $scope.Column = "";
     $scope.Kmlsrc1 = "http://locationtracking.electionchief.com/kml/Ward1.kml";
     //$scope.Kmlsrc1 = "http://cuyahogaelectionaudits.com/downloads/Ward1.KML";
@@ -13,6 +14,9 @@
     $scope.Kmlsrc6 = "http://cuyahogaelectionaudits.com/downloads/Ward6.KML";
     $scope.Kmlsrc7 = "http://cuyahogaelectionaudits.com/downloads/Ward7.KML";
     $scope.Kmlsrc8 = "http://cuyahogaelectionaudits.com/downloads/Ward8.KML";
+
+    $scope.kmlFiles = [];
+    $scope.dynamicKML = [];
 
     $scope.singleModel = '1';
     $scope.InfoWindow;
@@ -27,25 +31,69 @@
     SignalService.initialize();
 
 
-    $scope.config = [{
-        name: 'Monday_Arrival',
-        label: 'Monday Arrival',
-        btnClass: 'active'
-    }, {
-        name: 'Tuesday_Arrival',
-        label: 'Tuesday Arrival',
-        btnClass: ""
-    }, {
-        name: 'Open_Ready',
-        label: 'Open And Ready',
-        btnClass: ""
-    },
-    {
-        name: 'Close_Poll_Report',
-        label: 'Close Poll Report',
-        btnClass: ""
-    }];
+    $scope.config = [
+        //{
+        //    name: 'Length',
+        //    label: 'Locations',
+        //    btnClass: ""
+        //},
+        {
+            name: 'Monday_Delivery',
+            label: 'Monday Delivery',
+            btnClass: 'active'
+        },
+        {
+            name: 'Monday_Arrival',
+            label: 'Monday Arrival',
+            btnClass: ''
+        },
+        {
+            name: 'Monday_Close',
+            label: 'Monday Close',
+            btnClass: ""
+        },
+        {
+            name: 'Building_Open',
+            label: 'Building Open',
+            btnClass: ""
+        },
+        {
+            name: 'Tuesday_Arrival',
+            label: 'Tuesday Arrival',
+            btnClass: ""
+        },
+        {
+            name: 'Open_Ready',
+            label: 'Open And Ready',
+            btnClass: ""
+        },
+        {
+            name: 'Close_Poll_Report',
+            label: 'Close Poll Report',
+            btnClass: ""
+        }
+    ];
 
+    $scope.setActive = function setActive(idName) {
+        // $scope.activeButton = index;
+        var bdgs = document.getElementsByClassName("badge");
+        var sel = document.getElementById(idName);
+        for (var i = 0; i < bdgs.length; i++)
+        {
+            var current = document.getElementsByClassName("active");
+            if (current.length > 0)
+            {
+                current[0].className = current[0].className.replace(" active", "");
+                sel.className += " active";
+            }           
+            
+        }
+        //for (var i = 0; i < $scope.config.length; i++)
+        //    $scope.config[i].btnClass = "";
+        //$scope.config[index].btnClass = 'active';
+        $scope.mode = idName;
+        $scope.markerGen();
+    };
 
     $rootScope.$on('updateList', function () {
         $scope.populateForm();
@@ -53,24 +101,11 @@
     });
 
     $scope.activeButton = 0;
-
-    $scope.setActive = function setActive(index) {
-        $scope.activeButton = index;
-        for (var i = 0; i < $scope.config.length; i++)
-            $scope.config[i].btnClass = "";
-        $scope.config[index].btnClass = 'active';
-        $scope.mode = $scope.config[index].name;
-
-        $scope.markerGen();
-
-
-    };
+    
     $scope.changeSort = function (name) {
         $scope.sortType = name; // set the default sort type
         $scope.sortReverse = !$scope.sortReverse;  // set the default sort order
-        $scope.populateForm();
-
-        // $scope.searchFish = '';    
+        $scope.populateForm(); 
     }
 
     $scope.populateForm = function () {
@@ -86,6 +121,7 @@
         pollLoc.getZonesAll().then(function (response) {
 
             $scope.ZonesAll = response;
+            $scope.LoadKmlFil();
         })
 
         console.log($scope.sortType);
@@ -95,12 +131,22 @@
     $scope.getMap = function () {
         ///marker_green.png'       
 
+       
+
         NgMap.getMap().then(function (map) {
+            //$scope.marpOptions = {
+              
+            //    disableDoubleClickZoom: true; // <---
+                    
+            //};
             $scope.InfoWindow = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -25) });
             $scope.map = map;
+            
             $scope.populateForm();
+
+            //new google.maps.KmlLayer( { suppressInfoWindows: true, preserveViewport: false, map: $scope.map })
             //$scope.markerGen(); 
-            $scope.LoadKmlFil();
+           
             //   google.maps.event.trigger(map, 'resize');
 
         }, function errorCallback(response) {
@@ -111,81 +157,41 @@
 
     };
     $scope.LoadKmlFil = function () {
+       // var src = "http://electionchief.com/filestore/wp-content/uploads/2018/03/";
+        var src = "http://cuyahogaelectionaudits.com/downloads/";
+        var name = "";
+         
+        for (var z = 0; z < $scope.ZonesAll.length;z++)
+        {
+            $scope.ZonesAll[z].zone_Kml = src + $scope.ZonesAll[z].zone_Name + ".KML";
+            //$scope.kmlFiles.push({ Zone: $scope.ZonesAll[z].zone_Name, kmlSrc: src + $scope.ZonesAll[z].zone_Name + ".KML" })
+           // name = $scope.kmlFiles[z].Zone;
+            //$scope.dynamicKML[z] = new google.maps.KmlLayer($scope.kmlFiles[z].kmlSrc, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
 
-        //foreach(z in ZonesAll)
-        //{
-        //    kmlFiles.add()
-        //}
-
+            //google.maps.event.addListener($scope.dynamicKML[z], 'click', function (name) {
+            
+            //});
+        }
+        
         //$scope.kmlLayer1 = new google.maps.KmlLayer($scope.Kmlsrc1, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
         //google.maps.event.addListener($scope.kmlLayer1, 'click', function (kmlEvent1) {
         //    var text = kmlEvent1.featureData.snippet;
         //    alert(text);
         //});
-        //$scope.kmlLayer2 = new google.maps.KmlLayer($scope.Kmlsrc2, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer2, 'click', function (kmlEvent2) {
-        //    var text = kmlEvent2.featureData.snippet;
-        //    alert(text);
-        //});
-        //$scope.kmlLayer3 = new google.maps.KmlLayer($scope.Kmlsrc3, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer3, 'click', function (kmlEvent3) {
-        //    var text = kmlEvent3.featureData.snippet;
-        //    alert(text);
-        //});
-        //$scope.kmlLayer4 = new google.maps.KmlLayer($scope.Kmlsrc4, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer4, 'click', function (kmlEvent4) {
-        //    var text = kmlEvent4.featureData.snippet;
-        //    alert(text);
-        //}); $scope.kmlLayer5 = new google.maps.KmlLayer($scope.Kmlsrc5, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer5, 'click', function (kmlEvent5) {
-        //    var text = kmlEvent5.featureData.snippet;
-        //    alert(text);
-        //});
-        //$scope.kmlLayer6 = new google.maps.KmlLayer($scope.Kmlsrc6, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer6, 'click', function (kmlEvent6) {
-        //    var text = kmlEvent6.featureData.snippet;
-        //    alert(text);
-        //});
-        //$scope.kmlLayer7 = new google.maps.KmlLayer($scope.Kmlsrc7, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer7, 'click', function (kmlEvent7) {
-        //    var text = kmlEvent7.featureData.snippet;
-        //    alert(text);
-        //});
-        //$scope.kmlLayer8 = new google.maps.KmlLayer($scope.Kmlsrc8, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer8, 'click', function (kmlEvent8) {
-        //    var text = kmlEvent8.featureData.snippet;
-        //    alert(text);
-        //});
+         
 
 
-    }
-    //$scope.changeData = function () {
-    //    $scope.selectData = $scope.mode;
-    //    $scope.markerGen();
-
-    //}
+    } 
 
     $scope.markerGen = function () {
         $scope.dynMarkers = [];
-        //if ($scope.dynMarkers.length > 0) {
-        //    $scope.dynMarkers.setMap(null);
-        //}
-
-        //calls the populate method if the array is not already populated with data
-        //if it is it accesses the existing data from the factory and reassigns it to the 
-        //array for markerGen
-
-        //if (pollLoc.pollLocs != null) {
-        //    $scope.PollLoc = pollLoc.pollLocs;
-        //}
-        //else {
-        //    pollLoc.getLocation().then(function (response) {
-        //        $scope.PollLoc = response;
-        //    })
-        //}
+   
         $scope.i = 0;
         for (var k in $scope.PollLoc) {
-
+            //if ($scope.mode === "Length")
+            //{
+            //    $scope.mode == 'Monday_Delivery';
+            //}
             //$timeout(function () {
             if ($scope.PollLoc[k][$scope.mode] === "success") {
                 //$scope.dynMarkers[k] = new google.maps.Marker({ title: $scope.PollLoc[k].Poll_Name, icon: "images/marker_green.png" });
@@ -196,23 +202,9 @@
                     lng: $scope.PollLoc[k].longitude,
                     lat: $scope.PollLoc[k].latitude,
                     ward: $scope.PollLoc[k].Ward_Name,
-                    Precinct: $scope.PollLoc[k].Precinct
+                    Precinct: $scope.PollLoc[k].Precinct,
+                    Zone: $scope.PollLoc[k].Zone
                 });
-
-                //Close_Poll_Report :"warning"
-                //Monday_Arrival:"warning"
-                //Open_Ready:"success"
-                //Poll_Address:"29230 WOLF ROAD"
-                //Poll_Id:1050
-                //Poll_Name:"BAY HIGH SCHOOL"
-                //Precinct:" 3B"
-                //Precinct_Id:0
-                //Tuesday_Arrival:"success"
-                //Ward_Name:"BAY VILLAGE "
-                //Zone: 1
-                //latitude:41.486846
-                //longitude:-81.943349
-
             }
             else {
                 //$scope.dynMarkers[k] = new google.maps.Marker({ title: $scope.PollLoc[k].Poll_Name, icon: "images/marker_yellow.png" });
@@ -223,19 +215,12 @@
                     lng: $scope.PollLoc[k].longitude,
                     lat: $scope.PollLoc[k].latitude,
                     ward: $scope.PollLoc[k].Ward_Name,
-                    Precinct: $scope.PollLoc[k].Precinct
+                    Precinct: $scope.PollLoc[k].Precinct,
+                    Zone: $scope.PollLoc[k].Zone
                 });
-            }
-            //  $scope.i++;
-
-            // }, $scope.i * 200); 
-        }
-
-        // var loc = new google.maps.LatLng($scope.PollLoc[k].latitude, $scope.PollLoc[k].longitude);
-        //$scope.dynMarkers[k].setPosition(loc);
-        //$scope.dynMarkers[k].setMap($scope.map);            
+            }             
+        }           
     }
-
 
     $scope.toggleFun = function (toggleValue) {
         //  var url = $location.absUrl().split('!')[1];
@@ -259,47 +244,65 @@
         // console.log(d);
         var center = new google.maps.LatLng($scope.Location.lat, $scope.Location.lng);
         $scope.InfoWindow.setPosition(center);
-        $scope.InfoWindow.close();
+        //$scope.InfoWindow.close();
         //$scope.InfoWindow.event.addListener(clicked())
         //$scope.InfoWindow.setContent(
         //        );
 
+        pollLoc.getPollDetails($scope.Location.Id).then(function (response) {
+            $scope.PollDlts = response; 
+            console.log($scope.PollDlts);
+        })    
 
-        var content = '<div id="iw-container"  ng-click="clicked(d) ">' +
+
+        var content = '<div id="iw-container" ng-controller="EquipmentController" ng-click="clicked(d) ">' +
             '<div class="iw-title">' + $scope.Location.title + '</div>' +
             '<div class="iw-content">' +
             '<div class="iw-subTitle" ">' + $scope.Location.ward + $scope.Location.Precinct + '</div>' +
-            '<img src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg" alt="' + $scope.Location + '" height="115" width="83">' +
-            '<p>' + $scope.Location.Id + '</p>' +
-            '<div class="iw-subTitle">PLM: </div>' +
-            '<div class="iw-subTitle">Rover: </div>' +
+           
+            '<img src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg"   alt="' + $scope.Location.title + '" height="115" width="83">' +
+            '<p>' + $scope.Location.Id + '</p>' +            
+            '<ul>' +           
+            '<li ng-repeat="pd in PollDlts" class="iw-subTitle" >' +
+            '<label>{{pd.contact_FirstName}} {{pd.contact_LastName}} :</label>' +
+            '{{pd.contact_Type}} : {{pd.contact_Info}} '+
+            '</li>'+
+            '</ul>'+
+            
             '<br>Phone... <br>e-mail: geral@vaa.pt' +
             '</div>' +
             '<div class="iw-bottom-gradient"></div>' +
             '</div>';
-        $scope.InfoWindow.setContent(content);
+          var el = $compile(content)($scope);
+            $scope.$apply();
+            $scope.items = el.html();
+            $scope.InfoWindow.setContent($scope.items);  
+        // onerror="this.src = "http://locationtracking.electionchief.com/PollLocImgs/noImage.jpg""
+
+            
+
+        //$scope.InfoWindow = new google.maps.InfoWindow({
+        //    content: content,
+
+        //    // Assign a maximum value for the width of the infowindow allows
+        //    // greater control over the various content elements
+        //    minwidth: 325,
+        //    maxWidth: 350
+        //});
+       
+        //$scope.map.showInfoWindow('foo-iw', p);
+        //var pos = new google.maps.LatLng( p.lat, p.lng);         
+        //$scope.map.showInfoWindow.setPostion(pos);
+
+        console.log($scope.map);
+        console.log(p);
         $scope.InfoWindow.open($scope.map);
+
         //$scope.map.showInfoWindow('foo-iw', $scope.HydranLoc1.id);
     };
 
-
-    //$scope.PollLoc = {
-    //   Poll_Id          : 0,
-    //   Poll_Name        : "default",
-    //   Poll_Address     : "default",
-    //   Zone             : 0,
-    //   Ward_Name        : "default",
-    //   Precinct         : "default",
-    //   Monday_Arrival   : "default",
-    //   Tuesday_Arrival  : "default",
-    //   Open_Ready       : "default",
-    //   Close_Poll_Report: "default"
-
-    //};
-
-    //openModal(pl,'MondayArrival')
+ 
     $scope.openModal = function (e, x) {
-
         if (x ==='Zone')
         {
             if (userProfile.getProfile().username != null) {
@@ -309,6 +312,7 @@
                     ariaDescribedBy: 'modal-body',
                     templateUrl: 'SPA/Template/modalWindowZones.html',
                     controller: 'modalController',
+                    backdrop: false,
                     controllerAs: '$ctrl',
                     size: 'lg',
                     resolve:
@@ -327,6 +331,34 @@
                 });
             }
         }
+        else if (x === 'Poll Details')
+        {
+            if (userProfile.getProfile().username != null) {
+                $scope.Clicked = x;
+                $scope.modalInstance = $uibModal.open({
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: 'SPA/Template/modalPollDetails.html',
+                    controller: 'modalController',
+                    controllerAs: '$ctrl',
+                   
+                    size: 'lg',
+                    resolve:
+                    {
+                        x: function () {
+                            return x;
+                        },
+                        address: function () {
+                            return e;
+                        }
+                    }
+                });
+                $scope.modalInstance.result.then(function (response) {
+                    //   console.log(response);
+                    //$scope.ZoneDefault = response;
+                });
+            }
+        }
        
         else
         {
@@ -338,6 +370,7 @@
                     ariaDescribedBy: 'modal-body',
                     templateUrl: 'SPA/Template/modalWindow.html',
                     controller: 'modalController',
+                    backdrop: false,
                     controllerAs: '$ctrl',
                     size: 'lg',
                     resolve:
@@ -351,14 +384,34 @@
                     }
                 });
                 $scope.modalInstance.result.then(function () {
-                     console.log(e);
+                    console.log(e);
 
+                    if (e.Monday_Delivery === "warning" && $scope.Clicked === "MondayDelivery") {
+                         e.Monday_Delivery = "success";
+                     }
+                    else if (e.Monday_Delivery === "success" && $scope.Clicked === "MondayDelivery") {
+                         e.Monday_Delivery = "warning";
+                     }
 
                     if (e.Monday_Arrival === "warning" && $scope.Clicked === "MondayArrival") {
                         e.Monday_Arrival = "success";
                     }
                     else if (e.Monday_Arrival === "success" && $scope.Clicked === "MondayArrival") {
                         e.Monday_Arrival = "warning";
+                    }
+
+                    if (e.Monday_Close === "warning" && $scope.Clicked === "MondayClose") {
+                        e.Monday_Close = "success";
+                    }
+                    else if (e.Monday_Close === "success" && $scope.Clicked === "MondayClose") {
+                        e.Monday_Close = "warning";
+                    }
+
+                    if (e.Building_Open === "warning" && $scope.Clicked === "BuildingOpen") {
+                        e.Building_Open = "success";
+                    }
+                    else if (e.Building_Open === "success" && $scope.Clicked === "BuildingOpen") {
+                        e.Building_Open = "warning";
                     }
 
                     if (e.Tuesday_Arrival === "warning" && $scope.Clicked === "TuesdayArrival") {
@@ -392,16 +445,9 @@
             else
             {
 
-
             }
         }
-       
-
-    }
-
-    //$scope.filterCells = function (v) {
-    //    return v > 5.0 ? 'mouseenter' : 'none';
-    //};
+    }    
 
     $scope.changeView = function ()
     {
@@ -412,23 +458,14 @@
         else if (url === '/grid'){
             $location.path('/mapView');
         }
+    } 
+
+    $scope.selectZones = function ( p , k) {
+        console.log(k);
+        p.featureData.infoWindowHtml = "";
+
+        $scope.ZoneDefault = [k];
     }
-
-     
-
-    //$scope.showContextData = function () {
-    //    //0:Sunday
-    //    //1:Monday
-    //    //2:Tuesday
-    //    //3:Wednesday
-    //    //4:Thursday
-    //    //5:Friday
-    //    //6:Saturday
-    //    var day = (new Date()).getDay();              
-    //    var item = new Date();
-
-
-    //}
 
     $scope.filterMakes = function () {
         return function (p) {
@@ -444,23 +481,21 @@
                     {
                         return true;
                     }
-                    else if (p.Zone ==   $scope.ZoneDefault[i].zone) {
+                    else if (p.Zone == $scope.ZoneDefault[i].zone || p.zone == $scope.ZoneDefault[i].zone) {
                         return true;
                     }
                 }
-            }
-            
+            }            
         };
     };
-
-
-
-   
+    $scope.clickIfoPane = function (poll)
+    {
+        //console.log(poll);
+        $scope.showPane = true;
+        
+       
+    }      
 }
-EquipmentController.$inject = ['$rootScope', '$scope', '$http', '$timeout', '$uibModal', '$location', 'NgMap', 'SignalService', 'userProfile', '$routeParams', 'pollLoc'];
+EquipmentController.$inject = ['$rootScope', '$scope', '$http', '$timeout','$compile', '$uibModal', '$location', 'NgMap', 'SignalService', 'userProfile', '$routeParams', 'pollLoc'];
 
-//$(function () {
-//    $(".repeatpopover").popover({
-//        trigger: "hover"
-//    });
-//});
+ 
