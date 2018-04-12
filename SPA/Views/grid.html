@@ -50,7 +50,7 @@
      <div class="col-lg-12 ">
          <div class="badgeGrp  ">
              <span class="badge badge-primary ">Locations: {{(PollLoc).length}} </span>
-             <span class="badge badge-primary active">Monday Delivery: {{(PollLoc | filter :  { Monday_Delivery: 'success' } : true).length  }}</span>
+             <span class="badge badge-primary active">Monday Delivery: {{(PollLoc | filter :  { Monday_Delivery: 'success' } : true).length   }}</span>
              <span class="badge badge-primary ">Monday Arrival: {{(PollLoc | filter :  { Monday_Arrival: 'success' } : true).length }}</span>
              <span class="badge badge-primary ">Monday Close: {{(PollLoc | filter : { Monday_Close: 'success' } : true).length }}</span>
              <span class="badge badge-primary ">Building Open: {{(PollLoc  | filter : { Building_Open: 'success' } : true).length}} </span>
@@ -167,7 +167,7 @@
 
                  <tbody>
                      <tr scope="row" ng-repeat="pl in PollLoc | orderBy:sortType:sortReverse | filter:filterMakes()" class="active">
-                         <td ng-class-odd="'odd'"><span class="fa fa-info-circle" ng-click="clickIfoPane(pl)"> </span>  {{pl.Poll_Id}}</td>
+                         <td ng-class-odd="'odd'"><span class="fa fa-info-circle" ng-click="openModal(pl,'Poll Details')"> </span>  {{pl.Poll_Id}}</td>
                          <td ng-class-odd="'odd'">{{pl.Poll_Name}} </td>
                          <td ng-class-odd="'odd'">{{pl.Poll_Address}}</td>
                          <td ng-class-odd="'odd'">{{pl.Zone}}</td>

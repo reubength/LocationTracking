@@ -1,11 +1,13 @@
 ﻿angular.module('myAppHomeService', [])
 
-.factory('pollLoc', ['$http', function ($http) {
+    .factory('pollLoc', ['$http','domain', function ($http, domain) {
     var obj = {};
     var pollLocs;
     var polldtls;
     var Length;
     var Zones;
+
+        console.log(domain)
     
 
     //obj.ChangeDist = function (loc) {
@@ -36,7 +38,7 @@
         }
         return $http({
             method: 'GET',
-            url: 'http://localhost:60855/api/zones',
+            url: domain +'/zones',
             headers: authHeaders
         }).then(function (response, status) {
             //HydrantLong = response.data;
@@ -62,7 +64,7 @@
 
         return $http({
             method: 'GET',
-            url: 'http://localhost:60855/api/LocTrackMains' ,
+            url: domain +'/LocTrackMains' ,
             headers: authHeaders
         }).then(function (response, status) {
             //HydrantLong = response.data;
@@ -85,7 +87,7 @@
          
         return $http({
             method: 'POST',
-            url: 'http://localhost:60855/api/FileUploader/',
+            url: domain +'/FileUploader/',
             processData: false,
             contentType: false,
             data: data,
@@ -113,7 +115,7 @@
 
         return $http({
             method: 'POST',
-            url: 'http://localhost:60855/api/zones/',
+            url: domain +'/zones/',
             processData: false,
             contentType: false,
             data: JSON.stringify({
@@ -134,7 +136,38 @@
     }
     
 
-    obj.getPollDetails = function (pId) {
+    //obj.getPollDetails = function (pId) {
+    //    var accesstoken = sessionStorage.getItem('accessToken');
+    //    var authHeaders = {};
+
+    //    if (accesstoken) {
+    //        authHeaders.Authorization = 'Bearer ' + accesstoken;
+    //    }
+
+    //    return $http({
+    //        method: 'GET',
+    //        url: domain +'/poll_ContactDetails/' + pId,
+    //        processData: false,
+    //        contentType: false,
+    //        //data: JSON.stringify({
+    //        //    id_zone: data.id_zone,
+    //        //    zone: data.zone,
+    //        //    zone_Active: data.zone_Active,
+    //        //    zone_Kml: data.zone_Name,
+    //        //    zone_Name: data.zone_Name
+    //        //}),
+    //        headers: authHeaders,
+    //        contentType: 'application/json'
+    //    }).then(function (response, status) {
+    //        //HydrantLong = response.data;
+    //        obj.polldtls = response.data;
+    //        //obj.Length = response.data.length;
+    //        //console.log(HydrantLoc);
+    //        return response.data;
+
+    //    });
+    //}
+    obj.getPollDetails = function () {
         var accesstoken = sessionStorage.getItem('accessToken');
         var authHeaders = {};
 
@@ -144,7 +177,7 @@
 
         return $http({
             method: 'GET',
-            url: 'http://localhost:60855/api/poll_ContactDetails/' + pId.Poll_Id,
+            url: domain + '/poll_ContactDetails/',
             processData: false,
             contentType: false,
             //data: JSON.stringify({
@@ -165,7 +198,6 @@
 
         });
     }
-    
 
     obj.SubmitpollLocStat = function (Loc) {
 
@@ -186,7 +218,7 @@
             
         return $http({
             method: 'POST',
-            url: 'http://localhost:60855/api/poll_Location/',
+            url: domain + '/poll_Location/' + Loc.Poll_Id,
             data: JSON.stringify({
                 Poll_Id: Loc.Poll_Id,
                 Poll_Address: Loc.Poll_Address,

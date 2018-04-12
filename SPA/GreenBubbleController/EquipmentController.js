@@ -1,4 +1,4 @@
-﻿var EquipmentController = function ($rootScope, $scope, $http, $timeout, $uibModal, $location, NgMap, SignalService, userProfile, $routeParams, pollLoc) {
+﻿var EquipmentController = function ($rootScope, $scope, $http, $timeout, $compile, $uibModal, $location, NgMap, SignalService, userProfile, $routeParams, pollLoc) {
 
     $scope.gridView = false;
     $scope.Monday = true;
@@ -20,8 +20,7 @@
 
     $scope.singleModel = '1';
     $scope.InfoWindow;
-    //$scope.sortType = 'Ward_Name'; // set the default sort type
-    //$scope.sortReverse = false;  // set the default sort order
+     
     $scope.sortType = 'Poll_Id'; // set the default sort type
     $scope.sortReverse = false;  // set the default sort order
     $scope.searchFish = '';     // set the default search/filter term
@@ -126,10 +125,16 @@
 
         console.log($scope.sortType);
         // $scope.getMap();
+        pollLoc.getPollDetails( ).then(function (response) {
+            $scope.PollDlts = response;
+            console.log($scope.PollDlts);
+        })    
 
     }
     $scope.getMap = function () {
         ///marker_green.png'       
+
+       
 
         NgMap.getMap().then(function (map) {
             //$scope.marpOptions = {
@@ -140,7 +145,6 @@
             $scope.InfoWindow = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -25) });
             $scope.map = map;
             
-
             $scope.populateForm();
 
             //new google.maps.KmlLayer( { suppressInfoWindows: true, preserveViewport: false, map: $scope.map })
@@ -233,14 +237,28 @@
             $scope.Monday = false;
             $scope.gridView = false;
             $scope.getMap();
-            //google.maps.event.trigger($scope.map, 'resize');
+            
             //$scope.InfoWindow.close();
         }
     }
-
+    $scope.mapClick = function ()
+    {
+        //google.maps.InfoWindow.prototype.isOpen = function () {
+        //    var map = this.getMap();
+        //    return (map !== null && typeof map !== "undefined");
+        //}
+        //if ($scope.InfoWindow.getMap !== null)
+        //{
+        //    $scope.InfoWindow.close();
+        //}
+        //console.log($scope.InfoWindow);
+       // $scope.InfoWindow.close();
+    }
     $scope.showDetail = function (e, p) {
         $scope.Location = p;
         // console.log(d);
+        console.log($scope.InfoWindow);
+       
         var center = new google.maps.LatLng($scope.Location.lat, $scope.Location.lng);
         $scope.InfoWindow.setPosition(center);
         //$scope.InfoWindow.close();
@@ -248,32 +266,40 @@
         //$scope.InfoWindow.setContent(
         //        );
 
-
-        var content = '<div id="iw-container" ng-click="clicked(d) ">' +
+       
+        var content = '<div id="iw-container" ng-controller="EquipmentController" ng-click="clicked(d) ">' +
             '<div class="iw-title">' + $scope.Location.title + '</div>' +
             '<div class="iw-content">' +
-            '<div class="iw-subTitle" ">' + $scope.Location.ward + $scope.Location.Precinct + '</div>' +
-            '<img src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg" alt="' + $scope.Location.title + '" height="115" width="83">' +
-            '<p>' + $scope.Location.Id + '</p>' +
-            '<div class="iw-subTitle">PLM: </div>' +
-            '<div class="iw-subTitle">Rover: </div>' +
-            '<br>Phone... <br>e-mail: geral@vaa.pt' +
+            '<div class="iw-subTitle" ">' + $scope.Location.ward + $scope.Location.Precinct + '</div>' +           
+            '<img class="iw-image" src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg"   alt="' + $scope.Location.title + '" >' +
+            //'<p>' + $scope.Location.Id + '</p>' +  
+            '<h5>Contact Information</h5>'+
+            '<div>' +
+            '<ul>' +           
+            '<li ng-repeat="pd in PollDlts | filter:  Location.Id" class="iw-subTitle" >' +
+            '<label class="iw_label">{{pd.contact_FirstName}} {{pd.contact_LastName}} :</label>' +
+            '{{pd.contact_Info}}({{pd.contact_Type}}) '+
+            '</li>'+
+            '</ul>'+     
+            '</div>'+
+                   
+            //'<br>Phone... <br>e-mail: geral@vaa.pt' +
             '</div>' +
             '<div class="iw-bottom-gradient"></div>' +
             '</div>';
+          var el = $compile(content)($scope);
+            $scope.$apply();
+            $scope.items = el.html();
+            $scope.InfoWindow.setContent($scope.items);  
+        // onerror="this.src = "http://locationtracking.electionchief.com/PollLocImgs/noImage.jpg"" 
+        //$scope.map.showInfoWindow('foo-iw', p);
+        //var pos = new google.maps.LatLng( p.lat, p.lng);         
+        //$scope.map.showInfoWindow.setPostion(pos);
 
-        $scope.InfoWindow.setContent(content);  
-
-        //$scope.InfoWindow = new google.maps.InfoWindow({
-        //    content: content,
-
-        //    // Assign a maximum value for the width of the infowindow allows
-        //    // greater control over the various content elements
-        //    minwidth: 325,
-        //    maxWidth: 350
-        //});
-
+        console.log($scope.map);
+        console.log(p);
         $scope.InfoWindow.open($scope.map);
+
         //$scope.map.showInfoWindow('foo-iw', $scope.HydranLoc1.id);
     };
 
@@ -288,6 +314,7 @@
                     ariaDescribedBy: 'modal-body',
                     templateUrl: 'SPA/Template/modalWindowZones.html',
                     controller: 'modalController',
+                    backdrop: false,
                     controllerAs: '$ctrl',
                     size: 'lg',
                     resolve:
@@ -306,6 +333,34 @@
                 });
             }
         }
+        else if (x === 'Poll Details')
+        {
+            if (userProfile.getProfile().username != null) {
+                $scope.Clicked = x;
+                $scope.modalInstance = $uibModal.open({
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: 'SPA/Template/modalPollDetails.html',
+                    controller: 'modalController',
+                    controllerAs: '$ctrl',
+                   
+                    size: 'lg',
+                    resolve:
+                    {
+                        x: function () {
+                            return x;
+                        },
+                        address: function () {
+                            return e;
+                        }
+                    }
+                });
+                $scope.modalInstance.result.then(function (response) {
+                    //   console.log(response);
+                    //$scope.ZoneDefault = response;
+                });
+            }
+        }
        
         else
         {
@@ -317,6 +372,7 @@
                     ariaDescribedBy: 'modal-body',
                     templateUrl: 'SPA/Template/modalWindow.html',
                     controller: 'modalController',
+                    backdrop: false,
                     controllerAs: '$ctrl',
                     size: 'lg',
                     resolve:
@@ -329,63 +385,67 @@
                         }
                     }
                 });
-                $scope.modalInstance.result.then(function () {
+
+                $scope.modalInstance.result.then(function (response) {
                     console.log(e);
+                    if (response === 'save')
+                    {
+                        if (e.Monday_Delivery === "warning" && $scope.Clicked === "Monday_Delivery") {
+                            e.Monday_Delivery = "success";
+                        }
+                        else if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
+                            e.Monday_Delivery = "warning";
+                        }
 
-                    if (e.Monday_Delivery === "warning" && $scope.Clicked === "MondayDelivery") {
-                         e.Monday_Delivery = "success";
-                     }
-                    else if (e.Monday_Delivery === "success" && $scope.Clicked === "MondayDelivery") {
-                         e.Monday_Delivery = "warning";
-                     }
+                        if (e.Monday_Arrival === "warning" && $scope.Clicked === "Monday_Arrival") {
+                            e.Monday_Arrival = "success";
+                        }
+                        else if (e.Monday_Arrival === "success" && $scope.Clicked === "Monday_Arrival") {
+                            e.Monday_Arrival = "warning";
+                        }
 
-                    if (e.Monday_Arrival === "warning" && $scope.Clicked === "MondayArrival") {
-                        e.Monday_Arrival = "success";
-                    }
-                    else if (e.Monday_Arrival === "success" && $scope.Clicked === "MondayArrival") {
-                        e.Monday_Arrival = "warning";
-                    }
+                        if (e.Monday_Close === "warning" && $scope.Clicked === "Monday_Close") {
+                            e.Monday_Close = "success";
+                        }
+                        else if (e.Monday_Close === "success" && $scope.Clicked === "Monday_Close") {
+                            e.Monday_Close = "warning";
+                        }
 
-                    if (e.Monday_Close === "warning" && $scope.Clicked === "MondayClose") {
-                        e.Monday_Close = "success";
-                    }
-                    else if (e.Monday_Close === "success" && $scope.Clicked === "MondayClose") {
-                        e.Monday_Close = "warning";
-                    }
+                        if (e.Building_Open === "warning" && $scope.Clicked === "Building_Open") {
+                            e.Building_Open = "success";
+                        }
+                        else if (e.Building_Open === "success" && $scope.Clicked === "Building_Open") {
+                            e.Building_Open = "warning";
+                        }
 
-                    if (e.Building_Open === "warning" && $scope.Clicked === "BuildingOpen") {
-                        e.Building_Open = "success";
-                    }
-                    else if (e.Building_Open === "success" && $scope.Clicked === "BuildingOpen") {
-                        e.Building_Open = "warning";
-                    }
+                        if (e.Tuesday_Arrival === "warning" && $scope.Clicked === "Tuesday_Arrival") {
+                            e.Tuesday_Arrival = "success";
+                        }
+                        else if (e.Tuesday_Arrival === "success" && $scope.Clicked === "Tuesday_Arrival") {
+                            e.Tuesday_Arrival = "warning";
+                        }
 
-                    if (e.Tuesday_Arrival === "warning" && $scope.Clicked === "TuesdayArrival") {
-                        e.Tuesday_Arrival = "success";
-                    }
-                    else if (e.Tuesday_Arrival === "success" && $scope.Clicked === "TuesdayArrival") {
-                        e.Tuesday_Arrival = "warning";
-                    }
+                        if (e.Open_Ready === "warning" && $scope.Clicked === "Open_Ready") {
+                            e.Open_Ready = "success";
+                        }
+                        else if (e.Open_Ready === "success" && $scope.Clicked === "Open_Ready") {
+                            e.Open_Ready = "warning";
+                        }
 
-                    if (e.Open_Ready === "warning" && $scope.Clicked === "OpenReady") {
-                        e.Open_Ready = "success";
-                    }
-                    else if (e.Open_Ready === "success" && $scope.Clicked === "OpenReady") {
-                        e.Open_Ready = "warning";
-                    }
+                        if (e.Close_Poll_Report === "warning" && $scope.Clicked === "Close_Poll_Report") {
+                            e.Close_Poll_Report = "success";
+                        }
+                        else if (e.Close_Poll_Report === "success" && $scope.Clicked === "Close_Poll_Report") {
+                            e.Close_Poll_Report = "warning";
+                        }
+                        pollLoc.SubmitpollLocStat(e).then(function (response) {
+                            console.log(response);
+                            $scope.populateForm();
+                        })
 
-                    if (e.Close_Poll_Report === "warning" && $scope.Clicked === "ClosePollReport") {
-                        e.Close_Poll_Report = "success";
                     }
-                    else if (e.Close_Poll_Report === "success" && $scope.Clicked === "ClosePollReport") {
-                        e.Close_Poll_Report = "warning";
-                    }
-                    pollLoc.SubmitpollLocStat(e).then(function (response) {
-                        console.log(response);
-                        $scope.populateForm();
-                    })
-
-                    // console.log('Modal dismissed at: ' + new Date());
+                  
+                    
                 });
             }
             else
@@ -393,8 +453,7 @@
 
             }
         }
-    }
-    
+    }    
 
     $scope.changeView = function ()
     {
@@ -410,7 +469,6 @@
     $scope.selectZones = function ( p , k) {
         console.log(k);
         p.featureData.infoWindowHtml = "";
-
         $scope.ZoneDefault = [k];
     }
 
@@ -435,17 +493,7 @@
             }            
         };
     };
-    $scope.clickIfoPane = function (poll)
-    {
-        //console.log(poll);
-        $scope.showPane = true;
-        pollLoc.getPollDetails(poll).then(function (response) {
-            $scope.PollDlts = response;
-
-           // console.log($scope.PollDlts);
-        })        
-    }      
 }
-EquipmentController.$inject = ['$rootScope', '$scope', '$http', '$timeout', '$uibModal', '$location', 'NgMap', 'SignalService', 'userProfile', '$routeParams', 'pollLoc'];
+EquipmentController.$inject = ['$rootScope', '$scope', '$http', '$timeout','$compile', '$uibModal', '$location', 'NgMap', 'SignalService', 'userProfile', '$routeParams', 'pollLoc'];
 
  

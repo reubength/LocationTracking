@@ -3,11 +3,20 @@
 
     $scope.buttonClass = x;
 
+    $scope.$on('modal.closing', (event, reason, closed) => {
+        if (!closed && reason ) {
+            event.preventDefault();
+            $scope.$close("Closing");
+        }
+
+    });
+
     $scope.Context = address;
         $scope.cancelModal = function () {
             console.log("cancelmodal");
-            $uibModalInstance.dismiss('cancel');
-        }
+            $uibModalInstance.dismiss('cancel' );
+            }
+
         $scope.ok = function () {
             if (x === 'Zone')
             {
@@ -17,8 +26,13 @@
                 console.log($scope.modalBody);
                 $uibModalInstance.close($scope.modalBody);
             }
+            else if (x === 'Poll Details') {
+                //console.log($scope.modalBody);
+                $uibModalInstance.close($scope.modalBody);
+            }
             else
             {
+
                 $uibModalInstance.close('save');
             }
             //return $scope.Selected;
@@ -104,6 +118,10 @@
         if (x === 'editZones') {
             $scope.modalTitle = "Edit Zone"
         }
+        if (x == 'Poll Details')
+        {
+            $scope.modalTitle ="Location Details"
+        }
 
         $scope.checkSelected = function (e,z)
         {
@@ -115,7 +133,7 @@
             {
                 var index = $scope.Selected.indexOf(z);
                 $scope.Selected.splice(index, 1);
-                console.log(   $scope.Selected);
+                console.log(  $scope.Selected);
             }
         }       
        
@@ -125,6 +143,27 @@
             if (x == 'Zone')
             {
                 $scope.modalBody = address;
+            }
+            else if (x == 'Poll Details')
+            {
+                //pollLoc.getPollDetails(address.Poll_Id).then(function (response) {
+                    $scope.PollDlts = pollLoc.polldtls;
+                    $scope.modalBody = address;
+
+                    //fetch('http://locationtracking.electionchief.com/PollLocImgs/' + address.Poll_Id)
+                    //    .then(function (img) {
+                    //        $scope.modalImage = img;
+                    //        console.log($scope.modalImage);
+                    //    })
+                    //    .catch(e => {
+                    //        pre(`Caugth error: ${e.message}`)
+                    //    })
+                   
+                   // $scope.openModal($scope.PollDlts, "Poll Details")
+
+                    //$scope.modalBody = $scope.PollDlts;
+                    console.log($scope.PollDlts);
+                //})    
             }
             else if (x == 'editZones')
             {

@@ -1,45 +1,129 @@
-﻿<div class="col-lg-offset-1">
-    <form class="form-horizontal">
-        <fieldset ng-model="modalBody">
-            <legend>Edit Zone</legend>
+﻿<style>
+    .modal-dialog {
+        position: absolute;
+        top: 35% !important;
+        transform: translate(0, -50%) !important;
+        -ms-transform: translate(0, -50%) !important;
+        -webkit-transform: translate(0, -30%) !important;
+        left: 30%;
+        margin: auto 5%;
+        width: 40%;
+        min-width: 500px;
+        min-height: 400px;
+        display: table;
+         
+    }
+    .modal-header {
+        background-color: #3e80ab;
+        color: white;
+    }
+    #leftCol {
+        display: block;
+        float: left;
+        min-height: 300px;
+        padding: 20px 0 0 5px;
+        position: relative;
+        width: 50%;
+        word-wrap: break-word;
+    }
+    #ContentArea {
+        /*border-left: 1px solid #ccc;*/
+        margin-top: 15px;
+        padding: 15px 6px 6px 6px;
+        margin-left: 50%;
+        min-height: 400px;
+        color: #777676;
+        background-color: #fbfbfb;
+    }
+    .pollImg {
+        height: 250px;
+        width: 100%;
+    }
+    .gm-style-iw {
+        max-width: 300px;
+    }
 
-            <div class="form-group">
-                <label for="Latitude" class="col-lg-3 control-label">Zone #</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" ng-model="modalBody.zone" id="Latitude" placeholder="Address">
-                </div>
+    #mainContainer {
+        font-family: 'Open Sans Condensed', sans-serif;
+        /*font-size: 13px;
+        font-weight: bold;*/
+        padding: 10px;
+        /*background-color: #48b5e9;*/
+        color: #777676;
+        /*margin: 1px;*/
+        border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+    }
+
+    /*.iw-content {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 10px;
+        font-weight: 200;
+        padding: 10px;
+        color: black;
+        margin: 1px;
+        border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners.  
+        text-wrap: normal;
+    }*/
+    .content
+    {
+        margin-top:20px;
+    }
+    li {
+        list-style-type: none;
+        font-weight: 400;
+    }
+
+    .iw_label {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 0px 5px 10px 0px;
+        color: black;
+    }
+</style>
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Location Details</h3>
+</div>
+<div id="mainContainer">
+    
+    <div id="leftCol">
+            <label type="text" class="control-label  iw-title">{{modalBody.Poll_Name}}</label>         
+            <img class="pollImg" ng-src="http://locationtracking.electionchief.com/PollLocImgs/{{modalBody.Poll_Id}}.jpg" onerror="this.src='http://locationtracking.electionchief.com/PollLocImgs/noImage.jpg'"/>     
+    </div>
+
+    <div id="ContentArea">
+        <div class="content">                
+            <label>Contact Information</label>
+            <div>               
+                <ul>                   
+                    <li ng-repeat="pd in PollDlts | filter:  modalBody.Poll_Id "  >                     
+                        <label class="iw_label">
+                            {{pd.contact_FirstName}} {{pd.contact_LastName}} :
+                            {{pd.contact_Info}} ({{pd.contact_Type}} )
+                        </label> 
+                    </li>                    
+                </ul>
+                
             </div>
+            <!--<div id="table">
+                <table class="table  ">
+                    <thead>
+                        <tr>                                 
+                            <th scope="col"> Contact Name </th>                                 
+                            <th scope="col"> Contact Type  </th>
+                            <th scope="col"> Contact #  </th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" ng-repeat="pd in PollDlts | filter:modalBody.Poll_Id " class="active">
+                            <td  >{{pd.contact_FirstName}} {{pd.contact_LastName}}</td>
+                            <td >{{pd.contact_Type}} </td>
+                            <td  >{{pd.contact_Info}}</td>                                 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>-->
+        </div>
+    </div>
 
-            <div class="form-group">
-                <label for="Longitude" class="col-lg-3 control-label">Zone Name</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" ng-model="modalBody.zone_Name" id="Longitude" placeholder="Zone Name">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="zone_Active" class="col-lg-3 control-label">Status</label>
-                <div class="col-lg-5">
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Active</option>
-                        <option>Inactive</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="Longitude" class="col-lg-3 control-label">Zone KML</label>
-                <div class="col-lg-5">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" ng-click="ok()" class="btn btn-primary">Submit</button>
-                    <button ng-click="cancelModal()" class="btn btn-warning">Cancel</button>
-                </div>
-            </div>
-        </fieldset>
-    </form>
 </div>

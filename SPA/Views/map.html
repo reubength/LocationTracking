@@ -51,6 +51,36 @@
         margin-left: 3%;
         padding-bottom:25px;
     }
+    .gm-style-iw {
+        max-width: 300px;
+    } .iw-title {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 10px;
+        background-color: #48b5e9;
+        color: white;
+        margin: 1px;
+        border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+        text-wrap: normal;
+    }
+    .iw-content {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 10px;
+        font-weight: 200;
+        padding: 10px; 
+        color: black;
+        margin: 1px;
+        border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+        text-wrap: normal;
+    }.iw-image {
+        height: 200px;
+        width: 80%;
+    }
+    .iw_label {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 10px;
+    }
 </style>
 
 <div ng-controller="EquipmentController">
@@ -78,9 +108,18 @@
         </div>-->
 
         <div class="map">
-            <ng-map ng-init="getMap()" center="41.5027736,-81.6700112" zoom="13" ng-dblclick="openModal('','Zone')" disable-double-click-zoom="true"r>
+            <ng-map ng-init="getMap()" center="41.5027736,-81.6700112" zoom="13" ng-dblclick="openModal('','Zone')" disable-double-click-zoom="true" ng-click="mapClick()">
                 <kml-layer ng-repeat="k in ZonesAll| filter:filterMakes()" url="{{k.zone_Kml}}" on-click="selectZones(k,k.zone)"></kml-layer>
-                <marker ng-repeat="p in dynMarkers | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}" animation="Animation.DROP" optimized="true" on-click="showDetail(p)">
+                <marker ng-repeat="p in dynMarkers | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}" animation="Animation.DROP" optimized="true" on-click="showDetail(p)"> </marker>
+                <!--<info-window id="foo-iw" position="[{{p.lat}},{{p.lng}}]">
+
+                    <div >
+                        
+                        
+                      
+                    </div>
+                </info-window>-->
+            </ng-map>
 
         </div>
     </div>
