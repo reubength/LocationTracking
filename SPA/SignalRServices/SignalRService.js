@@ -19,7 +19,7 @@
 
             notificationHubProxy.client.hello = function () {
 
-                console.log("Hello from ASP.NET Web API");
+               //console.log("Hello from ASP.NET Web API");
                var  alert = 1;
                self.setAlert(alert);
 

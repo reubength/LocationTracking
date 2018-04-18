@@ -6,8 +6,11 @@
     var polldtls;
     var Length;
     var Zones;
+    var mode;
+    obj.grdMode = true;
+    obj.zonesSel=[{ id_zone: '0', zone: '', zone_Name: 'All', zone_Kml: 'null', zone_Active: '1' }];
 
-        console.log(domain)
+        //console.log(domain)
     
 
     //obj.ChangeDist = function (loc) {
@@ -19,10 +22,25 @@
     //    //console.log(District);
     //    return District;
     //}
-
+    obj.setGridMode = function (Monday)    {
+        obj.grdMode = Monday;
+    }
+    obj.getGridMode = function () {
+        return obj.grdMode;
+    } 
+    obj.setMapMode = function (mode) {
+        obj.mode = mode;
+    } 
+    obj.getMapMode = function ( ) {
+        return obj.mode;
+    } 
     obj.getPollLocs = function(){
         return obj.pollLocs;
     } 
+    obj.getpolldtls = function ()
+    {
+        return obj.polldtls;
+    }
 
     obj.getZone = function () {
         // console.log(HydLength);
@@ -50,7 +68,22 @@
             return response.data;
 
         });
-    } 
+    }
+    obj.getzoneDefaults = function ()
+    {
+        return obj.zonesSel;
+    }
+    obj.setzoneDefaults = function (zoneDef)
+    { 
+        if(zoneDef === "Closing")
+        {
+            console.log(obj.zonesSel)
+        }
+        else
+        { 
+            obj.zonesSel = zoneDef;
+        }
+    }
     
     obj.getLocation = function ()
     {

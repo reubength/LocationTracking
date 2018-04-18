@@ -1173,12 +1173,14 @@
     <Content Include="SPA\Login\loginController.js" />
     <Content Include="SPA\Login\loginServices.js" />
     <Content Include="SPA\MainController.js" />
+    <Content Include="SPA\MapController\MapController.js" />
     <Content Include="SPA\ModalController\ModalController.js" />
     <Content Include="SPA\SignalRServices\SignalRService.js" />
     <Content Include="SPA\Template\modalPollDetails.html" />
     <Content Include="SPA\Template\modalWindowEditZones.html" />
     <Content Include="SPA\Template\modalWindowZones.html" />
     <Content Include="SPA\Template\modalWindow.html" />
+    <Content Include="SPA\Template\summaryPrintTemplate.html" />
     <Content Include="SPA\UploadFile\fileUploadController.js" />
     <Content Include="SPA\UserProfile\userProfileService.js" />
     <Content Include="SPA\Views\ElectionSetup.html" />

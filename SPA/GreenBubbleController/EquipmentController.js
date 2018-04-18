@@ -1,6 +1,6 @@
 ﻿var EquipmentController = function ($rootScope, $scope, $http, $timeout, $compile, $uibModal, $location, NgMap, SignalService, userProfile, $routeParams, pollLoc) {
 
-    $scope.gridView = false;
+    
     $scope.Monday = true;
     $scope.toggleValue = true;
     $scope.showPane = false;
@@ -20,6 +20,7 @@
 
     $scope.singleModel = '1';
     $scope.InfoWindow;
+    $scope.ZonesAll=[];
      
     $scope.sortType = 'Poll_Id'; // set the default sort type
     $scope.sortReverse = false;  // set the default sort order
@@ -31,11 +32,11 @@
 
 
     $scope.config = [
-        //{
-        //    name: 'Length',
-        //    label: 'Locations',
-        //    btnClass: ""
-        //},
+        {
+            name: 'Length',
+            label: 'Locations',
+            btnClass: ""
+        },
         {
             name: 'Monday_Delivery',
             label: 'Monday Delivery',
@@ -73,24 +74,37 @@
         }
     ];
 
-    $scope.setActive = function setActive(idName) {
-        // $scope.activeButton = index;
-        var bdgs = document.getElementsByClassName("badge");
-        var sel = document.getElementById(idName);
-        for (var i = 0; i < bdgs.length; i++)
-        {
-            var current = document.getElementsByClassName("active");
-            if (current.length > 0)
-            {
-                current[0].className = current[0].className.replace(" active", "");
-                sel.className += " active";
-            }           
+    $scope.activeButton = 0;
+
+    $scope.$watch(function () {
+        return pollLoc.getGridMode();
+    }, function () {
+        $scope.Monday = pollLoc.getGridMode();
+        console.log($scope.Monday);
+    });
+
+    
+
+    $scope.setActive = function setActive(index) {
+       //idName
+         $scope.activeButton = index;
+        //var bdgs = document.getElementsByClassName("badge");
+        //var sel = document.getElementById(idName);
+        //for (var i = 0; i < bdgs.length; i++)
+        //{
+        //    var current = document.getElementsByClassName("active");
+        //    if (current.length > 0)
+        //    {
+        //        current[0].className = current[0].className.replace(" active", "");
+        //        sel.className += " active";
+        //    }           
             
-        }
-        //for (var i = 0; i < $scope.config.length; i++)
-        //    $scope.config[i].btnClass = "";
-        //$scope.config[index].btnClass = 'active';
-        $scope.mode = idName;
+        //}
+        for (var i = 0; i < $scope.config.length; i++)
+            $scope.config[i].btnClass = "";
+        $scope.config[index].btnClass = 'active';
+
+        $scope.mode = $scope.config[index].name;
         $scope.markerGen();
     };
 
@@ -98,8 +112,6 @@
         $scope.populateForm();
 
     });
-
-    $scope.activeButton = 0;
     
     $scope.changeSort = function (name) {
         $scope.sortType = name; // set the default sort type
@@ -110,200 +122,43 @@
     $scope.populateForm = function () {
         pollLoc.getLocation().then(function (response) {
             $scope.PollLoc = response;
-
-            var url = $location.absUrl().split('!')[1];
-            if (url === '/mapView') {
-                $scope.markerGen();
-            }
+           
         });
-
-        pollLoc.getZonesAll().then(function (response) {
-
-            $scope.ZonesAll = response;
-            $scope.LoadKmlFil();
-        })
-
-        console.log($scope.sortType);
-        // $scope.getMap();
-        pollLoc.getPollDetails( ).then(function (response) {
+        if ($scope.ZonesAll != null || $scope.ZonesAll.length != 0)
+        {       
+            pollLoc.getZonesAll().then(function (response)
+            { 
+                $scope.ZonesAll = response; 
+            })
+         } 
+        pollLoc.getPollDetails().then(function (response) {
             $scope.PollDlts = response;
-            console.log($scope.PollDlts);
+            
         })    
 
     }
-    $scope.getMap = function () {
-        ///marker_green.png'       
-
-       
-
-        NgMap.getMap().then(function (map) {
-            //$scope.marpOptions = {
-              
-            //    disableDoubleClickZoom: true; // <---
-                    
-            //};
-            $scope.InfoWindow = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -25) });
-            $scope.map = map;
-            
-            $scope.populateForm();
-
-            //new google.maps.KmlLayer( { suppressInfoWindows: true, preserveViewport: false, map: $scope.map })
-            //$scope.markerGen(); 
-           
-            //   google.maps.event.trigger(map, 'resize');
-
-        }, function errorCallback(response) {
-
-            console.log("Nothing to see here...");
-
-        });
-
-    };
-    $scope.LoadKmlFil = function () {
-       // var src = "http://electionchief.com/filestore/wp-content/uploads/2018/03/";
-        var src = "http://cuyahogaelectionaudits.com/downloads/";
-        var name = "";
-         
-        for (var z = 0; z < $scope.ZonesAll.length;z++)
-        {
-            $scope.ZonesAll[z].zone_Kml = src + $scope.ZonesAll[z].zone_Name + ".KML";
-            //$scope.kmlFiles.push({ Zone: $scope.ZonesAll[z].zone_Name, kmlSrc: src + $scope.ZonesAll[z].zone_Name + ".KML" })
-           // name = $scope.kmlFiles[z].Zone;
-            //$scope.dynamicKML[z] = new google.maps.KmlLayer($scope.kmlFiles[z].kmlSrc, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-
-            //google.maps.event.addListener($scope.dynamicKML[z], 'click', function (name) {
-            
-            //});
-        }
-        
-        //$scope.kmlLayer1 = new google.maps.KmlLayer($scope.Kmlsrc1, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
-        //google.maps.event.addListener($scope.kmlLayer1, 'click', function (kmlEvent1) {
-        //    var text = kmlEvent1.featureData.snippet;
-        //    alert(text);
-        //});
-         
-
-
-    } 
-
-    $scope.markerGen = function () {
-        $scope.dynMarkers = [];
-   
-        $scope.i = 0;
-        for (var k in $scope.PollLoc) {
-            //if ($scope.mode === "Length")
-            //{
-            //    $scope.mode == 'Monday_Delivery';
-            //}
-            //$timeout(function () {
-            if ($scope.PollLoc[k][$scope.mode] === "success") {
-                //$scope.dynMarkers[k] = new google.maps.Marker({ title: $scope.PollLoc[k].Poll_Name, icon: "images/marker_green.png" });
-                $scope.dynMarkers.push({
-                    title: $scope.PollLoc[k].Poll_Name,
-                    icon: "images/marker_green.png",
-                    Id: $scope.PollLoc[k].Poll_Id,
-                    lng: $scope.PollLoc[k].longitude,
-                    lat: $scope.PollLoc[k].latitude,
-                    ward: $scope.PollLoc[k].Ward_Name,
-                    Precinct: $scope.PollLoc[k].Precinct,
-                    Zone: $scope.PollLoc[k].Zone
-                });
-            }
-            else {
-                //$scope.dynMarkers[k] = new google.maps.Marker({ title: $scope.PollLoc[k].Poll_Name, icon: "images/marker_yellow.png" });
-                $scope.dynMarkers.push({
-                    title: $scope.PollLoc[k].Poll_Name,
-                    icon: "images/marker_yellow.png",
-                    Id: $scope.PollLoc[k].Poll_Id,
-                    lng: $scope.PollLoc[k].longitude,
-                    lat: $scope.PollLoc[k].latitude,
-                    ward: $scope.PollLoc[k].Ward_Name,
-                    Precinct: $scope.PollLoc[k].Precinct,
-                    Zone: $scope.PollLoc[k].Zone
-                });
-            }             
-        }           
-    }
+ 
+ 
 
     $scope.toggleFun = function (toggleValue) {
         //  var url = $location.absUrl().split('!')[1];
         if (toggleValue) {
             //$location.path('/map');
             $scope.Monday = true;
-            $scope.gridView = true;
+          //  $scope.gridView = true;
         }
         else {
             // $location.path('/');
             $scope.Monday = false;
-            $scope.gridView = false;
-            $scope.getMap();
+           // $scope.gridView = false;
+      //      $scope.getMap();
             
             //$scope.InfoWindow.close();
         }
     }
-    $scope.mapClick = function ()
-    {
-        //google.maps.InfoWindow.prototype.isOpen = function () {
-        //    var map = this.getMap();
-        //    return (map !== null && typeof map !== "undefined");
-        //}
-        //if ($scope.InfoWindow.getMap !== null)
-        //{
-        //    $scope.InfoWindow.close();
-        //}
-        //console.log($scope.InfoWindow);
-       // $scope.InfoWindow.close();
-    }
-    $scope.showDetail = function (e, p) {
-        $scope.Location = p;
-        // console.log(d);
-        console.log($scope.InfoWindow);
-       
-        var center = new google.maps.LatLng($scope.Location.lat, $scope.Location.lng);
-        $scope.InfoWindow.setPosition(center);
-        //$scope.InfoWindow.close();
-        //$scope.InfoWindow.event.addListener(clicked())
-        //$scope.InfoWindow.setContent(
-        //        );
-
-       
-        var content = '<div id="iw-container" ng-controller="EquipmentController" ng-click="clicked(d) ">' +
-            '<div class="iw-title">' + $scope.Location.title + '</div>' +
-            '<div class="iw-content">' +
-            '<div class="iw-subTitle" ">' + $scope.Location.ward + $scope.Location.Precinct + '</div>' +           
-            '<img class="iw-image" src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg"   alt="' + $scope.Location.title + '" >' +
-            //'<p>' + $scope.Location.Id + '</p>' +  
-            '<h5>Contact Information</h5>'+
-            '<div>' +
-            '<ul>' +           
-            '<li ng-repeat="pd in PollDlts | filter:  Location.Id" class="iw-subTitle" >' +
-            '<label class="iw_label">{{pd.contact_FirstName}} {{pd.contact_LastName}} :</label>' +
-            '{{pd.contact_Info}}({{pd.contact_Type}}) '+
-            '</li>'+
-            '</ul>'+     
-            '</div>'+
-                   
-            //'<br>Phone... <br>e-mail: geral@vaa.pt' +
-            '</div>' +
-            '<div class="iw-bottom-gradient"></div>' +
-            '</div>';
-          var el = $compile(content)($scope);
-            $scope.$apply();
-            $scope.items = el.html();
-            $scope.InfoWindow.setContent($scope.items);  
-        // onerror="this.src = "http://locationtracking.electionchief.com/PollLocImgs/noImage.jpg"" 
-        //$scope.map.showInfoWindow('foo-iw', p);
-        //var pos = new google.maps.LatLng( p.lat, p.lng);         
-        //$scope.map.showInfoWindow.setPostion(pos);
-
-        console.log($scope.map);
-        console.log(p);
-        $scope.InfoWindow.open($scope.map);
-
-        //$scope.map.showInfoWindow('foo-iw', $scope.HydranLoc1.id);
-    };
-
  
+  
+
     $scope.openModal = function (e, x) {
         if (x ==='Zone')
         {
@@ -329,7 +184,7 @@
                 });
                 $scope.modalInstance.result.then(function (response) {
                  //   console.log(response);
-                    $scope.ZoneDefault = response ;
+                    pollLoc.setzoneDefaults( response );
                 });
             }
         }
@@ -360,8 +215,7 @@
                     //$scope.ZoneDefault = response;
                 });
             }
-        }
-       
+        }       
         else
         {
             if (userProfile.getProfile().username != null)
@@ -387,7 +241,7 @@
                 });
 
                 $scope.modalInstance.result.then(function (response) {
-                    console.log(e);
+                    //console.log(e);
                     if (response === 'save')
                     {
                         if (e.Monday_Delivery === "warning" && $scope.Clicked === "Monday_Delivery") {
@@ -439,12 +293,11 @@
                             e.Close_Poll_Report = "warning";
                         }
                         pollLoc.SubmitpollLocStat(e).then(function (response) {
-                            console.log(response);
+                            //console.log(response);
                             $scope.populateForm();
                         })
 
-                    }
-                  
+                    }                  
                     
                 });
             }
@@ -453,26 +306,19 @@
 
             }
         }
-    }    
+    }  
 
-    $scope.changeView = function ()
-    {
-        var url = $location.absUrl().split('!')[1];
-        if (url === '/mapView') {      
-            $location.path('/grid');
-        }
-        else if (url === '/grid'){
-            $location.path('/mapView');
-        }
-    } 
+  
 
     $scope.selectZones = function ( p , k) {
-        console.log(k);
+        //console.log(k);
         p.featureData.infoWindowHtml = "";
         $scope.ZoneDefault = [k];
     }
 
     $scope.filterMakes = function () {
+
+        $scope.ZoneDefault = pollLoc.getzoneDefaults()
         return function (p) {
             if ($scope.ZoneDefault.length === 0)
             {
@@ -486,7 +332,7 @@
                     {
                         return true;
                     }
-                    else if (p.Zone == $scope.ZoneDefault[i].zone || p.zone == $scope.ZoneDefault[i].zone) {
+                    else if (p.Zone == pollLoc.zonesSel[i].zone || p.zone == pollLoc.zonesSel[i].zone) {
                         return true;
                     }
                 }

@@ -1,10 +1,13 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngTouch', 'myAppHomeService', 'myLoginService', 'myAppUserService', 'mySignalRService', 'ngMap', 'ui.toggle', 'ui.bootstrap']).constant('domain','http://localhost:60855/api') ;
+﻿var app = angular.module('app', ['ngRoute', 'ngTouch', 'myAppHomeService', 'myLoginService', 'myAppUserService', 'mySignalRService', 'ngMap', 'ui.toggle', 'ui.bootstrap'])
+    .constant('domain','http://localhost:60855/api') ;
 
 app.controller('MainController', MainController);
 app.controller('loginController', loginController);
 //app.controller('AlertController', AlertController);
 //app.controller('GridController', GridController);
 app.controller('EquipmentController', EquipmentController);
+//
+app.controller('MapController', MapController);
 app.controller('ElectionSetupController', ElectionSetupController);
 
 
@@ -67,4 +70,3 @@ app.run(function ($rootScope, $location, userProfile) {
         }
     });
 });
-
