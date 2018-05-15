@@ -34,7 +34,7 @@ namespace LocationTracking.Models
 
     public class RegisterBindingModel
     {
-        [Required]
+        //[Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -50,8 +50,17 @@ namespace LocationTracking.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
+
+        //[Required]
+        //[Display(Name = "Function")]
+        //public string Function { get; set; }
     }
 
     public class RegisterExternalBindingModel

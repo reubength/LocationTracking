@@ -28,7 +28,6 @@ namespace LocationTracking.Models
         public virtual DbSet<election_Precinct> election_Precinct { get; set; }
         public virtual DbSet<poll_Location> poll_Location { get; set; }
         public virtual DbSet<poll_Location_All> poll_Location_All { get; set; }
-        public virtual DbSet<LocTrackMain> LocTrackMains { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -36,5 +35,7 @@ namespace LocationTracking.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<dbo_zones> dbo_zones { get; set; }
         public virtual DbSet<dbo_poll_ContactDetails> dbo_poll_ContactDetails { get; set; }
+        public virtual DbSet<LocTrackMain> LocTrackMains { get; set; }
+        public virtual DbSet<audit_Table> audit_Table { get; set; }
     }
 }

@@ -1,14 +1,20 @@
 ﻿angular.module('myAppHomeService', [])
 
-    .factory('pollLoc', ['$http','domain', function ($http, domain) {
+    .factory('pollLoc', ['$http', 'domain', 'userProfile', function ($http, domain, userProfile) {
     var obj = {};
     var pollLocs;
     var polldtls;
     var Length;
     var Zones;
     var mode;
+    var day;
+    var hour;
+    var min;
     obj.grdMode = true;
-    obj.zonesSel=[{ id_zone: '0', zone: '', zone_Name: 'All', zone_Kml: 'null', zone_Active: '1' }];
+    obj.zonesSel = [{ id_zone: '0', zone: '', zone_Name: 'All', zone_Kml: 'null', zone_Active: '1' }];
+    var Roles;
+    
+
 
         //console.log(domain)
     
@@ -22,6 +28,48 @@
     //    //console.log(District);
     //    return District;
     //}
+    obj.getDay = function ()
+    {
+        //0:Sunday
+        //1:Monday
+        //2:Tuesday
+        //3:Wednesday
+        //4:Thursday
+        //5:Friday
+        //6:Saturday
+        //7:Sunday
+        obj.day = (new Date()).getDay();
+        obj.hour = (new Date().getHours());
+        obj.min = (new Date().getMinutes());
+       // obj.time  , format("dddd, mmmm dS, yyyy, h:MM:ss TT")
+        var time = obj.hour + obj.min;
+        if (obj.day === 1)
+        {
+            obj.setGridMode(true)
+            if ((time >= '1730') && (time < '2030') )
+            {
+                obj.setMapMode('Monday_Arrival')
+            }
+            else {
+                obj.setMapMode('Monday_Close')
+            }
+        }
+        else
+        {
+            if ((time >= '0530') && (time< '0615')) {
+                obj.setMapMode('Tuesday_Arrival')
+            }
+            else if ((time >' 0615') && (time < '1830')) {
+                obj.setMapMode('Open_Ready')
+            }
+            else   {
+                obj.setMapMode('Close_Poll_Report')
+            }
+          //  'Close_Poll_Report'
+            obj.setGridMode(false)
+        }
+    }
+
     obj.setGridMode = function (Monday)    {
         obj.grdMode = Monday;
     }
@@ -106,9 +154,71 @@
             //console.log(HydrantLoc);
             return response.data;
 
+            }, function errorCallback(response) {
+                if (response.status === 401)
+                {
+                    userProfile.logOut();
+                }
+            console.log("Nothing to see here...");
         });
     }
-     
+
+    obj.getUserRole = function () {
+        var accesstoken = sessionStorage.getItem('accessToken');
+        var authHeaders = {};
+
+        if (accesstoken) {
+            authHeaders.Authorization = 'Bearer ' + accesstoken;
+        }
+
+        return $http({
+            method: 'GET',
+            url: domain + '/AspNetRoles',
+            headers: authHeaders
+        }).then(function (response, status) {
+            //HydrantLong = response.data;
+            obj.pollLocs = response.data;
+            obj.Length = response.data.length;
+            //console.log(HydrantLoc);
+            return response.data;
+
+        }, function errorCallback(response) {
+            if (response.status === 401) {
+                userProfile.logOut();
+            }
+            console.log("Nothing to see here...");
+        });
+    }
+
+    obj.DeleteZone = function (zone)
+    {
+        var accesstoken = sessionStorage.getItem('accessToken');
+        var authHeaders = {};
+
+        if (accesstoken) {
+            authHeaders.Authorization = 'Bearer ' + accesstoken;
+        }
+
+        return $http({
+            method: 'DELETE',
+            url: domain + '/zones/' + zone.id_zone,
+            processData: false,
+            contentType: false,
+            data: zone,
+            //headers: authHeaders,
+            //contentType: 'application/vnd.ms-excel'
+            //Content-Type: 'application/vnd.ms-excel'
+            headers: {
+                "Authorization": authHeaders.Authorization,
+                "Content-Type": undefined
+            },
+
+
+        }).then(function (response, status) {
+
+
+        });
+    }
 
     obj.SubmitpollLoc = function (data) {
         var accesstoken = sessionStorage.getItem('accessToken');
@@ -240,15 +350,19 @@
         if (accesstoken) {
             authHeaders.Authorization = 'Bearer ' + accesstoken;
         }
-        Loc.Monday_Delivery     == "success" ? Loc.Monday_Delivery = 1 : Loc.Monday_Delivery = 0;
-        Loc.Monday_Arrival      == "success" ? Loc.Monday_Arrival = 1 : Loc.Monday_Arrival = 0;
-        Loc.Monday_Close        == "success" ? Loc.Monday_Close = 1 : Loc.Monday_Close = 0;
-        Loc.Building_Open       == "success" ? Loc.Building_Open = 1 : Loc.Building_Open = 0;
-        Loc.Tuesday_Arrival     == "success" ? Loc.Tuesday_Arrival      = 1 : Loc.Tuesday_Arrival   = 0;
-        Loc.Open_Ready          == "success" ? Loc.Open_Ready           = 1 : Loc.Open_Ready        = 0;
-        Loc.Close_Poll_Report   == "success" ? Loc.Close_Poll_Report    = 1 : Loc.Close_Poll_Report = 0;
+        Loc.Monday_Delivery         = (Loc.Monday_Delivery ==="primary" ? Loc.Monday_Delivery      = 1 : Loc.Monday_Delivery   === "success" ? 2 : Loc.Monday_Delivery  === "warning"    ? 0 : 0);
+        Loc.Monday_Arrival          = (Loc.Monday_Arrival === "primary" ? Loc.Monday_Arrival       = 1 : Loc.Monday_Arrival    === "success" ? 2 : Loc.Monday_Arrival   === "warning"    ? 0 : 0);
+        Loc.Monday_Close            = (Loc.Monday_Close  === "primary" ? Loc.Monday_Close         = 1 : Loc.Monday_Close      === "success" ? 2 : Loc.Monday_Close     === "warning"    ? 0 : 0);
+        Loc.Building_Open           = (Loc.Building_Open=== "primary" ? Loc.Building_Open        = 1 : Loc.Building_Open     === "success" ? 2 : Loc.Building_Open    === "warning"    ? 0 : 0);
+        Loc.Tuesday_Arrival         = (Loc.Tuesday_Arrival=== "primary" ? Loc.Tuesday_Arrival      = 1 : Loc.Tuesday_Arrival   === "success" ? 2 : Loc.Tuesday_Arrival  === "warning"    ? 0 : 0);
+        Loc.Open_Ready              = (Loc.Open_Ready === "primary" ? Loc.Open_Ready           = 1 : Loc.Open_Ready        === "success" ? 2 : Loc.Open_Ready       === "warning"    ? 0 : 0);
+        Loc.Close_Poll_Report       = (Loc.Close_Poll_Report === "primary" ? Loc.Close_Poll_Report = 1 : Loc.Close_Poll_Report === "success" ? 2 : Loc.Close_Poll_Report === "warning" ? 0 : 0);
+      //  Loc.user_Name               = userProfile.getProfile().username
+       
 
             
+        //return $http({
+        //    method: 'POST',
         return $http({
             method: 'POST',
             url: domain + '/poll_Location/' + Loc.Poll_Id,
@@ -263,7 +377,9 @@
                 Building_Open: Loc.Building_Open,
                 Tuesday_Arrival: Loc.Tuesday_Arrival,
                 OpenReady: Loc.Open_Ready,
-                ClosePollReady: Loc.Close_Poll_Report
+                ClosePollReady: Loc.Close_Poll_Report,
+                user_Name: userProfile.getProfile().username,
+                Role: userProfile.getProfile().Role
             }),
                 headers: authHeaders,
                 contentType: 'application/json'

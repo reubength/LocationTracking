@@ -46,10 +46,8 @@ namespace LocationTracking.Controllers
         // GET: api/poll_Location/5
         [ResponseType(typeof(poll_Location))]
         public IHttpActionResult Getpoll_Location(int id)
-        {
-           
+        {           
             poll_Location poll_Location = db.poll_Location.Find(id);
-
             
             if (poll_Location == null)
             {
@@ -123,7 +121,7 @@ namespace LocationTracking.Controllers
                 try
                 {
                     db.SaveChanges();
-                    locationUpdatesHub.SayHello();
+                    locationUpdatesHub.SayHello(poll_Location);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

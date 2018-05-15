@@ -9,6 +9,8 @@ namespace LocationTracking.Models
     {
         public string Name { get; set; }
 
+        
+
         public string Url { get; set; }
 
         public string State { get; set; }
@@ -32,6 +34,8 @@ namespace LocationTracking.Models
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+        public string Claim { get; set; }
+
     }
 
     public class UserLoginInfoViewModel

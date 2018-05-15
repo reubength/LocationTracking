@@ -98,8 +98,8 @@
 
         <div class="map">
             <ng-map ng-init="getMap()"  ng-dblclick="openModal('','Zone')" center="41.5027736,-81.6700112"  zoom="10" disable-double-click-zoom="true" ng-click="mapClick()"  >
-                <kml-layer id="{{k.zone}}" ng-repeat="k in ZonesAll| filter:filterMakes()" url="{{k.zone_Kml}}" on-click="selectZones(k,k.zone)"  preserveViewport="true "></kml-layer>
-                <marker ng-repeat="p in dynMarkers | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}"   optimized="true" on-click="showDetail(p)"> </marker>
+                <kml-layer id="{{k.zone}}" ng-repeat="k in ZonesAll| filter:filterMakes()" url="{{k.zone_Kml}}" on-click="selectZones(k,k.zone)" title="{{k.zone_Nme}}"  preserveViewport="true "></kml-layer>
+                <marker ng-repeat="p in dynMarkers | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}"     optimized="true" on-click="showDetail(p)"> </marker>
                 <!--<info-window id="foo-iw" position="[{{p.lat}},{{p.lng}}]" animation="Animation.DROP" center="41.5027736,-81.6700112" zoom="13">
 
                     <div >                        

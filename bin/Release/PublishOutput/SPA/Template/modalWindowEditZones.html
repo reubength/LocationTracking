@@ -1,17 +1,12 @@
 ﻿   <div class="col-lg-offset-1">
         <form class="form-horizontal">
-            <fieldset ng-model="modalBody">
+            <fieldset >
                 <legend>Edit Zone</legend>
-                <!--<div class="form-group">
-                    <label for="id_zone" class="col-lg-3 control-label">Id</label>
-                    <div class="col-lg-5">
-                        <input name="Hydrant.hydrant_Id" type="text" ng-model="modalBody.id_zone" class="form-control" id="id_zone" placeholder="0001">
-                    </div>
-                </div>-->
+                 
                 <div class="form-group">
-                    <label for="Latitude" class="col-lg-3 control-label">Zone #</label>
+                    <label for="Zone" class="col-lg-3 control-label">Zone #</label>
                     <div class="col-lg-3">
-                        <input type="text" class="form-control" ng-model="modalBody.zone" id="Latitude" placeholder="Address">
+                        <input type="text" class="form-control" ng-model="modalBody.zone" id="Zone" placeholder="Zone">
                     </div>
                 </div>
 
@@ -25,9 +20,9 @@
                 <div class="form-group">
                     <label for="zone_Active" class="col-lg-3 control-label">Status</label>
                     <div class="col-lg-5">
-                        <select class="form-control" id="exampleSelect1">
-                            <option>Active</option>
-                            <option>Inactive</option>
+                        <select class="form-control" id="exampleSelect1" ng-model="StatusSelected">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                 </div>
@@ -35,9 +30,7 @@
                 <div class="form-group">
                     <label for="Longitude" class="col-lg-3 control-label">Zone KML</label>
                     <div class="col-lg-5">
-                       <!-- <input type="text" class="form-control" ng-model="modalBody.zone_Kml" id="Longitude" placeholder="KML FIle">-->
-                      <!--  <input type="file" placeholder="file" value="~/locker/"  ng-model="modalBody.zone_Kml" class="form-control" accept=".KML,.kml"/>-->
-                        <!--<small id="emailHelp" class="form-text text-muted"><a>Upload KML file</a></small>-->
+                       
                     </div>                    
                 </div>
 

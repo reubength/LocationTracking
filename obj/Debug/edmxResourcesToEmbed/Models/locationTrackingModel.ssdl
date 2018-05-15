@@ -76,7 +76,7 @@
     </Key>
     <Property Name="poll_Id" Type="int" Nullable="false" />
     <Property Name="poll_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="poll_Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="poll_Address" Type="nvarchar" MaxLength="50" />
     <Property Name="Zone" Type="int" />
     <Property Name="Monday_Delivery" Type="int" />
     <Property Name="Monday_Arrival" Type="int" />
@@ -85,6 +85,8 @@
     <Property Name="Tuesday_Arrival" Type="int" />
     <Property Name="OpenReady" Type="int" />
     <Property Name="ClosePollReady" Type="int" />
+    <Property Name="user_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="poll_Location_All">
     <Key>
@@ -98,6 +100,20 @@
     <Property Name="location_Address" Type="nvarchar" MaxLength="255" />
     <Property Name="city" Type="nvarchar" MaxLength="255" />
     <Property Name="state" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="audit_Table">
+    <Key>
+      <PropertyRef Name="r_Id" />
+    </Key>
+    <Property Name="r_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="poll_Id" Type="int" />
+    <Property Name="location_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="mandatory_Calls" Type="nvarchar" MaxLength="50" />
+    <Property Name="status_Old" Type="nvarchar" MaxLength="50" />
+    <Property Name="status_New" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="role" Type="nvarchar" MaxLength="50" />
+    <Property Name="change_Date" Type="datetime" />
   </EntityType>
   <EntityType Name="dbo_poll_ContactDetails">
     <Key>
@@ -127,13 +143,12 @@ warning 6002: The table/view 'ph13696936071_ElectionReporting.dbo.LocTrackMain' 
       <PropertyRef Name="poll_Id" />
       <PropertyRef Name="poll_Name" />
       <PropertyRef Name="poll_Address" />
-      <PropertyRef Name="ward_Name" />
     </Key>
     <Property Name="poll_Id" Type="int" Nullable="false" />
     <Property Name="poll_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="poll_Address" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Zone" Type="int" />
-    <Property Name="ward_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ward_Name" Type="nvarchar(max)" />
     <Property Name="precincts" Type="nvarchar(max)" />
     <Property Name="Monday_Delivery" Type="int" />
     <Property Name="Monday_Arrival" Type="int" />
@@ -142,6 +157,7 @@ warning 6002: The table/view 'ph13696936071_ElectionReporting.dbo.LocTrackMain' 
     <Property Name="Tuesday_Arrival" Type="int" />
     <Property Name="OpenReady" Type="int" />
     <Property Name="ClosePollReady" Type="int" />
+    <Property Name="user_Name" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -209,6 +225,7 @@ warning 6002: The table/view 'ph13696936071_ElectionReporting.dbo.LocTrackMain' 
     <EntitySet Name="election_Precinct" EntityType="Self.election_Precinct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="poll_Location" EntityType="Self.poll_Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="poll_Location_All" EntityType="Self.poll_Location_All" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="audit_Table" EntityType="Self.audit_Table" Schema="tadmin" store:Type="Tables" />
     <EntitySet Name="dbo_poll_ContactDetails" EntityType="Self.dbo_poll_ContactDetails" Schema="tadmin" Table="dbo.poll_ContactDetails" store:Type="Tables" />
     <EntitySet Name="dbo_zones" EntityType="Self.dbo_zones" Schema="tadmin" Table="dbo.zones" store:Type="Tables" />
     <EntitySet Name="LocTrackMain" EntityType="Self.LocTrackMain" store:Type="Views" store:Schema="dbo">
@@ -225,7 +242,8 @@ warning 6002: The table/view 'ph13696936071_ElectionReporting.dbo.LocTrackMain' 
     [LocTrackMain].[Building_Open] AS [Building_Open], 
     [LocTrackMain].[Tuesday_Arrival] AS [Tuesday_Arrival], 
     [LocTrackMain].[OpenReady] AS [OpenReady], 
-    [LocTrackMain].[ClosePollReady] AS [ClosePollReady]
+    [LocTrackMain].[ClosePollReady] AS [ClosePollReady], 
+    [LocTrackMain].[user_Name] AS [user_Name]
     FROM [dbo].[LocTrackMain] AS [LocTrackMain]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">

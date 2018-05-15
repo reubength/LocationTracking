@@ -13,7 +13,7 @@ using LocationTracking.ViewModels;
 
 namespace LocationTracking.Controllers
 {
-    [Authorize(Roles = "Admin,Manager,Supervisor,User")]
+    [Authorize]
     public class LocTrackMainsController : ApiController
     {
         private ElectionReportingEntities db = new ElectionReportingEntities();
@@ -21,6 +21,8 @@ namespace LocationTracking.Controllers
         // GET: api/LocTrackMains
         public IQueryable<LocationViewModel> GetLocTrackMains()
         {
+          //  LocationViewModel loc = new LocationViewModel();
+
             //return db.LocTrackMains;
             var LocationViewModel = from pl in db.LocTrackMains
                                     join pla in db.poll_Location_All on pl.poll_Id equals pla.poll_id
@@ -33,15 +35,16 @@ namespace LocationTracking.Controllers
                                         Ward_Name           = pl.ward_Name,
                                         Precinct            = pl.precincts,
                                         Zone                = pl.Zone,
-                                        Monday_Arrival      = (pl.Monday_Arrival    == 1) ? "success" : "warning",
-                                        Tuesday_Arrival     = (pl.Tuesday_Arrival   == 1) ? "success" : "warning",
-                                        Open_Ready          = (pl.OpenReady         == 1) ? "success" : "warning",
-                                        Close_Poll_Report   = (pl.ClosePollReady    == 1) ? "success" : "warning",
                                         latitude            = pla.latitude,
                                         longitude           = pla.longitude,
-                                        Monday_Delivery     = (pl.Monday_Delivery == 1) ? "success" : "warning",
-                                        Monday_Close        = (pl.Monday_Close == 1) ? "success" : "warning",
-                                        Building_Open       = (pl.Building_Open == 1) ? "success" : "warning",
+                                        Monday_Arrival      = (pl.Monday_Arrival    == 0 ? "warning"    : pl.Monday_Arrival == 1 ? "primary": pl.Monday_Arrival == 2 ? "success" : "warning" ),// (pl.Monday_Arrival    == 1) ? "success" : "warning",
+                                        Tuesday_Arrival     = (pl.Tuesday_Arrival   == 0 ? "warning"    : pl.Tuesday_Arrival == 1 ? "primary" : pl.Tuesday_Arrival == 2 ? "success" : "warning") ,//(pl.Tuesday_Arrival   == 1) ? "success" : "warning",
+                                        Open_Ready          = (pl.OpenReady         == 0 ? "warning"    : pl.OpenReady == 1 ? "primary" : pl.OpenReady == 2 ? "success" : "warning"),//(pl.OpenReady         == 1) ? "success" : "warning",
+                                        Close_Poll_Report   = (pl.ClosePollReady    == 0 ? "warning"    : pl.ClosePollReady == 1 ? "primary" : pl.ClosePollReady == 2 ? "success" : "warning"),//(pl.ClosePollReady    == 1) ? "success" : "warning",                                        
+                                        Monday_Delivery     = (pl.Monday_Delivery   == 0 ? "warning"    : pl.Monday_Delivery == 1 ? "primary" : pl.Monday_Delivery == 2 ? "success" : "warning"),//(pl.Monday_Delivery == 1) ? "success" : "warning",
+                                        Monday_Close        = (pl.Monday_Close      == 0 ? "warning"    : pl.Monday_Close == 1 ? "primary" : pl.Monday_Close == 2 ? "success" : "warning"),//(pl.Monday_Close == 1) ? "success" : "warning",
+                                        Building_Open       = (pl.Building_Open     == 0 ? "warning"    : pl.Building_Open == 1 ? "primary" : pl.Building_Open == 2 ? "success" : "warning"),//(pl.Building_Open == 1) ? "success" : "warning",
+                                        user_Name           = pl.user_Name
 
                                     };
 
@@ -49,8 +52,29 @@ namespace LocationTracking.Controllers
             return LocationViewModel;
         }
 
-        // GET: api/LocTrackMains/5
-        [ResponseType(typeof(LocTrackMain))]
+        //public string VetStatusData(int? Status)
+        //{
+        //    string stringStatus = "warning";
+        //    if (Status == 1)
+        //    {
+        //        stringStatus = "success";
+        //    }
+        //    else if (Status == 2)
+        //    {
+        //        stringStatus = "primary";
+
+        //    }
+        //    else
+        //    {
+        //        stringStatus = "warning";
+        //    }
+        //    return stringStatus;
+        //}
+    
+
+
+    // GET: api/LocTrackMains/5
+    [ResponseType(typeof(LocTrackMain))]
         public IHttpActionResult GetLocTrackMain(int id)
         {       
             LocTrackMain locTrackMain = db.LocTrackMains.Find(id);

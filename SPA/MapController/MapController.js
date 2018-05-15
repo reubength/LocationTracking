@@ -111,15 +111,93 @@
     //    $scope.markerGen();
     //};
 
-    $rootScope.$on('updateList', function () {
-        $scope.populateForm();
+    $rootScope.$on('updateList', function (updateList, loc) {
+        var status =
+            [
+                'Building_Open',
+                'Close_Poll_Report',
+                'Monday_Arrival',
+                'Monday_Close',
+                'Monday_Delivery',
+                'Open_Ready',
+                'Tuesday_Arrival'
+            ]
+        var polObj = [];
 
-    });
 
+        polObj.Building_Open = loc.loc.Building_Open;
+        polObj.Close_Poll_Report = loc.loc.ClosePollReady;
+        polObj.Monday_Arrival = loc.loc.Monday_Arrival;
+        polObj.Monday_Close = loc.loc.Monday_Close;
+        polObj.Monday_Delivery = loc.loc.Monday_Delivery;
+        polObj.Open_Ready = loc.loc.OpenReady;
+        polObj.Poll_Address = loc.loc.poll_Address;
+        polObj.Poll_Id = loc.loc.poll_Id;
+        polObj.Poll_Name = loc.loc.poll_Name;
+        polObj.Tuesday_Arrival = loc.loc.Tuesday_Arrival;
+        polObj.Zone = loc.loc.Zone;
+        polObj.user_Name = loc.loc.user_Name;
+
+
+        // polObj.Poll_Id = loc.loc.poll_Id;
+        // polObj.Poll_Id = loc.loc.poll_Id; 
+        var index = $scope.PollLoc.map(function (e) { return e.Poll_Id; }).indexOf(polObj.Poll_Id); 
+        //var index = $scope.PollLoc.indexOf(loc.poll_Id);
+        if (index > -1) {
+            for (var i = 0; i < status.length; i++) {
+                if (polObj[status[i]] === 0) {
+                    polObj[status[i]] = 'warning'
+                }
+                else if (polObj[status[i]] === 1) {
+                    polObj[status[i]] = 'primary'
+                }
+                else if (polObj[status[i]] === 2) {
+                    polObj[status[i]] = 'success'
+                }
+                //if ($scope.PollLoc[index][status[i]] !== loc.loc[status[i]])
+                //{
+
+                //    $scope.PollLoc[index][status[i]] = loc.loc[status[i]];
+                //}
+            }
+            for (var i = 0; i < status.length; i++) {
+                $scope.PollLoc[index][status[i]] = polObj[status[i]];
+            }
+
+            // $scope.PollLoc.splice(loc.loc, 1);
+            // $scope.PollLoc.splice(index, 1, loc.loc);
+
+            //  $scope.PollLoc[index] = loc.loc;
+
+        }
+        // array = [2, 9]
+        $scope.markerGen();
+
+    }); 
 
     $scope.populateForm = function () {
         pollLoc.getLocation().then(function (response) {
+
+            for (var p in response) {
+                var wardName = [];
+                wardName = response[p].Ward_Name.split(',')
+                $scope.wardNameFxd = [];
+                
+
+                $.each(wardName, function (i, el) {
+                    if ($.inArray(el, $scope.wardNameFxd) === -1)
+                        $scope.wardNameFxd.push(el);
+
+                    //   console.log($scope.wardNameFxd);
+                });
+                response[p].Ward_Name = "";
+                //  console.log($scope.wardNameFxd);
+
+                response[p].Ward_Name = "".concat($scope.wardNameFxd);
+            } 
+
             $scope.PollLoc = response; 
+            
                 $scope.markerGen(); 
         });
         
@@ -150,9 +228,7 @@
             $scope.populateForm();
 
             pollLoc.getZonesAll().then(function (response) {
-
                 $scope.ZonesAll = response;
-
                 //if ($scope.map.kmlLayers == null) {
 
                 $scope.LoadKmlFil();
@@ -219,17 +295,19 @@
     }
 
     $scope.LoadKmlFil = function () {
-        //if ($scope.map.kmlLayers == null)
-        //{
-        //   console.log("kmlLayer");
-
+         
 
         // var src = "http://electionchief.com/filestore/wp-content/uploads/2018/03/";
         var src = "http://cuyahogaelectionaudits.com/downloads/";
         var name = "";
 
         for (var z = 0; z < $scope.ZonesAll.length; z++) {
-            $scope.ZonesAll[z].zone_Kml = src + $scope.ZonesAll[z].zone_Name + ".KML";
+            $scope.ZonesAll[z].zone_Kml = src + $scope.ZonesAll[z].zone_Name + ".KML?rev=2";
+
+            //if ($scope.ZonesAll[z].zone_Name === 'All')
+            //{
+            //    $scope.ZonesAll[z].zone_Kml = src + "Zone_All.KML?rev=2";
+            //}
             //$scope.kmlFiles.push({ Zone: $scope.ZonesAll[z].zone_Name, kmlSrc: src + $scope.ZonesAll[z].zone_Name + ".KML" })
             // name = $scope.kmlFiles[z].Zone;
             //$scope.dynamicKML[z] = new google.maps.KmlLayer($scope.kmlFiles[z].kmlSrc, { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
@@ -238,6 +316,7 @@
             //new google.maps.KmlLayer( { suppressInfoWindows: true, preserveViewport: false, map: $scope.map });
             //});
         }
+
 
         //  }
 
@@ -253,6 +332,7 @@
         if ($scope.mode == null)
         {
             $scope.mode = 'Monday_Delivery';
+            pollLoc.setMapMode('Monday_Delivery');
         }
 
         $scope.i = 0;
@@ -262,20 +342,21 @@
             //    $scope.mode == 'Monday_Delivery';
             //}
             //$timeout(function () {
-            if ($scope.PollLoc[k][$scope.mode] === "success") {
-                //$scope.dynMarkers[k] = new google.maps.Marker({ title: $scope.PollLoc[k].Poll_Name, icon: "images/marker_green.png" });
-                $scope.dynMarkers.push({
-                    title: $scope.PollLoc[k].Poll_Name,
-                    icon: "images/marker_green.png",
-                    Id: $scope.PollLoc[k].Poll_Id,
-                    lng: $scope.PollLoc[k].longitude,
-                    lat: $scope.PollLoc[k].latitude,
-                    ward: $scope.PollLoc[k].Ward_Name,
-                    Precinct: $scope.PollLoc[k].Precinct,
-                    Zone: $scope.PollLoc[k].Zone
-                });
-            }
-            else if ($scope.PollLoc[k][$scope.mode] === "warning") {
+            //if ($scope.PollLoc[k][$scope.mode] === "success" || $scope.PollLoc[k][$scope.mode] === "primary" ) {
+            //    //$scope.dynMarkers[k] = new google.maps.Marker({ title: $scope.PollLoc[k].Poll_Name, icon: "images/marker_green.png" });
+            //    $scope.dynMarkers.push({
+            //        title: $scope.PollLoc[k].Poll_Name,
+            //        icon: "images/marker_green.png",
+            //        Id: $scope.PollLoc[k].Poll_Id,
+            //        lng: $scope.PollLoc[k].longitude,
+            //        lat: $scope.PollLoc[k].latitude,
+            //        ward: $scope.PollLoc[k].Ward_Name,
+            //        Precinct: $scope.PollLoc[k].Precinct,
+            //        Zone: $scope.PollLoc[k].Zone
+            //    });
+            //}
+            //else 
+            if ($scope.PollLoc[k][$scope.mode] === "warning") {
                 //$scope.dynMarkers[k] = new google.maps.Marker({ title: $scope.PollLoc[k].Poll_Name, icon: "images/marker_yellow.png" });
                 $scope.dynMarkers.push({
                     title: $scope.PollLoc[k].Poll_Name,
@@ -300,13 +381,14 @@
         var content = '<div id="iw-container" ng-controller="EquipmentController" ng-click="clicked(d) ">' +
             '<div class="iw-title">' + $scope.Location.title + '</div>' +
             '<div class="iw-content">' +
-            '<div class="iw-subTitle" ">' + $scope.Location.ward + $scope.Location.Precinct + '</div>' +
-            '<img class="iw-image" src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg"   alt="' + $scope.Location.title + '" >' +
+            '<div class="iw-subTitle" ">' + $scope.Location.ward  + '</div>' +
+            //'<div class="iw-subTitle" ">' +   $scope.Location.Precinct + '</div>' +
+            //'<img class="iw-image" src="http://locationtracking.electionchief.com/PollLocImgs/' + $scope.Location.Id + '.jpg"   alt="' + $scope.Location.title + '" >' +
             //'<p>' + $scope.Location.Id + '</p>' +  
             '<h5>Contact Information</h5>' +
             '<div>' +
             '<ul>' +
-            '<li ng-repeat="pd in PollDlts | filter:  Location.Id" class="iw-subTitle" >' +
+            '<li ng-repeat="pd in PollDlts | filter:  {poll_Id:Location.Id} " class="iw-subTitle" >' +
             '<label class="iw_label">{{pd.contact_FirstName}} {{pd.contact_LastName}} :</label>' +
             '{{pd.contact_Info}}({{pd.contact_Type}}) ' +
             '</li>' +
@@ -357,129 +439,19 @@
                     pollLoc.setzoneDefaults(response);
                 });
             }
+        } 
+        else
+        {
+
         }
-        //else if (x === 'Poll Details') {
-        //    if (userProfile.getProfile().username != null) {
-        //        $scope.Clicked = x;
-        //        $scope.modalInstance = $uibModal.open({
-        //            ariaLabelledBy: 'modal-title',
-        //            ariaDescribedBy: 'modal-body',
-        //            templateUrl: 'SPA/Template/modalPollDetails.html',
-        //            controller: 'modalController',
-        //            controllerAs: '$ctrl',
-
-        //            size: 'lg',
-        //            resolve:
-        //            {
-        //                x: function () {
-        //                    return x;
-        //                },
-        //                address: function () {
-        //                    return e;
-        //                }
-        //            }
-        //        });
-        //        $scope.modalInstance.result.then(function (response) {
-        //            //   console.log(response);
-        //            //$scope.ZoneDefault = response;
-        //        });
-        //    }
-        //}
-        //else {
-        //    if (userProfile.getProfile().username != null) {
-        //        $scope.Clicked = x;
-        //        $scope.modalInstance = $uibModal.open({
-        //            ariaLabelledBy: 'modal-title',
-        //            ariaDescribedBy: 'modal-body',
-        //            templateUrl: 'SPA/Template/modalWindow.html',
-        //            controller: 'modalController',
-        //            backdrop: false,
-        //            controllerAs: '$ctrl',
-        //            size: 'lg',
-        //            resolve:
-        //            {
-        //                x: function () {
-        //                    return x;
-        //                },
-        //                address: function () {
-        //                    return e;
-        //                }
-        //            }
-        //        });
-
-                //$scope.modalInstance.result.then(function (response) {
-                //    console.log(e);
-                //    if (response === 'save') {
-                //        if (e.Monday_Delivery === "warning" && $scope.Clicked === "Monday_Delivery") {
-                //            e.Monday_Delivery = "success";
-                //        }
-                //        else if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
-                //            e.Monday_Delivery = "warning";
-                //        }
-
-                //        if (e.Monday_Arrival === "warning" && $scope.Clicked === "Monday_Arrival") {
-                //            e.Monday_Arrival = "success";
-                //        }
-                //        else if (e.Monday_Arrival === "success" && $scope.Clicked === "Monday_Arrival") {
-                //            e.Monday_Arrival = "warning";
-                //        }
-
-                //        if (e.Monday_Close === "warning" && $scope.Clicked === "Monday_Close") {
-                //            e.Monday_Close = "success";
-                //        }
-                //        else if (e.Monday_Close === "success" && $scope.Clicked === "Monday_Close") {
-                //            e.Monday_Close = "warning";
-                //        }
-
-                //        if (e.Building_Open === "warning" && $scope.Clicked === "Building_Open") {
-                //            e.Building_Open = "success";
-                //        }
-                //        else if (e.Building_Open === "success" && $scope.Clicked === "Building_Open") {
-                //            e.Building_Open = "warning";
-                //        }
-
-                //        if (e.Tuesday_Arrival === "warning" && $scope.Clicked === "Tuesday_Arrival") {
-                //            e.Tuesday_Arrival = "success";
-                //        }
-                //        else if (e.Tuesday_Arrival === "success" && $scope.Clicked === "Tuesday_Arrival") {
-                //            e.Tuesday_Arrival = "warning";
-                //        }
-
-                //        if (e.Open_Ready === "warning" && $scope.Clicked === "Open_Ready") {
-                //            e.Open_Ready = "success";
-                //        }
-                //        else if (e.Open_Ready === "success" && $scope.Clicked === "Open_Ready") {
-                //            e.Open_Ready = "warning";
-                //        }
-
-                //        if (e.Close_Poll_Report === "warning" && $scope.Clicked === "Close_Poll_Report") {
-                //            e.Close_Poll_Report = "success";
-                //        }
-                //        else if (e.Close_Poll_Report === "success" && $scope.Clicked === "Close_Poll_Report") {
-                //            e.Close_Poll_Report = "warning";
-                //        }
-                //        pollLoc.SubmitpollLocStat(e).then(function (response) {
-                //            console.log(response);
-                //            $scope.populateForm();
-                //        })
-
-                //    }
-
-
-                //});
-            //}
-            else {
-
-            }
-        }
+    }
         
     $scope.selectZones = function (p, k) {
         console.log(k);
         p.featureData.infoWindowHtml = "";
         pollLoc.setzoneDefaults([k]);
     }
-
-
+     
 
     $scope.changeView = function () {
         var url = $location.absUrl().split('!')[1];

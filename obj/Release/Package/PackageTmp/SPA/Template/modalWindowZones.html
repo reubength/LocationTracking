@@ -2,20 +2,27 @@
     ul {
         list-style-type: none;
     }
+    .modal-header {
+        
+        background-color: #3e80ab;
+        color: white;
+    }
+    ul > li {
+        padding: 5px;
+    }
 </style>
 <div class="modal-header">
     <h3 class="modal-title" id="modal-title">{{modalTitle}}</h3>
 </div>
 <div class="modal-body" id="modal-body" >
-    <ul  >
-
-        <li ng-repeat="z in modalBody" class="nav-item"> <input type='checkbox' value="{{z.zone_Name}}" ng-model="Selected" ng-click="checkSelected(z)"> {{z.zone_Name}}</li>
+    <ul>
+        <li ng-repeat="z in modalBody" class="nav-item"> <input type='checkbox' value="{{z.zone_Name}}" ng-model="Selected" ng-click="checkSelected(this,z)"> {{z.zone_Name}}</li>
     </ul>
     
-    <!--<p>{{modalWard}}</p>-->
+    
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
+    <button class="btn btn-primary" type="button" ng-click="ok()">Apply</button>
     <button class="btn btn-warning" type="button" ng-click="cancelModal()">Cancel</button>
 
 </div>

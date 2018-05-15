@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
+using LocationTracking.Models;
 
 namespace LocationTracking.Hubs
 {
@@ -14,10 +15,11 @@ namespace LocationTracking.Hubs
         {
             Clients.All.hello();
         }
-        public static void SayHello()
+        public static void SayHello(poll_Location poll_Location)
         {
             //hubContext.Clients.User("r@g.com").hello();
-             hubContext.Clients.All.hello();
+
+             hubContext.Clients.All.hello(poll_Location);
             //hubContext.Clients.AllExcept()
             //  Clients.User("");
         }

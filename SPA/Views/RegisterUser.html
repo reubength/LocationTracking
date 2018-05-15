@@ -8,13 +8,13 @@
     }
 </style>
 
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 registerDiv container" ng-controller="loginController">
-    <h4>Create New User</h4>
-    <form class="form-horizontal  ">
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 registerDiv container" ng-controller="loginController" ng-init="populateForm()">
+    <h4 align="center">Create New User</h4>
+    <form class="form-horizontal">
         <div class="form-group">
             <label for="userLoginEmail" class="  control-label">User Name</label>
             <div class=" ">
-                <input type="text" class="form-control" placeholder="E-mail"
+                <input type="text" class="form-control" placeholder="User Name"
                        ng-model="userRegistrationEmail" />
             </div>
         </div>
@@ -37,25 +37,36 @@
                        ng-model="userRegistrationConfirmPassword" />
             </div>
 
-        </div>
-        <div class="form-group">
+         </div>
+        <!--<div class="form-group">
             <label for="userRole" class=" control-label">User Role</label>
             <div class=" ">
                 <input placeholder="User Role"
                        class="form-control"
                        ng-model="userRegistrationRole" />
             </div>
-        </div>
+        </div>-->
 
         <div class="form-group">
+            <label for="userRole" class=" control-label">User Role</label>
             <div class=" ">
+                <select class="form-control" id="exampleSelect1" ng-model="userRegistrationRole">
+                    <option selected disabled hidden style='display: none' value=''>Select User Role</option>
+                    <option ng-repeat="r in userRoles"  >{{r}}</option>
+                   
+                </select>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-2">
                 <!-- <small id="newUser" class="form-text text-muted">New User? <a href="#!/Register"><span class="badge badge-pill badge-success">Register</span></a></small>-->
                 <button type="submit" ng-click="registerUser()" class="btn btn-success"><i ng-show="Loading==true" class="fa fa-spinner fa-spin"></i> Register</button>
-                <button type="reset" class="btn btn-warning">Cancel</button>
-
-            </div>
-
-
+                <button type="reset" class="btn btn-warning">Cancel</button> 
+            </div> 
         </div>
     </form>
 </div>

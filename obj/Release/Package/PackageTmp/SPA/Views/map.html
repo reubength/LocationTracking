@@ -19,9 +19,9 @@
         margin-right: 15px;
     }
 
-    input {
+    /*input {
         visibility: hidden;
-    }
+    }*/
 
     /*label {
         cursor: pointer;
@@ -38,55 +38,76 @@
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
     }
-    .badge {
+    /*.badge {
         font-size: 15px;
         background-color: #efa15f;
+        cursor:pointer;
+    }*/
+    .active {
+        font-size: 15px;
+        background-color: #a5a3a3;
+    }
+    /*.badgeGrp {
+        margin-left: 3%;
+        padding-bottom:25px;
+    }*/
+    .gm-style-iw {
+        max-width: 300px;
+    } .iw-title {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 10px;
+        background-color: #48b5e9;
+        color: white;
+        margin: 1px;
+        border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+        text-wrap: normal;
+    }
+    .iw-content {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 10px;
+        font-weight: 200;
+        padding: 10px; 
+        color: black;
+        margin: 1px;
+        border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+        text-wrap: normal;
+    }.iw-image {
+        height: 200px;
+        width: 80%;
+    }
+    .iw_label {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 10px;
+    }
+    .glyphBtton {
+        position: absolute;
+        right: 0;
     }
 </style>
 
-<div ng-controller="EquipmentController">
-    <!--<div class="col-lg-6 col-lg-offset-10">
-       
-          <button class="btn btn-default" ng-click="changeView()"><span class="glyphicon glyphicon-map-marker"></span></button>
-    </div>-->
-    <button class="btn btn-primary glyphBtton" ng-click="changeView()"><span class="glyphicon glyphicon-list"></span></button>
-    <div class="col-lg-12 col-lg-offset-3">
-        <span class="badge badge-primary">Locations: {{(PollLoc).length}} </span>  <span class="badge badge-primary">Monday Arrival: {{(PollLoc | filter : { Monday_Arrival: 'success' } : true).length }}</span>
-        <span class="badge badge-primary">Tuesday Arrival: {{(PollLoc  | filter : { Tuesday_Arrival: 'success' } : true).length}} </span>
-        <span class="badge badge-primary">Open Ready: {{(PollLoc  | filter : { Open_Ready: 'success' } : true).length}} </span>
-        <span class="badge badge-primary">Close Poll Report: {{(PollLoc | filter : { Close_Poll_Report: 'success' } : true).length}}</span>
-        
+<div ng-controller="MapController"> 
+
+            <!--<label ng-repeat="item in config"
+                   class="btn btn-primary classButton"
+                   ng-class="config[$index].btnClass" ng-model="mode" value="{{item.name}}" ng-click="setActive($index)">
+                {{item.label}}
+            </label>
+        </div>--> 
+
+        <div class="map">
+            <ng-map ng-init="getMap()"  ng-dblclick="openModal('','Zone')" center="41.5027736,-81.6700112"  zoom="10" disable-double-click-zoom="true" ng-click="mapClick()"  >
+                <kml-layer id="{{k.zone}}" ng-repeat="k in ZonesAll| filter:filterMakes()" url="{{k.zone_Kml}}" on-click="selectZones(k,k.zone)" title="{{k.zone_Nme}}"  preserveViewport="true "></kml-layer>
+                <marker ng-repeat="p in dynMarkers | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}"     optimized="true" on-click="showDetail(p)"> </marker>
+                <!--<info-window id="foo-iw" position="[{{p.lat}},{{p.lng}}]" animation="Animation.DROP" center="41.5027736,-81.6700112" zoom="13">
+
+                    <div >                        
+                        
+                      
+                    </div>
+                </info-window>-->
+            </ng-map>
+
+        </div>
     </div>
-
-    <div class="btn-group">
-        <!--<input type="radio" id="radio1" ng-model="mode" name="radios" ng-click="changeData()" value='Monday_Arrival'>
-    <label class="btn btn-primary " for="radio1">Monday Arrival</label>
-
-    <input type="radio" id="radio2" ng-model="mode" name="radios" ng-click="changeData()" value='Tuesday_Arrival'>
-    <label class="btn btn-primary" for="radio2">Tuesday Arrival</label>
-
-    <input type="radio" id="radio3" ng-model="mode" name="radios" ng-click="changeData()" value='Open_Ready'>
-    <label class="btn btn-primary " for="radio3">Open And Ready</label>
-
-    <input type="radio" id="radio4" ng-model="mode" name="radios" ng-click="changeData()" value='Close_Poll_Report'>
-    <label class="btn btn-primary " for="radio4">Close Poll Report</label>-->
-        <label ng-repeat="item in config"
-               class="btn btn-primary classButton"
-               ng-class="config[$index].btnClass" ng-model="mode" value="{{item.name}}" ng-click="setActive($index)">
-            {{item.label}}
-        </label>
-
-    </div>
-    <!--<div class="btn-group">    
-        <label class="btn btn-primary "  for='radio1'><input type='radio' ng-model="mode" ng-click="changeData()" value='Monday_Arrival'       name='radio' id='radio1' />Monday Arrival</label>
-        <label class="btn btn-primary "  for='radio2'><input type='radio' ng-model="mode" ng-click="changeData()" value='Tuesday_Arrival'      name='radio' id='radio2' />Tuesday Arrival</label>
-        <label class="btn btn-primary "  for='radio3'><input type='radio' ng-model="mode" ng-click="changeData()"           name='radio' id='radio3' />Open And Ready</label>
-        <label class="btn btn-primary "  for='radio4'><input type='radio' ng-model="mode" ng-click="changeData()" value='Close_Poll_Report'    name='radio' id='radio4' />Close Poll Report</label>
-    </div>-->
-    
-    <div class="map">
-        <ng-map ng-init="getMap()" center="41.5027736,-81.6700112" zoom="13">
-            <marker ng-repeat="p in dynMarkers  | filter:filterMakes()" position="[{{p.lat}},{{p.lng}}]" icon="{{p.icon}}" animation="Animation.DROP" optimized="true" on-click="showDetail(p)">
-               <kml-layer ng-repreat="k in ZonesAll"  ng-click="selectZones(k)"></kml-layer> 
-    </div>
-</div>

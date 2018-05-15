@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.election_Precinct" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.poll_Location" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.poll_Location_All" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.LocTrackMain" Width="1.5" PointX="7.5" PointY="1.25" />
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.C__MigrationHistory" Width="1.5" PointX="6.875" PointY="5.125" />
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.AspNetRole" Width="1.5" PointX="0.875" PointY="6.125" />
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.AspNetUserClaim" Width="1.5" PointX="9.125" PointY="5.125" />
@@ -19,6 +18,8 @@
         <AssociationConnector Association="ph13696936071_ElectionReportingModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.dbo_zones" Width="1.5" PointX="9.75" PointY="1.625" />
         <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.dbo_poll_ContactDetails" Width="1.5" PointX="11.625" PointY="1.75" />
+        <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.LocTrackMain" Width="1.5" PointX="6.875" PointY="0.625" />
+        <EntityTypeShape EntityType="ph13696936071_ElectionReportingModel.audit_Table" Width="1.5" PointX="11.375" PointY="4.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,5 +25,7 @@ namespace LocationTracking.Models
         public Nullable<int> Monday_Delivery { get; set; }
         public Nullable<int> Monday_Close { get; set; }
         public Nullable<int> Building_Open { get; set; }
+        public string user_Name { get; set; }
+        public string Role { get; set; }
     }
 }

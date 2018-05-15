@@ -23,5 +23,28 @@ namespace LocationTracking.ViewModels
         public string   Close_Poll_Report   { get; set; }
         public double?  latitude            { get; set; }
         public double?  longitude           { get; set; }
+        public string   user_Name { get; set; }
+
+
+        public string VetStatusData(int? Status)
+        {
+            string stringStatus = "warning";
+            if (Status == 1)
+            {
+                stringStatus = "success";
+            }
+            else if(Status ==2)
+            {
+                stringStatus = "primary";
+
+            }
+            else
+            {
+                stringStatus = "warning";
+            }
+                return stringStatus;
+        }
     }
+
+ 
 }

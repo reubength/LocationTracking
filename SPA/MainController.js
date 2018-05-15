@@ -2,10 +2,36 @@
 {
     $scope.ZoneDefault = [{ id_zone: '0', zone: '', zone_Name: 'All', zone_Kml: 'null', zone_Active: '1' }];
     $scope.gridView = true;
+    $scope.visible = true;
     $scope.locCountInfo = [];
     $scope.locSummInfo = [];
     $scope.PollDltsSumm = [];
- 
+
+    //$scope.$on('$routeChangeStart', function ($event, next, current) {
+        
+    //});
+
+    $scope.DaySelect = function ()
+    {
+        pollLoc.getDay();
+        $scope.setActive(pollLoc.getMapMode());
+    }
+
+    $scope.$on('$routeChangeStart', function ($event, next, current) {
+        console.log(next.originalPath);
+         
+        if (next.originalPath === '/mapView' || next.originalPath === '/grid')
+        {
+            $scope.infoTop = true;
+        }
+        else
+        {
+                //$location.path('/mapView');
+            $scope.infoTop = false;
+        } 
+         
+    });
+
     $scope.$watch(function () {
             return userProfile.getProfile().username;
         }, function () {
@@ -60,7 +86,7 @@
         {
             $scope.locCountInfo = []; 
             $scope.ZoneDefault = pollLoc.getzoneDefaults();
-            console.log($scope.ZoneDefault);
+            //console.log($scope.ZoneDefault);
             if (pollLoc.pollLocs != null) { 
 
                 if ($scope.ZoneDefault.length === 0) {
@@ -83,7 +109,7 @@
                                 }
                             }  
                         }
-                } 
+                    }    
                 }
             }
 
@@ -93,6 +119,13 @@
         $scope.populateSummRpt = function ()
         {
             $scope.locSummInfo = [];
+            if (pollLoc.mode === undefined)
+            {
+                pollLoc.setMapMode('Monday_Delivery');
+            }
+
+               // pollLoc.setMapMode('Monday_Delivery');
+
             for (var n in $scope.locCountInfo) {
 
                 if ($scope.locCountInfo[n][pollLoc.getMapMode()] === "warning")
@@ -111,21 +144,15 @@
                 }
 
             }
-            console.log($scope.locSummInfo);
+           // console.log($scope.locSummInfo);
         }
-        $scope.activeButton = 0;
-        $scope.setActive = function setActive(index) {
+        $scope.activeButton = 0; 
+        $scope.setActive = function setActive (index) {
             //idName
-            var url = $location.absUrl().split('!')[1];
-            //if (url === '/mapView') {
-            //    $location.path('/grid');
-            //}
-            //else if (url === '/grid') {
-            //    $location.path('/mapView');
-            //}
-
+            var url = $location.absUrl().split('!')[1]; 
             if (url === '/mapView')
             {
+                $scope.visible = true;
                 $scope.activeButton = index;
                 var bdgs = document.getElementsByClassName("badge");
                 var sel = document.getElementById(index);
@@ -136,20 +163,30 @@
                         sel.className += " active";
                     }
                 }
+
                 pollLoc.setMapMode(index); ///$scope.config[index].name;
-                pollLoc.setGridMode()
+
+                var gridMode = index.split('_')[0];
+
+
+                if (gridMode === 'Monday') {
+                    pollLoc.setGridMode(true);
+                }
+                else {
+                    pollLoc.setGridMode(false);
+                }
+
+               // pollLoc.setGridMode()
                 //$scope.markerGen();
             }
             else if (url === '/grid')
             {
+                $scope.visible = true;
                 //$scope.mode = pollLoc.getMapMode();
                 //if ($scope.mode == null) {
                 //    $scope.mode = 'Monday_Delivery';
-                //}
-
-                var gridMode =  index.split('_')[0];
-
-
+                //} 
+                var gridMode =  index.split('_')[0]; 
                 if (gridMode === 'Monday')
                 {
                     pollLoc.setGridMode(true);
@@ -172,6 +209,10 @@
                 }
                 pollLoc.setMapMode(index);
             }
+            //else
+            //{
+            //    $scope.visible = false;
+            //}
 
             $scope.populateSummRpt();
             //for (var i = 0; i < $scope.config.length; i++)
@@ -181,107 +222,56 @@
 
         };
 
-        $scope.printData = function () {
-            //var divToPrint = document.getElementById("table");
-            //  newWin = window.open("");
-            //  newWin.document.write(divToPrint.outerHTML);
-            //  newWin.print();
-            //  newWin.close();
-
-
-       //     '<div id="tablePrint" ng-hide="true">'+
-       //         '<table class="table table-striped table-bordered ">'+                    
-       //         '<thead class="table">'+
-       //                '<tr>'+
-       //                  '<th scope="col">Poll Name</th>'+
-       //                   '<th scope="col">Zone</th>'+
-       //                   '<th scope="col">City</th>'+
-       //                    '<th scope="col">Precinct</th>'+
-       //               '</tr>'+
-       //             '</thead>'+
-       //            ' <tbody>'+
-       //             '  <tr scope="row" ng-repeat="pl in locCountInfo | orderBy:sortType:sortReverse | filter:filterMakes()" class="active">'+
-                    
-       //               '<td>{{ pl.Poll_Name }} </td>'+
-                     
-       //                '  <td >' +pl.Zone +'</td>'+
-       //               ' <td >'+pl.Ward_Name +'</td>'+
-       //               '  <td>'+pl.Precinct+'</td>'+
-       //               '  <td ng-repeat="pldt in pollDlts | filter: {pldt.poll_ID  : pl.Poll_Id} " ng-model="">'+
-       //                '  <div>Contact:{{ pldt.contact_FirstName }} {{ pldt.contact_LastName }}: {{ pldt.contact_Info }}({{ pldt.contact_Type }}) </div>'+
-       //               ' </td>'+
-       //               ' </tr>'+ 
-       //            '</tbody>'+
-       //        ' </table>'+
-       //    ' </div>'+
-       //' </div >'
-
-
-
-            //content = {
-            //    templateURL: "/SPA/Template/summaryPrintTemplate.html"
-            //}
-            //console.log($scope.locCountInfo);
-            //console.log(pollLoc.getpolldtls());
-           
-            //content = /SPA/Template/summaryPrintTemplate.html;
+        $scope.printData = function ()
+        { 
             newWin = window.open();
             newWin.document.write('<html><head>    <script src="Scripts/bootstrap.min.js"></script>'); 
           //  newWin.document.write(' < script src= "Scripts/ui-bootstrap-tpls-2.5.0.js" ></script >');
-            newWin.document.write(' <link href="Content/angular-bootstrap-toggle.css" rel="stylesheet" />');
-            newWin.document.write('<style> html, body { height: 100 %; margin: 0;  font-family: Calibri, Franklin Gothic Medium, Arial Narrow, Arial, sans-serif; font-size: 12px;}  li { list- style: none;  } </style>');
-            newWin.document.write(' <link href="Content/bootstrap.css" rel="stylesheet" /><title>' + document.title + '</title>');
+            newWin.document.write(' <link href="Content/angular-bootstrap-toggle.css" rel="stylesheet" />'); 
+            newWin.document.write(' <link href="Content/bootstrap.css" rel="stylesheet" /><title>' + document.title + '</title>'); newWin.document.write('<style> html, body { height: 100 %; margin: 0;  font-family: Calibri, Franklin Gothic Medium, Arial Narrow, Arial, sans-serif; font-size: 11px;} li { list- style: none;  } </style>');
             newWin.document.write('</head><body >');
-            newWin.document.write('<h3>  Summary Report </h3> <div class="col-lg-6">');
+            newWin.document.write('<h3>  Summary Report : ' + pollLoc.getMapMode() +' </h3> <div class="col-lg-6">');
             newWin.document.write(document.getElementById("tablePrint").innerHTML);
-            newWin.document.write('</div></body></html>');
-
-           // console.log(template.html());
-             //newWin.print();
-          
+            newWin.document.write('</div></body></html>'); 
+             //newWin.print(); 
             //newWin.close();
         }
-        //$scope.filterSumm = function ()
-        //{
-        //    return function (pl) {
 
-        //        $scope.PollDltsSumm = [];
-        //        console.log(pl.Poll_Id);
-        //        console.log($scope.pollDlts);
-        //        for (var i in $scope.pollDlts)
-        //        {               
-        //            if (pl.Poll_Id === $scope.pollDlts[i].poll_Id)
-        //            {
-        //                $scope.PollDltsSumm.push($scope.pollDlts[i]);
-                       
-        //            }
-               
-        //        }
-        //        console.log($scope.PollDltsSumm);
-        //        return true;
-        //    };
-           
-        //}
-        //$scope.filterContact = function ()
-        //{
-        //    return function (pldt)
-        //    {
-        //        if ($scope.p_Id === pldt.poll_Id) {
-        //            return true;
-        //        }
-        //    };
-        //}
-
+   
+       
         $scope.changeView = function () {
             url = $location.absUrl().split('!')[1];
             if (url === '/mapView') {
                 $location.path('/grid');
                 $scope.gridView = true;
+              //  $scope.visible = true;
             }
             else if (url === '/grid') {
                 $location.path('/mapView');
                 $scope.gridView = false;
+               // $scope.visible = true;
             }
+            //else
+            //{
+            //    $scope.visible = false;
+            //}
         }  
+
+        //app.run(function ($rootScope, $location, userProfile) {
+        //    $rootScope.$on('$routeChangeStart', function (event) {
+        //        url = $location.absUrl().split('!')[1];
+        //        if (url !== '/mapView' || url !== '/grid') {
+        //            console.log('not the View')
+        //        }
+        //        else {
+        //            console.log("it is");
+        //        }
+        //    });
+        //});
+  
+        $scope.DaySelect();
+
 };
+
+
 MainController.$inject = ['$scope', '$uibModal', '$location', 'pollLoc', 'userProfile'];

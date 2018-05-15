@@ -9,6 +9,7 @@ var loginController = function ($scope, $http, $location, $routeParams, loginSer
     $scope.userRegistrationPassword = "";
     $scope.userRegistrationConfirmPassword = "";
     $scope.userRegistrationRole = "";
+    $scope.userRegistrationDept = "";
 
     $scope.userLoginEmail = "";
     $scope.userLoginPassword = "";
@@ -20,17 +21,18 @@ var loginController = function ($scope, $http, $location, $routeParams, loginSer
     $scope.Loading = false;
     //Ends Here
 
-    //Function to register user
+    //Function to register a user
     $scope.registerUser = function () {
 
         $scope.responseData = "";
 
         //The User Registration Information
         $scope.userRegistrationInfo = {
-            Email: $scope.userRegistrationEmail,
+            UserName: $scope.userRegistrationEmail,
             Password: $scope.userRegistrationPassword,
             ConfirmPassword: $scope.userRegistrationConfirmPassword,
-            Name: $scope.userRegistrationRole
+            Role: $scope.userRegistrationRole
+            //Claims : $scope.userRegistrationDept
         };
 
         $scope.Loading = true;
@@ -43,12 +45,15 @@ var loginController = function ($scope, $http, $location, $routeParams, loginSer
             $scope.userRegistrationPassword = "";
             $scope.userRegistrationConfirmPassword = "";
             $scope.userRegistrationRole = "";
+            $scope.userRegistrationDept = "";
             $scope.Loading = false;
         }, function (err) {
             $scope.responseData = "Error " + err.status;
             $scope.Loading = false;
         });
     };
+
+
 
 
     //$scope.redirect = function () {
@@ -75,6 +80,8 @@ var loginController = function ($scope, $http, $location, $routeParams, loginSer
             sessionStorage.setItem('accessToken', resp.data.access_token);
             sessionStorage.setItem('refreshToken', resp.data.refresh_token);
             sessionStorage.setItem('Role', resp.data.Role);
+           // sessionStorage.setItem('Dept', resp.data.Claim);
+
             userProfile.setProfile(resp.data.userName, resp.data.access_token, resp.data.refresh_token,resp.data.Role);
             $scope.erroLogin = false;
            // isLoggenin = userProfile.getProfile().username;

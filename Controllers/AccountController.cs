@@ -28,6 +28,7 @@ namespace LocationTracking.Controllers
 
         public AccountController()
         {
+
         }
 
 
@@ -328,23 +329,19 @@ namespace LocationTracking.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
+            //var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.UserName };             
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
             if (!result.Succeeded)
             {
-
                 return GetErrorResult(result);
             }
             else
             {
                 //Assign Role to user Here 
-                await this.UserManager.AddToRoleAsync(user.Id, model.Name);
+                await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                //      await this.UserManager.AddToFuctionAsync(user.Id, model.Function);
                 //Ends Here
-
-
             }
 
             return Ok();

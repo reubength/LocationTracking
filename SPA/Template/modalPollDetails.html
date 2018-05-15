@@ -96,7 +96,7 @@
             <label>Contact Information</label>
             <div>               
                 <ul>                   
-                    <li ng-repeat="pd in PollDlts | filter:  modalBody.Poll_Id "  >                     
+                    <li ng-repeat="pd in PollDlts | filter: {poll_Id: Poll_Id} | orderBy: 'contact_Type'"  >                     
                         <label class="iw_label">
                             {{pd.contact_FirstName}} {{pd.contact_LastName}} :
                             {{pd.contact_Info}} ({{pd.contact_Type}} )

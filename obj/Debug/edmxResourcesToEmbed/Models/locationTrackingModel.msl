@@ -14,6 +14,8 @@
     <EntitySetMapping Name="poll_Location">
       <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.poll_Location">
         <MappingFragment StoreEntitySet="poll_Location">
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="user_Name" ColumnName="user_Name" />
           <ScalarProperty Name="Building_Open" ColumnName="Building_Open" />
           <ScalarProperty Name="Monday_Close" ColumnName="Monday_Close" />
           <ScalarProperty Name="Monday_Delivery" ColumnName="Monday_Delivery" />
@@ -39,25 +41,6 @@
           <ScalarProperty Name="location_Address" ColumnName="location_Address" />
           <ScalarProperty Name="city" ColumnName="city" />
           <ScalarProperty Name="state" ColumnName="state" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LocTrackMains">
-      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.LocTrackMain">
-        <MappingFragment StoreEntitySet="LocTrackMain">
-          <ScalarProperty Name="Building_Open" ColumnName="Building_Open" />
-          <ScalarProperty Name="Monday_Close" ColumnName="Monday_Close" />
-          <ScalarProperty Name="Monday_Delivery" ColumnName="Monday_Delivery" />
-          <ScalarProperty Name="ClosePollReady" ColumnName="ClosePollReady" />
-          <ScalarProperty Name="OpenReady" ColumnName="OpenReady" />
-          <ScalarProperty Name="Tuesday_Arrival" ColumnName="Tuesday_Arrival" />
-          <ScalarProperty Name="Monday_Arrival" ColumnName="Monday_Arrival" />
-          <ScalarProperty Name="precincts" ColumnName="precincts" />
-          <ScalarProperty Name="ward_Name" ColumnName="ward_Name" />
-          <ScalarProperty Name="Zone" ColumnName="Zone" />
-          <ScalarProperty Name="poll_Address" ColumnName="poll_Address" />
-          <ScalarProperty Name="poll_Name" ColumnName="poll_Name" />
-          <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -142,6 +125,41 @@
           <ScalarProperty Name="contact_Type" ColumnName="contact_Type" />
           <ScalarProperty Name="contact_LastName" ColumnName="contact_LastName" />
           <ScalarProperty Name="contact_FirstName" ColumnName="contact_FirstName" />
+          <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
+          <ScalarProperty Name="r_Id" ColumnName="r_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocTrackMains">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.LocTrackMain">
+        <MappingFragment StoreEntitySet="LocTrackMain">
+          <ScalarProperty Name="user_Name" ColumnName="user_Name" />
+          <ScalarProperty Name="ClosePollReady" ColumnName="ClosePollReady" />
+          <ScalarProperty Name="OpenReady" ColumnName="OpenReady" />
+          <ScalarProperty Name="Tuesday_Arrival" ColumnName="Tuesday_Arrival" />
+          <ScalarProperty Name="Building_Open" ColumnName="Building_Open" />
+          <ScalarProperty Name="Monday_Close" ColumnName="Monday_Close" />
+          <ScalarProperty Name="Monday_Arrival" ColumnName="Monday_Arrival" />
+          <ScalarProperty Name="Monday_Delivery" ColumnName="Monday_Delivery" />
+          <ScalarProperty Name="precincts" ColumnName="precincts" />
+          <ScalarProperty Name="ward_Name" ColumnName="ward_Name" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="poll_Address" ColumnName="poll_Address" />
+          <ScalarProperty Name="poll_Name" ColumnName="poll_Name" />
+          <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="audit_Table">
+      <EntityTypeMapping TypeName="ph13696936071_ElectionReportingModel.audit_Table">
+        <MappingFragment StoreEntitySet="audit_Table">
+          <ScalarProperty Name="change_Date" ColumnName="change_Date" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="user_Name" ColumnName="user_Name" />
+          <ScalarProperty Name="status_New" ColumnName="status_New" />
+          <ScalarProperty Name="status_Old" ColumnName="status_Old" />
+          <ScalarProperty Name="mandatory_Calls" ColumnName="mandatory_Calls" />
+          <ScalarProperty Name="location_Name" ColumnName="location_Name" />
           <ScalarProperty Name="poll_Id" ColumnName="poll_Id" />
           <ScalarProperty Name="r_Id" ColumnName="r_Id" />
         </MappingFragment>

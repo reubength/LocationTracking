@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using LocationTracking.Models;
+using System;
 
 namespace LocationTracking
 {
@@ -23,7 +24,7 @@ namespace LocationTracking
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
+                RequireUniqueEmail = false
             };
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
@@ -41,5 +42,12 @@ namespace LocationTracking
             }
             return manager;
         }
+
+        //internal Task AddToFuctionAsync(string id, object dept)
+        //{ 
+
+
+        //    throw new NotImplementedException();
+        //}
     }
 }

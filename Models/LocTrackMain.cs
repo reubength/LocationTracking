@@ -20,12 +20,13 @@ namespace LocationTracking.Models
         public Nullable<int> Zone { get; set; }
         public string ward_Name { get; set; }
         public string precincts { get; set; }
+        public Nullable<int> Monday_Delivery { get; set; }
         public Nullable<int> Monday_Arrival { get; set; }
+        public Nullable<int> Monday_Close { get; set; }
+        public Nullable<int> Building_Open { get; set; }
         public Nullable<int> Tuesday_Arrival { get; set; }
         public Nullable<int> OpenReady { get; set; }
         public Nullable<int> ClosePollReady { get; set; }
-        public Nullable<int> Monday_Delivery { get; set; }
-        public Nullable<int> Monday_Close { get; set; }
-        public Nullable<int> Building_Open { get; set; }
+        public string user_Name { get; set; }
     }
 }

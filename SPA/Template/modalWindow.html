@@ -19,12 +19,12 @@
     <h3 class="modal-title" id="modal-title">{{modalTitle}}</h3>
 </div>
 <div class="modal-body" id="modal-body">
-
-   <p>{{modalBody}}</p>
-    <p>{{modalWard}}</p>
-    
+    <p>{{modalBody}}</p>
+    <p>{{modalWard}}</p>    
 </div>
 <div class="modal-footer">
-    <button class="btn btn-{{Context[buttonClass]}}" type="button" ng-click="ok()">{{modalButtonTxt}}</button>
+    <!--<button ng-show="Context[buttonClass] ==='warning' || Context[buttonClass] ==='primary' " ng-if="Context[buttonClass] ==='warning' || Context[buttonClass] ==='primary'" class="btn btn-success" type="button" ng-click="ok()">{{modalButtonTxt}}</button>
+    <button ng-show="Context[buttonClass] ==='success'" ng-if="Context[buttonClass] ==='success'" class="btn btn-warning" type="button" ng-click="ok()">{{modalButtonTxt}}</button>-->
+    <button   class="btn btn-{{buttonClass}}" type="button" ng-click="ok()">{{modalButtonTxt}}</button>
     <button class="btn btn-danger" type="button" ng-click="cancelModal()">Cancel</button>
 </div>

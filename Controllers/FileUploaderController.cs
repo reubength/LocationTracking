@@ -12,6 +12,8 @@ using LocationTracking.Objects;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Web.Http.Description;
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace LocationTracking.Controllers
 {
@@ -20,8 +22,10 @@ namespace LocationTracking.Controllers
     {
         private ElectionReportingEntities db = new ElectionReportingEntities();
 
+        private ApplicationUserManager _userManager;
 
-         // GET: api/FileUploader
+
+        // GET: api/FileUploader
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -67,7 +71,7 @@ namespace LocationTracking.Controllers
                     excel.readExcelFile(sPath + hfc.AllKeys[i].ToString() + ".csv");
                     if (hfc.AllKeys[i].ToString() == "Location List")
                     {
-                        int colcnt = 4;
+                        int colcnt = 3;
                         // poll_Location poll = new poll_Location();
                         while (colcnt < excel.ReadList.Count)
                         {
@@ -76,14 +80,20 @@ namespace LocationTracking.Controllers
                             colcnt++;
                             poll.poll_Name = excel.ReadList[colcnt].ToString();
                             colcnt++;
-                            poll.poll_Address = excel.ReadList[colcnt].ToString();
-                            colcnt++;
+                            //poll.poll_Address = excel.ReadList[colcnt].ToString();
+                            //colcnt++;
                             poll.Zone = int.Parse(excel.ReadList[colcnt].ToString());
                             colcnt++;
+                            poll.Monday_Delivery = 0;
                             poll.Monday_Arrival = 0;
+                            poll.Monday_Close = 0;
+                            poll.Building_Open = 0;
                             poll.Tuesday_Arrival = 0;
                             poll.OpenReady = 0;
                             poll.ClosePollReady = 0;
+                            poll.user_Name = "Admin";
+                            poll.Role = "Admin";
+
                             db.Entry(poll).State = EntityState.Modified;
 
                             if (!ModelState.IsValid)
@@ -109,23 +119,24 @@ namespace LocationTracking.Controllers
                                 }
                             }
                         }
+
                     }
-                    else if(hfc.AllKeys[i].ToString() == "Location Details")
+                    else if (hfc.AllKeys[i].ToString() == "Location Details")
                     {
-                        int colcnt = 4;
+                        int colcnt = 5;
                         while (colcnt < excel.ReadList.Count)
                         {
                             dbo_poll_ContactDetails pollCnt = new dbo_poll_ContactDetails();
-                           
-                            pollCnt.poll_Id = int.Parse(excel.ReadList[colcnt].ToString()); 
+                            
+                            pollCnt.poll_Id = int.Parse(excel.ReadList[colcnt].ToString());
                             colcnt++;
-                            pollCnt.contact_FirstName = excel.ReadList[colcnt].ToString(); 
+                            pollCnt.contact_FirstName = excel.ReadList[colcnt].ToString();
                             colcnt++;
-                            pollCnt.contact_LastName = excel.ReadList[colcnt].ToString(); 
+                            pollCnt.contact_LastName = excel.ReadList[colcnt].ToString();
                             colcnt++;
-                            pollCnt.contact_Type = excel.ReadList[3].ToString();
-                           // colcnt++;
-                            pollCnt.contact_Info = excel.ReadList[colcnt].ToString(); 
+                            pollCnt.contact_Type = excel.ReadList[colcnt].ToString();
+                             colcnt++;
+                            pollCnt.contact_Info = excel.ReadList[colcnt].ToString();
                             colcnt++;
                             db.Entry(pollCnt).State = EntityState.Modified;
                             if (!ModelState.IsValid)
@@ -198,7 +209,7 @@ namespace LocationTracking.Controllers
                     }
                     else if (hfc.AllKeys[i].ToString() == "KMLFile")
                     {
-                        
+
                     }
                     else if (hfc.AllKeys[i].ToString() == "Polling Location All")
                     {
@@ -247,11 +258,9 @@ namespace LocationTracking.Controllers
                                 {
                                     throw;
                                 }
-                            }
-
-                        }
-
-                    }
+                            } 
+                        } 
+                    } 
                 }
                 DirectoryInfo di = new DirectoryInfo(sPath);                        
                 foreach (FileInfo file in di.GetFiles())
@@ -269,6 +278,7 @@ namespace LocationTracking.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+ 
 
         // PUT: api/FileUploader/5
         //public void Put(int id, [FromBody]string value)

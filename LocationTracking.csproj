@@ -238,6 +238,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AspNetRolesController.cs" />
+    <Compile Include="Controllers\audit_PollTableController.cs" />
     <Compile Include="Controllers\election_PrecinctController.cs" />
     <Compile Include="Controllers\FileUploaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -245,7 +247,7 @@
     <Compile Include="Controllers\poll_ContactDetailsController.cs" />
     <Compile Include="Controllers\poll_LocationController.cs" />
     <Compile Include="Controllers\poll_Location_AllController.cs" />
-    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\RoleController_OLD.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\zonesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -264,6 +266,9 @@
       <DependentUpon>locationTrackingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>locationTrackingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\audit_Table.cs">
       <DependentUpon>locationTrackingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">

@@ -9,11 +9,11 @@ using System.Web.Http;
 
 namespace LocationTracking.Controllers
 {
-    public class RoleController : ApiController
+    public class RoleController_OLD : ApiController
     {
         ApplicationDbContext context;
 
-        public RoleController()
+        public RoleController_OLD()
         {
             context = new ApplicationDbContext();
         }
@@ -21,7 +21,7 @@ namespace LocationTracking.Controllers
         /// Get All Roles
         /// </summary>
         /// <returns></returns>
-        public IHttpActionResult Index()
+        public IHttpActionResult Roles()
         {
             var Roles = context.Roles.ToList();
             return Ok(Roles);

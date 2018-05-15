@@ -35,6 +35,8 @@ namespace LocationTracking.Providers
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
             string rolename = userManager.GetRoles(user.Id).FirstOrDefault(); //await userManager.GetRoles(user.Id).FirstOrDefault();
+         //   string claim = userManager.GetClaimsAsync(user.Id).ToString();
+           // string Dept  = userManager.g
             if (user == null)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
@@ -43,15 +45,18 @@ namespace LocationTracking.Providers
            // userManager.AddToRole(user.UserName, user.Roles);
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
+                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
             //oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
            
             //  oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "User"));
+
             AuthenticationProperties properties = CreateProperties(user.UserName);
             properties.Dictionary.Add("Role", rolename);
+       //     properties.Dictionary.Add("Claim", claim);
+
 
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);

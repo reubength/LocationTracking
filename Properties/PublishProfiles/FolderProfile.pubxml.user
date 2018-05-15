@@ -85,10 +85,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/25/2018 09:35:36</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>03/27/2018 12:42:08</publishTime>
+      <publishTime>05/04/2018 11:56:26</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>03/27/2018 12:42:08</publishTime>
+      <publishTime>05/04/2018 11:56:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -97,10 +97,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/LocationTracking.dll">
-      <publishTime>03/27/2018 12:41:56</publishTime>
+      <publishTime>05/04/2018 11:56:04</publishTime>
     </File>
     <File Include="bin/LocationTracking.pdb">
-      <publishTime>03/27/2018 12:41:56</publishTime>
+      <publishTime>05/04/2018 11:56:04</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>11/30/2016 16:07:42</publishTime>
@@ -373,7 +373,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/30/2018 12:43:30</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>03/16/2018 12:34:15</publishTime>
+      <publishTime>04/23/2018 19:56:45</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
       <publishTime>01/25/2018 09:35:04</publishTime>
@@ -412,13 +412,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/09/2018 09:46:58</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>03/26/2018 10:53:07</publishTime>
+      <publishTime>05/03/2018 15:48:54</publishTime>
     </File>
     <File Include="Models/locationTrackingModel.edmx.diagram">
-      <publishTime>03/06/2018 16:36:24</publishTime>
+      <publishTime>04/30/2018 12:08:56</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>03/27/2018 12:41:59</publishTime>
+      <publishTime>05/04/2018 11:56:11</publishTime>
     </File>
     <File Include="Scripts/angular-animate.js">
       <publishTime>01/25/2018 09:56:46</publishTime>
@@ -2821,76 +2821,85 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/25/2018 09:55:56</publishTime>
     </File>
     <File Include="SPA/app.js">
-      <publishTime>03/23/2018 13:44:42</publishTime>
+      <publishTime>05/03/2018 15:44:47</publishTime>
     </File>
     <File Include="SPA/ElectionSetup/ElectionSetupController.js">
-      <publishTime>03/27/2018 11:29:28</publishTime>
+      <publishTime>04/23/2018 10:18:41</publishTime>
     </File>
     <File Include="SPA/GreenBubbleController/EquipmentController.js">
-      <publishTime>03/27/2018 11:31:09</publishTime>
+      <publishTime>05/03/2018 15:57:47</publishTime>
     </File>
     <File Include="SPA/Home/homeService.js">
-      <publishTime>03/27/2018 12:27:50</publishTime>
+      <publishTime>05/04/2018 08:52:29</publishTime>
     </File>
     <File Include="SPA/InitialServices.js">
-      <publishTime>01/25/2018 13:35:08</publishTime>
+      <publishTime>04/11/2018 10:00:49</publishTime>
     </File>
     <File Include="SPA/Login/loginController.js">
-      <publishTime>03/16/2018 12:54:32</publishTime>
+      <publishTime>04/26/2018 10:33:44</publishTime>
     </File>
     <File Include="SPA/Login/loginServices.js">
-      <publishTime>01/25/2018 13:10:34</publishTime>
+      <publishTime>04/11/2018 10:00:49</publishTime>
     </File>
     <File Include="SPA/MainController.js">
-      <publishTime>03/16/2018 12:44:26</publishTime>
+      <publishTime>05/03/2018 17:32:07</publishTime>
+    </File>
+    <File Include="SPA/MapController/MapController.js">
+      <publishTime>05/04/2018 11:45:46</publishTime>
     </File>
     <File Include="SPA/ModalController/ModalController.js">
-      <publishTime>03/27/2018 10:38:30</publishTime>
+      <publishTime>05/04/2018 11:40:08</publishTime>
     </File>
     <File Include="SPA/SignalRServices/SignalRService.js">
-      <publishTime>03/08/2018 16:09:02</publishTime>
+      <publishTime>04/30/2018 16:49:17</publishTime>
+    </File>
+    <File Include="SPA/Template/modalPollDetails.html">
+      <publishTime>05/04/2018 11:44:15</publishTime>
     </File>
     <File Include="SPA/Template/modalWindow.html">
-      <publishTime>02/05/2018 13:19:56</publishTime>
+      <publishTime>05/02/2018 16:25:36</publishTime>
     </File>
     <File Include="SPA/Template/modalWindowEditZones.html">
-      <publishTime>03/27/2018 10:35:32</publishTime>
+      <publishTime>04/20/2018 09:15:49</publishTime>
     </File>
     <File Include="SPA/Template/modalWindowZones.html">
-      <publishTime>03/26/2018 11:52:35</publishTime>
+      <publishTime>04/11/2018 13:59:27</publishTime>
+    </File>
+    <File Include="SPA/Template/summaryPrintTemplate.html">
+      <publishTime>04/17/2018 14:12:14</publishTime>
     </File>
     <File Include="SPA/UploadFile/fileUploadController.js">
-      <publishTime>03/23/2018 10:09:49</publishTime>
+      <publishTime>04/30/2018 08:53:11</publishTime>
     </File>
     <File Include="SPA/UserProfile/userProfileService.js">
-      <publishTime>03/14/2018 13:15:19</publishTime>
+      <publishTime>04/24/2018 10:24:09</publishTime>
     </File>
     <File Include="SPA/Views/ElectionSetup.html">
-      <publishTime>03/26/2018 16:04:44</publishTime>
+      <publishTime>04/20/2018 09:17:10</publishTime>
     </File>
     <File Include="SPA/Views/grid.html">
-      <publishTime>03/26/2018 16:03:12</publishTime>
+      <publishTime>04/27/2018 13:52:37</publishTime>
     </File>
     <File Include="SPA/Views/map.html">
-      <publishTime>03/26/2018 20:50:08</publishTime>
+      <publishTime>04/27/2018 11:00:42</publishTime>
     </File>
     <File Include="SPA/Views/RegisterUser.html">
-      <publishTime>03/19/2018 09:33:33</publishTime>
+      <publishTime>04/11/2018 10:00:50</publishTime>
     </File>
     <File Include="SPA/Views/SecurityInfo.html">
-      <publishTime>03/19/2018 09:34:07</publishTime>
+      <publishTime>04/11/2018 10:00:50</publishTime>
     </File>
     <File Include="SPA/Views/uploadPage.html">
-      <publishTime>03/26/2018 14:08:26</publishTime>
+      <publishTime>04/11/2018 10:00:50</publishTime>
     </File>
     <File Include="SPA/Zone/ZoneController.js">
-      <publishTime>03/19/2018 11:03:51</publishTime>
+      <publishTime>04/11/2018 10:00:50</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>01/25/2018 09:34:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/06/2018 15:06:11</publishTime>
+      <publishTime>05/01/2018 11:01:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

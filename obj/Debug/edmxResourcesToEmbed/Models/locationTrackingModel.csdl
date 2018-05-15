@@ -15,7 +15,7 @@
     </Key>
     <Property Name="poll_Id" Type="Int32" Nullable="false" />
     <Property Name="poll_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="poll_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="poll_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Zone" Type="Int32" />
     <Property Name="Monday_Arrival" Type="Int32" />
     <Property Name="Tuesday_Arrival" Type="Int32" />
@@ -24,6 +24,8 @@
     <Property Name="Monday_Delivery" Type="Int32" />
     <Property Name="Monday_Close" Type="Int32" />
     <Property Name="Building_Open" Type="Int32" />
+    <Property Name="user_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="poll_Location_All">
     <Key>
@@ -42,7 +44,6 @@
     <EntitySet Name="election_Precinct" EntityType="Self.election_Precinct" />
     <EntitySet Name="poll_Location" EntityType="Self.poll_Location" />
     <EntitySet Name="poll_Location_All" EntityType="Self.poll_Location_All" />
-    <EntitySet Name="LocTrackMains" EntityType="ph13696936071_ElectionReportingModel.LocTrackMain" />
     <EntitySet Name="C__MigrationHistory" EntityType="ph13696936071_ElectionReportingModel.C__MigrationHistory" />
     <EntitySet Name="AspNetRoles" EntityType="ph13696936071_ElectionReportingModel.AspNetRole" />
     <EntitySet Name="AspNetUserClaims" EntityType="ph13696936071_ElectionReportingModel.AspNetUserClaim" />
@@ -57,33 +58,14 @@
       <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
     </AssociationSet>
     <AssociationSet Name="AspNetUserRoles" Association="ph13696936071_ElectionReportingModel.AspNetUserRoles">
-      <End Role="AspNetRole" EntitySet="AspNetRoles" />
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End EntitySet="AspNetRoles" Role="AspNetRole" />
+      <End EntitySet="AspNetUsers" Role="AspNetUser" />
     </AssociationSet>
     <EntitySet Name="dbo_zones" EntityType="ph13696936071_ElectionReportingModel.dbo_zones" />
     <EntitySet Name="dbo_poll_ContactDetails" EntityType="ph13696936071_ElectionReportingModel.dbo_poll_ContactDetails" />
+    <EntitySet Name="LocTrackMains" EntityType="ph13696936071_ElectionReportingModel.LocTrackMain" />
+    <EntitySet Name="audit_Table" EntityType="ph13696936071_ElectionReportingModel.audit_Table" />
   </EntityContainer>
-  <EntityType Name="LocTrackMain">
-    <Key>
-      <PropertyRef Name="poll_Id" />
-      <PropertyRef Name="poll_Name" />
-      <PropertyRef Name="poll_Address" />
-      <PropertyRef Name="ward_Name" />
-    </Key>
-    <Property Name="poll_Id" Type="Int32" Nullable="false" />
-    <Property Name="poll_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="poll_Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Zone" Type="Int32" />
-    <Property Name="ward_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="precincts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Monday_Arrival" Type="Int32" />
-    <Property Name="Tuesday_Arrival" Type="Int32" />
-    <Property Name="OpenReady" Type="Int32" />
-    <Property Name="ClosePollReady" Type="Int32" />
-    <Property Name="Monday_Delivery" Type="Int32" />
-    <Property Name="Monday_Close" Type="Int32" />
-    <Property Name="Building_Open" Type="Int32" />
-  </EntityType>
   <EntityType Name="C__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -172,8 +154,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="AspNetUserRoles">
-    <End Type="ph13696936071_ElectionReportingModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-    <End Type="ph13696936071_ElectionReportingModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <End Type="ph13696936071_ElectionReportingModel.AspNetRole" Multiplicity="*" Role="AspNetRole" />
+    <End Type="ph13696936071_ElectionReportingModel.AspNetUser" Multiplicity="*" Role="AspNetUser" />
   </Association>
   <EntityType Name="dbo_zones">
     <Key>
@@ -195,5 +177,40 @@
     <Property Name="contact_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="contact_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="contact_Info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LocTrackMain">
+    <Key>
+      <PropertyRef Name="poll_Id" />
+      <PropertyRef Name="poll_Name" />
+      <PropertyRef Name="poll_Address" />
+    </Key>
+    <Property Name="poll_Id" Type="Int32" Nullable="false" />
+    <Property Name="poll_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="poll_Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Zone" Type="Int32" />
+    <Property Name="ward_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="precincts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Monday_Delivery" Type="Int32" />
+    <Property Name="Monday_Arrival" Type="Int32" />
+    <Property Name="Monday_Close" Type="Int32" />
+    <Property Name="Building_Open" Type="Int32" />
+    <Property Name="Tuesday_Arrival" Type="Int32" />
+    <Property Name="OpenReady" Type="Int32" />
+    <Property Name="ClosePollReady" Type="Int32" />
+    <Property Name="user_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="audit_Table">
+    <Key>
+      <PropertyRef Name="r_Id" />
+    </Key>
+    <Property Name="r_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="poll_Id" Type="Int32" />
+    <Property Name="location_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mandatory_Calls" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="status_Old" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="status_New" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="change_Date" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

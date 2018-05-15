@@ -17,14 +17,15 @@
             $.connection.hub.logging = true;
             notificationHubProxy = $.connection.locationUpdatesHub;
 
-            notificationHubProxy.client.hello = function () {
+            notificationHubProxy.client.hello = function (item) {
+           //     console.log(item);
 
                //console.log("Hello from ASP.NET Web API");
                var  alert = 1;
                self.setAlert(alert);
 
                $rootScope.$apply(function () {
-                   $rootScope.$broadcast('updateList');
+                   $rootScope.$broadcast('updateList', { loc: item });
                });
           
             };
