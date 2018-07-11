@@ -260,7 +260,7 @@
             method: 'POST',
             url: domain +'/zones/',
             processData: false,
-            contentType: false,
+            //contentType: false,
             data: JSON.stringify({
                 id_zone: data.id_zone,
                 zone: data.zone,

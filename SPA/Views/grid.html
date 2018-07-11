@@ -1,9 +1,9 @@
 ﻿<style>
-    #table
+    /*#table
     {
-        height:400px;
+        height:800px;
         /*padding-top:15px;*/
-    }
+    /*}*/
     
     table tr {
         cursor: pointer;
@@ -37,154 +37,180 @@
         content: "\e084";
     }
 
-        /*th{
-    position:fixed;
-    padding:5px;
-    top:0px;
-    background:#111;
-    color:#fff;
-    width:60px;
-}*/
-        .fitler {
-            margin: 0;
-            box-sizing: unset;
-            padding: 0;
-            border: none;
-            background-color: #fff;
-        }
-    *, *:before, *:after {
-        /* -webkit-box-sizing: border-box; */
-        /*-moz-box-sizing: border-box;*/
-        /* box-sizing: border-box; */
+    .fitler {
+        margin: 0;
+        box-sizing: unset;
+        padding: 0;
+        border: none;
+        background-color: #fff;
     }
-   
+
+    /*tbody {
+        display: block;
+        height: 690px;
+        overflow: auto;
+    }
+
+        thead, tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+    thead {
+        
+        width: calc( 100% - 1.07em );
+    }*/
+    /*#table{
+        height:inherit;
+    }*/
 </style>
 
- <div class="col-lg-12 col-md-12 col-sm-12" ng-controller="EquipmentController" ng-init="populateForm()">          
+ <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="EquipmentController" ng-init="populateForm()">
+    <!--<div class="col-lg-3 col-md-offset-1 col-sm-offset-6 col-xs-offset-6">
+       <toggle ng-model="toggleValue" on="Monday" off="Tuesday" class="slow" ng-change="toggleFun(toggleValue)" onstyle="btn-success" offstyle="btn-warning"></toggle>
+    </div>-->
 
-         <!--<div class="col-lg-3 col-md-offset-1 col-sm-offset-6 col-xs-offset-6">
-             <toggle ng-model="toggleValue" on="Monday" off="Tuesday" class="slow" ng-change="toggleFun(toggleValue)" onstyle="btn-success" offstyle="btn-warning"></toggle>
-            
-         </div>-->
-     <label>Search Location: </label>
-     <input class="form-control col-lg-1" type="search" placeholder="Search Location" ng-model="SearchPollName">
-         <div id="table">             
-             <table class="table table-striped table-bordered ">                 
-                 <thead class="table">
-                     <tr>                        
-                         <th scope="col">
-                             <a ng-click="sortType = 'Poll_Id'; sortReverse = !sortReverse">
-                                 Poll Id
-                                 <span ng-show="sortType == 'Poll_Id' && !sortReverse" class="fa fa-caret-down"></span>
-                                 <span ng-show="sortType == 'Poll_Id' && sortReverse" class="fa fa-caret-up"></span>
-                             </a>
-                         </th>                          
-                         <th scope="col">
-                             <a ng-click="changeSort('Poll_Name')">
-                                 Poll Name
-                                 <span ng-show="sortType == 'Poll_Name' && !sortReverse" class="fa fa-caret-down"></span>
-                                 <span ng-show="sortType == 'Poll_Name' && sortReverse" class="fa fa-caret-up"></span>
-                             </a>
-                         </th>                         
-                         <th scope="col">
-                             <a ng-click="changeSort('Poll_Address')">
-                                 Poll Address
-                                 <span ng-show="sortType == 'Poll_Address' && !sortReverse" class="fa fa-caret-down"></span>
-                                 <span ng-show="sortType == 'Poll_Address' && sortReverse" class="fa fa-caret-up"></span>
-                             </a>
-                         </th>                             
-                             <th scope="col" >                             
-                                     <a ng-click="changeSort('Zone')"  >Zone      
-                                 <span ng-show="sortType == 'Zone' && !sortReverse" class="fa fa-caret-down"></span>
-                                 <span ng-show="sortType == 'Zone' && sortReverse" class="fa fa-caret-up"></span>
-                             </a>                                
-                                 <button class="fitler" ng-click="openModal('','Zone')" ><i class="fa fa-filter" aria-hidden="true"></i></button>
-                            </th>
-                             <th scope="col">
-                                 <a ng-click="changeSort('Ward_Name')">
-                                     City
-                                     <span ng-show="sortType == 'Ward_Name' && !sortReverse" class="fa fa-caret-down"></span>
-                                     <span ng-show="sortType == 'Ward_Name' && sortReverse" class="fa fa-caret-up"></span>
-                                 </a>
-                             </th>                            
-                             <th scope="col">
-                                 <a ng-click="changeSort('Precinct')">
-                                     Precinct
-                                     <span ng-show="sortType == 'Precinct' && !sortReverse" class="fa fa-caret-down"></span>
-                                     <span ng-show="sortType == 'Precinct' && sortReverse" class="fa fa-caret-up"></span>
-                                 </a>
-                             </th>                            
-                         <th scope="col" ng-show="Monday==true && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')">
-                             <a ng-click="changeSort('Monday_Delivery')">
-                                 Monday Delivery
-                                 <span ng-show=" sortType == 'Monday_Delivery' && !sortReverse" class="fa fa-caret-down"></span>
-                                 <span ng-show="  sortType == 'Monday_Delivery' && sortReverse" class="fa fa-caret-up"></span>
-                             </a>
-                         </th>
-                             <th scope="col" ng-show="Monday==true">
-                                 <a ng-click="changeSort('Monday_Arrival')">
-                                     Monday Night Arrival
-                                     <span ng-show=" sortType == 'Monday_Arrival' && !sortReverse" class="fa fa-caret-down"></span>
-                                     <span ng-show="  sortType == 'Monday_Arrival' && sortReverse" class="fa fa-caret-up"></span>
-                                 </a>
-                             </th>
-                         <th scope="col" ng-show="Monday==true">
-                             <a ng-click="changeSort('Monday_Close')">
-                                 Monday Close
-                                 <span ng-show=" sortType == 'Monday_Close' && !sortReverse" class="fa fa-caret-down"></span>
-                                 <span ng-show="  sortType == 'Monday_Close' && sortReverse" class="fa fa-caret-up"></span>
-                             </a>
-                         </th>
-                         <th scope="col" ng-show="Monday==false  && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')">
-                             <a ng-click="changeSort('Building_Open')">
-                                 Building Open
-                                 <span ng-show="Monday==false && sortType == 'Building_Open' && !sortReverse" class="fa fa-caret-down"></span>
-                                 <span ng-show="Monday==false && sortType == 'Building_Open' && sortReverse" class="fa fa-caret-up"></span>
-                             </a>
-                         </th>
-                             <th scope="col" ng-show="Monday==false">
-                                 <a ng-click="changeSort('Tuesday_Arrival')">
-                                     Tuesday Arrival
-                                     <span ng-show="Monday==false && sortType == 'Tuesday_Arrival' && !sortReverse" class="fa fa-caret-down"></span>
-                                     <span ng-show="Monday==false && sortType == 'Tuesday_Arrival' && sortReverse" class="fa fa-caret-up"></span>
-                                 </a>
-                             </th>                             
-                             <th scope="col" ng-show="Monday==false">
-                                 <a ng-click="changeSort('Open_Ready')">
-                                     Open & Ready
-                                     <span ng-show="Monday==false && sortType == 'Open_Ready' && !sortReverse" class="fa fa-caret-down"></span>
-                                     <span ng-show="Monday==false && sortType == 'Open_Ready' && sortReverse" class="fa fa-caret-up"></span>
-                                 </a>
-                             </th>
-                             
-                             <th scope="col" ng-show="Monday==false">
-                                 <a ng-click="changeSort('Close_Poll_Report')">
-                                     Close Poll Ready
-                                     <span ng-show="Monday==false && sortType == 'Close_Poll_Report' && !sortReverse" class="fa fa-caret-down"></span>
-                                     <span ng-show="Monday==false && sortType == 'Close_Poll_Report' && sortReverse" class="fa fa-caret-up"></span>
-                                 </a>
-                             </th>
-                     </tr>
-                 </thead>
+    <label>Search Location: </label>
+    <input class="form-control col-lg-2" type="search" placeholder="Search Location" ng-model="SearchPollName">
+    <div id="table">
+        <table class="table table-striped table-bordered  ">
+            <thead >
+                <tr>
+                    <th scope="col">
+                        <a ng-click="sortType = 'Poll_Id'; sortReverse = !sortReverse">
+                            Poll Id
+                            <span ng-show="sortType == 'Poll_Id' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Poll_Id' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a ng-click="changeSort('Poll_Name')">
+                            Poll Name
+                            <span ng-show="sortType == 'Poll_Name' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Poll_Name' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a ng-click="changeSort('Poll_Address')">
+                            Poll Address
+                            <span ng-show="sortType == 'Poll_Address' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Poll_Address' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a ng-click="changeSort('Zone')">
+                            Zone
+                            <span ng-show="sortType == 'Zone' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Zone' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                        <button class="fitler" ng-click="openModal('','Zone')"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">
+                        <a ng-click="changeSort('Ward_Name')">
+                            City
+                            <span ng-show="sortType == 'Ward_Name' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Ward_Name' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a ng-click="changeSort('Precinct')">
+                            Precinct
+                            <span ng-show="sortType == 'Precinct' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Precinct' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col" ng-show="Monday==true && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')">
+                        <a ng-click="changeSort('Monday_Delivery')">
+                            Monday Delivery
+                            <span ng-show=" sortType == 'Monday_Delivery' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="  sortType == 'Monday_Delivery' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col" ng-show="Monday==true">
+                        <a ng-click="changeSort('Monday_Arrival')">
+                            Monday Night Arrival
+                            <span ng-show=" sortType == 'Monday_Arrival' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="  sortType == 'Monday_Arrival' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col" ng-show="Monday==true">
+                        <a ng-click="changeSort('Monday_Close')">
+                            Monday Close
+                            <span ng-show="  sortType == 'Monday_Close' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="  sortType == 'Monday_Close' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col" ng-show="Monday==false  && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')">
+                        <a ng-click="changeSort('Building_Open')">
+                            Building Open
+                            <span ng-show="Monday==false && sortType == 'Building_Open' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Monday==false && sortType == 'Building_Open' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col" ng-show="Monday==false">
+                        <a ng-click="changeSort('Tuesday_Arrival')">
+                            Tuesday Arrival
+                            <span ng-show="Monday==false && sortType == 'Tuesday_Arrival' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Monday==false && sortType == 'Tuesday_Arrival' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th scope="col" ng-show="Monday==false">
+                        <a ng-click="changeSort('Open_Ready')">
+                            Open & Ready
+                            <span ng-show="Monday==false && sortType == 'Open_Ready' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Monday==false && sortType == 'Open_Ready' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
 
-                 <tbody>
-                     <tr scope="row" ng-repeat="pl in PollLoc | orderBy:sortType:sortReverse | filter:filterMakes() | filter:SearchPollName" class="active">
-                         <td ng-class-odd="'odd'"><span class="fa fa-info-circle" ng-click="openModal(pl,'Poll Details')"> </span>  {{pl.Poll_Id}}</td>
-                         <td ng-class-odd="'odd'">{{pl.Poll_Name}} </td>
-                         <td ng-class-odd="'odd'">{{pl.Poll_Address}}</td>
-                         <td ng-class-odd="'odd'">{{pl.Zone}}</td>
-                         <td ng-class-odd="'odd'">{{pl.Ward_Name }}</td>
-                         <td ng-class-odd="'odd'">{{pl.Precinct }}</td>
-                         <td ng-class-odd="'odd'" ng-show="Monday==true  && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')"  ng-click="openModal(pl,'Monday_Delivery')" class="{{pl.Monday_Delivery}}"><span class="glyphicon glyphicon-{{pl.Monday_Delivery}}-sign"></span></td>
-                         <td ng-class-odd="'odd'" ng-show="Monday==true"  ng-click="openModal(pl,'Monday_Arrival')" class="{{pl.Monday_Arrival}}"><span class="glyphicon glyphicon-{{pl.Monday_Arrival}}-sign"></span></td>
-                         <td ng-class-odd="'odd'" ng-show="Monday==true"  ng-click="openModal(pl,'Monday_Close')" class="{{pl.Monday_Close}}"><span class="glyphicon glyphicon-{{pl.Monday_Close}}-sign"></span></td>
-                         <td ng-class-odd="'odd'" ng-show="Monday==false  && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')" ng-click="openModal(pl,'Building_Open')" class="{{pl.Building_Open}}"><span class="glyphicon glyphicon-{{pl.Building_Open}}-sign"></span></td>
-                         <td ng-class-odd="'odd'" ng-show="Monday==false" ng-click="openModal(pl,'Tuesday_Arrival')" class="{{pl.Tuesday_Arrival}}"><span class="glyphicon glyphicon-{{pl.Tuesday_Arrival}}-sign"></span></td>
-                         <td ng-class-odd="'odd'" ng-show="Monday==false" ng-click="openModal(pl,'Open_Ready')" class="{{pl.Open_Ready}}"><span class="glyphicon glyphicon-{{pl.Open_Ready}}-sign"></span></td>
-                         <td ng-class-odd="'odd'" ng-show="Monday==false" ng-click="openModal(pl,'Close_Poll_Report')" class="{{pl.Close_Poll_Report}}"><span class="glyphicon glyphicon-{{pl.Close_Poll_Report}}-sign"></span></td>                         
-                     </tr>
-                   
-                 </tbody>
-             </table>
-         </div>
-     </div>
+                    <th scope="col" ng-show="Monday==false">
+                        <a ng-click="changeSort('Close_Poll_Report')">
+                            Close Poll Ready
+                            <span ng-show="Monday==false && sortType == 'Close_Poll_Report' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Monday==false && sortType == 'Close_Poll_Report' && sortReverse"  class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead> 
+
+            <tbody>
+                <tr scope="row" ng-repeat="pl in PollLoc | orderBy:sortType:sortReverse | filter:filterMakes() | filter:SearchPollName" class="active">
+                    <td ng-class-odd="'odd'"><span class="fa fa-info-circle" ng-click="openModal(pl,'Poll Details')"> </span>  {{pl.Poll_Id}}</td>
+                    <td ng-class-odd="'odd'">{{pl.Poll_Name}} </td>
+                    <td ng-class-odd="'odd'">{{pl.Poll_Address}}</td>
+                    <td ng-class-odd="'odd'">{{pl.Zone}}</td>
+                    <td ng-class-odd="'odd'">{{pl.Ward_Name }}</td>
+                    <td ng-class-odd="'odd'">{{pl.Precinct }}</td>
+                    <td ng-class-odd="'odd'" ng-show="Monday==true   && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')" 
+                        ng-click="openModal(pl,'Monday_Delivery')" class="{{pl.Monday_Delivery}}"><span class="glyphicon glyphicon-{{pl.Monday_Delivery}}-sign"></span>
+                    </td>
+
+                    <td ng-class-odd="'odd'" ng-show="Monday==true"  ng-click="openModal(pl,'Monday_Arrival')" 
+                        class="{{pl.Monday_Arrival}}"><span class="glyphicon glyphicon-{{pl.Monday_Arrival}}-sign"></span>
+                    </td>
+
+                    <td ng-class-odd="'odd'" ng-show="Monday==true"  ng-click="openModal(pl,'Monday_Close')"   
+                        class="{{pl.Monday_Close}}"><span class="glyphicon glyphicon-{{pl.Monday_Close}}-sign"></span>
+                    </td>
+
+                    <td ng-class-odd="'odd'" ng-show="Monday==false  && ( Role =='Admin' || Role =='Manager' || Role =='Supervisor' || Role =='Zone Captains')"
+                        ng-click="openModal(pl,'Building_Open')" class="{{pl.Building_Open}}"><span class="glyphicon glyphicon-{{pl.Building_Open}}-sign"></span>
+                    </td>
+
+                    <td ng-class-odd="'odd'" ng-show="Monday==false" ng-click="openModal(pl,'Tuesday_Arrival')" 
+                        class="{{pl.Tuesday_Arrival}}"><span class="glyphicon glyphicon-{{pl.Tuesday_Arrival}}-sign"></span>
+                    </td>
+
+                    <td ng-class-odd="'odd'" ng-show="Monday==false" ng-click="openModal(pl,'Open_Ready')" 
+                        class="{{pl.Open_Ready}}"><span class="glyphicon glyphicon-{{pl.Open_Ready}}-sign"></span>
+                    </td>
+
+                    <td ng-class-odd="'odd'" ng-show="Monday==false" ng-click="openModal(pl,'Close_Poll_Report')" 
+                        class="{{pl.Close_Poll_Report}}"><span class="glyphicon glyphicon-{{pl.Close_Poll_Report}}-sign"></span>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

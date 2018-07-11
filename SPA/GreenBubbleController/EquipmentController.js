@@ -172,6 +172,14 @@
         $scope.params.text = null;
     }
 
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+
+
+//$(window).on("load resize ", function() {
+//    var scrollWidth = $('tbody').width() - $('tbody ').width();
+//  $('thead').css({'padding-right':scrollWidth});
+//}).resize();
+
 
     $scope.changeSort = function (name) {
         $scope.sortType = name; // set the default sort type
@@ -277,8 +285,7 @@
     } 
 
     $scope.openModal = function (e, x) {
-        if (x ==='Zone')
-        {
+        if (x === 'Zone') {
             if (userProfile.getProfile().username != null) {
                 $scope.Clicked = x;
                 $scope.modalInstance = $uibModal.open({
@@ -300,13 +307,12 @@
                     }
                 });
                 $scope.modalInstance.result.then(function (response) {
-                 //   console.log(response);
-                    pollLoc.setzoneDefaults( response );
+                    //   console.log(response);
+                    pollLoc.setzoneDefaults(response);
                 });
             }
         }
-        else if (x === 'Poll Details')
-        {
+        else if (x === 'Poll Details') {
             if (userProfile.getProfile().username != null) {
                 $scope.Clicked = x;
                 $scope.modalInstance = $uibModal.open({
@@ -315,7 +321,7 @@
                     templateUrl: 'SPA/Template/modalPollDetails.html',
                     controller: 'modalController',
                     controllerAs: '$ctrl',
-                   
+
                     size: 'lg',
                     resolve:
                     {
@@ -332,16 +338,15 @@
                     //$scope.ZoneDefault = response;
                 });
             }
-        }       
-        else
-        {
+        }
+        else {
             //$scope.Clicked = x;
             if (userProfile.getProfile().username != null)
             //if (userProfile.getProfile().username != null && !(e[$scope.Clicked] === 'success' && userProfile.getProfile().Role === 'Phone Operator'))
             {
                 $scope.Clicked = x;
-                
-            //   if (e[$scope.Clicked] === 'success' && userProfile.getProfile().Role != 'Phone Operator')
+
+                //   if (e[$scope.Clicked] === 'success' && userProfile.getProfile().Role != 'Phone Operator')
 
                 $scope.modalInstance = $uibModal.open({
                     ariaLabelledBy: 'modal-title',
@@ -364,15 +369,13 @@
 
                 $scope.modalInstance.result.then(function (response) {
                     //console.log(e);
-                    if (response === 'save')
-                    {                    
+                    if (response === 'save') {
                         if (userProfile.getProfile().Role === 'Admin' || userProfile.getProfile().Role === 'Manager' ||
-                            userProfile.getProfile().Role === 'Supervisor' || userProfile.getProfile().Role === 'Election Support' || userProfile.getProfile().Role === 'Zone Captains')
-                        {
+                            userProfile.getProfile().Role === 'Supervisor' || userProfile.getProfile().Role === 'Election Support' || userProfile.getProfile().Role === 'Zone Captains') {
                             //if (e.Monday_Delivery === "warning" && $scope.Clicked === "Monday_Delivery") {
                             //    e.Monday_Delivery = "success";
                             //}
-                             if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
+                            if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
                                 e.Monday_Delivery = "warning";
                             }
 
@@ -383,13 +386,11 @@
                             //else if (e.Building_Open === "success" && $scope.Clicked === "Building_Open") {
                             //    e.Monday_Delivery = "warning";
                             //}
-                            else if (e[$scope.Clicked] === "warning")
-                            {
-                                  e[$scope.Clicked] = "primary";
+                            else if (e[$scope.Clicked] === "warning") {
+                                e[$scope.Clicked] = "primary";
                             }
-                            else if (e[$scope.Clicked] === "success"||e[$scope.Clicked] === "primary")
-                            {
-                                  e[$scope.Clicked] = "warning";
+                            else if (e[$scope.Clicked] === "success" || e[$scope.Clicked] === "primary") {
+                                e[$scope.Clicked] = "warning";
                             }
 
 
@@ -442,136 +443,134 @@
                             //    e.Close_Poll_Report = "warning";
                             //}
                         }
-//************************************************************************************************************************************************************************************//
-//*******************************************************************************Condition For Phone Operator*************************************************************************//
-//************************************************************************************************************************************************************************************//
-                        else if (userProfile.getProfile().Role === 'Phone Operator')
-                        {
-                              
-                            //else if (e[$scope.Clicked] === "warning" || e[$scope.Clicked] === "primary")
-                            //{
-                            //      e[$scope.Clicked] = "success";
+                        //************************************************************************************************************************************************************************************//
+                        //*******************************************************************************Condition For Phone Operator*************************************************************************//
+                        //************************************************************************************************************************************************************************************//
+                        else if (userProfile.getProfile().Role === 'Phone Operator') {
+
+                            if (e[$scope.Clicked] === "warning" || e[$scope.Clicked] === "primary") {
+                                e[$scope.Clicked] = "success";
+                            }
+                            else if (e[$scope.Clicked] === "success") {
+                                e[$scope.Clicked] = "warning";
+                            }
+
+
+
+
+                            //    if ((e.Monday_Delivery === "warning" || e.Monday_Delivery === "primary") && $scope.Clicked === "Monday_Delivery") {
+                            //    e.Monday_Delivery = "success";
                             //}
-                            //else if (e[$scope.Clicked] === "success" )
-                            //{
-                            //      e[$scope.Clicked] = "warning";
+                            //else if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
+                            //   // e.Monday_Delivery = "success";
                             //}
 
+                            //    if ((e.Monday_Arrival === "warning" || e.Monday_Arrival === "primary" ) && $scope.Clicked === "Monday_Arrival") {
+                            //    e.Monday_Arrival = "success";
+                            //}
+                            //else if (e.Monday_Arrival === "success" && $scope.Clicked === "Monday_Arrival") {
+                            //    e.Monday_Arrival = "warning";
+                            //}
 
+                            //    if ((e.Monday_Close === "warning" || e.Monday_Close === "primary") && $scope.Clicked === "Monday_Close") {
+                            //    e.Monday_Close = "success";
+                            //}
+                            //else if (e.Monday_Close === "success" && $scope.Clicked === "Monday_Close") {
+                            //    e.Monday_Close = "warning";
+                            //}
 
+                            //if (e.Building_Open === "warning"  && $scope.Clicked === "Building_Open") {
+                            //    e.Building_Open = "success";
+                            //}
+                            //else if (e.Building_Open === "success" && $scope.Clicked === "Building_Open") {
+                            //    e.Building_Open = "warning";
+                            //}
 
-                        //    if ((e.Monday_Delivery === "warning" || e.Monday_Delivery === "primary") && $scope.Clicked === "Monday_Delivery") {
-                        //    e.Monday_Delivery = "success";
-                        //}
-                        //else if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
-                        //   // e.Monday_Delivery = "success";
-                        //}
+                            //if ((e.Tuesday_Arrival === "warning" || e.Tuesday_Arrival === "primary") && $scope.Clicked === "Tuesday_Arrival") {
+                            //e.Tuesday_Arrival = "success";
+                            //}
+                            //else if (e.Tuesday_Arrival === "success" && $scope.Clicked === "Tuesday_Arrival") {
+                            //    e.Tuesday_Arrival = "warning";
+                            //}
 
-                            if ((e.Monday_Arrival === "warning" || e.Monday_Arrival === "primary" ) && $scope.Clicked === "Monday_Arrival") {
-                            e.Monday_Arrival = "success";
+                            //    if ((e.Open_Ready === "warning" || e.Open_Ready === "primary") && $scope.Clicked === "Open_Ready") {
+                            //    e.Open_Ready = "success";
+                            //}
+                            //else if (e.Open_Ready === "success" && $scope.Clicked === "Open_Ready") {
+                            //    e.Open_Ready = "warning";
+                            //}
+
+                            //if ((e.Close_Poll_Report === "warning" || e.Close_Poll_Report === "primary" )&& $scope.Clicked === "Close_Poll_Report") {
+                            //    e.Close_Poll_Report = "success";
+                            //}
+                            //else if (e.Close_Poll_Report === "success" && $scope.Clicked === "Close_Poll_Report") {
+                            //    e.Close_Poll_Report = "warning";
+                            //}
+                            //}
+                            //if (e.Monday_Delivery === "warning" && $scope.Clicked === "Monday_Delivery") {
+                            //    e.Monday_Delivery = "success";
+                            //}
+                            //else if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
+                            //    e.Monday_Delivery = "warning";
+                            //}
+
+                            //if (e.Monday_Arrival === "warning" && $scope.Clicked === "Monday_Arrival") {
+                            //    e.Monday_Arrival = "success";
+                            //}
+                            //else if (e.Monday_Arrival === "success" && $scope.Clicked === "Monday_Arrival") {
+                            //    e.Monday_Arrival = "warning";
+                            //}
+
+                            //if (e.Monday_Close === "warning" && $scope.Clicked === "Monday_Close") {
+                            //    e.Monday_Close = "success";
+                            //}
+                            //else if (e.Monday_Close === "success" && $scope.Clicked === "Monday_Close") {
+                            //    e.Monday_Close = "warning";
+                            //}
+
+                            //if (e.Building_Open === "warning" && $scope.Clicked === "Building_Open") {
+                            //    e.Building_Open = "success";
+                            //}
+                            //else if (e.Building_Open === "success" && $scope.Clicked === "Building_Open") {
+                            //    e.Building_Open = "warning";
+                            //}
+
+                            //if (e.Tuesday_Arrival === "warning" && $scope.Clicked === "Tuesday_Arrival") {
+                            //    e.Tuesday_Arrival = "success";
+                            //}
+                            //else if (e.Tuesday_Arrival === "success" && $scope.Clicked === "Tuesday_Arrival") {
+                            //    e.Tuesday_Arrival = "warning";
+                            //}
+
+                            //if (e.Open_Ready === "warning" && $scope.Clicked === "Open_Ready") {
+                            //    e.Open_Ready = "success";
+                            //}
+                            //else if (e.Open_Ready === "success" && $scope.Clicked === "Open_Ready") {
+                            //    e.Open_Ready = "warning";
+                            //}
+
+                            //if (e.Close_Poll_Report === "warning" && $scope.Clicked === "Close_Poll_Report") {
+                            //    e.Close_Poll_Report = "success";
+                            //}
+                            //else if (e.Close_Poll_Report === "success" && $scope.Clicked === "Close_Poll_Report") {
+                            //    e.Close_Poll_Report = "warning";
+                            //}
+                            pollLoc.SubmitpollLocStat(e).then(function (response) {
+                                //console.log(response);
+                                //   $scope.populateForm();
+                            })
+
                         }
-                        else if (e.Monday_Arrival === "success" && $scope.Clicked === "Monday_Arrival") {
-                            e.Monday_Arrival = "warning";
-                        }
 
-                            if ((e.Monday_Close === "warning" || e.Monday_Close === "primary") && $scope.Clicked === "Monday_Close") {
-                            e.Monday_Close = "success";
-                        }
-                        else if (e.Monday_Close === "success" && $scope.Clicked === "Monday_Close") {
-                            e.Monday_Close = "warning";
-                        }
+                    }
+                    else {
 
-                        //if (e.Building_Open === "warning"  && $scope.Clicked === "Building_Open") {
-                        //    e.Building_Open = "success";
-                        //}
-                        //else if (e.Building_Open === "success" && $scope.Clicked === "Building_Open") {
-                        //    e.Building_Open = "warning";
-                        //}
-
-                        if ((e.Tuesday_Arrival === "warning" || e.Tuesday_Arrival === "primary") && $scope.Clicked === "Tuesday_Arrival") {
-                        e.Tuesday_Arrival = "success";
-                        }
-                        else if (e.Tuesday_Arrival === "success" && $scope.Clicked === "Tuesday_Arrival") {
-                            e.Tuesday_Arrival = "warning";
-                        }
-
-                            if ((e.Open_Ready === "warning" || e.Open_Ready === "primary") && $scope.Clicked === "Open_Ready") {
-                            e.Open_Ready = "success";
-                        }
-                        else if (e.Open_Ready === "success" && $scope.Clicked === "Open_Ready") {
-                            e.Open_Ready = "warning";
-                        }
-
-                        if ((e.Close_Poll_Report === "warning" || e.Close_Poll_Report === "primary" )&& $scope.Clicked === "Close_Poll_Report") {
-                            e.Close_Poll_Report = "success";
-                        }
-                        else if (e.Close_Poll_Report === "success" && $scope.Clicked === "Close_Poll_Report") {
-                            e.Close_Poll_Report = "warning";
-                        }
-                        }
-                        //if (e.Monday_Delivery === "warning" && $scope.Clicked === "Monday_Delivery") {
-                        //    e.Monday_Delivery = "success";
-                        //}
-                        //else if (e.Monday_Delivery === "success" && $scope.Clicked === "Monday_Delivery") {
-                        //    e.Monday_Delivery = "warning";
-                        //}
-
-                        //if (e.Monday_Arrival === "warning" && $scope.Clicked === "Monday_Arrival") {
-                        //    e.Monday_Arrival = "success";
-                        //}
-                        //else if (e.Monday_Arrival === "success" && $scope.Clicked === "Monday_Arrival") {
-                        //    e.Monday_Arrival = "warning";
-                        //}
-
-                        //if (e.Monday_Close === "warning" && $scope.Clicked === "Monday_Close") {
-                        //    e.Monday_Close = "success";
-                        //}
-                        //else if (e.Monday_Close === "success" && $scope.Clicked === "Monday_Close") {
-                        //    e.Monday_Close = "warning";
-                        //}
-
-                        //if (e.Building_Open === "warning" && $scope.Clicked === "Building_Open") {
-                        //    e.Building_Open = "success";
-                        //}
-                        //else if (e.Building_Open === "success" && $scope.Clicked === "Building_Open") {
-                        //    e.Building_Open = "warning";
-                        //}
-
-                        //if (e.Tuesday_Arrival === "warning" && $scope.Clicked === "Tuesday_Arrival") {
-                        //    e.Tuesday_Arrival = "success";
-                        //}
-                        //else if (e.Tuesday_Arrival === "success" && $scope.Clicked === "Tuesday_Arrival") {
-                        //    e.Tuesday_Arrival = "warning";
-                        //}
-
-                        //if (e.Open_Ready === "warning" && $scope.Clicked === "Open_Ready") {
-                        //    e.Open_Ready = "success";
-                        //}
-                        //else if (e.Open_Ready === "success" && $scope.Clicked === "Open_Ready") {
-                        //    e.Open_Ready = "warning";
-                        //}
-
-                        //if (e.Close_Poll_Report === "warning" && $scope.Clicked === "Close_Poll_Report") {
-                        //    e.Close_Poll_Report = "success";
-                        //}
-                        //else if (e.Close_Poll_Report === "success" && $scope.Clicked === "Close_Poll_Report") {
-                        //    e.Close_Poll_Report = "warning";
-                        //}
-                        pollLoc.SubmitpollLocStat(e).then(function (response) {
-                            //console.log(response);
-                         //   $scope.populateForm();
-                        })
-
-                    }                  
-                    
+                    }
                 });
             }
-            else
-            {
 
-            }
         }
-    }  
+    }
 
     $scope.selectZones = function ( p , k) {
         //console.log(k);

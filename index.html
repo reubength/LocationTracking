@@ -8,16 +8,15 @@
     <script src="Scripts/angular-animate.min.js"></script>
     <script src="Scripts/angular-touch.min.js"></script>
     <script src="Scripts/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
     <script src="Scripts/ng-map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHlI2lKUMykO3mHXvoBnDkI1yQcFgRR8s"></script>
 
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/ui-bootstrap-tpls-2.5.0.js"></script>
-    <link href="Content/angular-bootstrap-toggle.css" rel="stylesheet" />
 
+    <link href="Content/angular-bootstrap-toggle.css" rel="stylesheet" /> 
     <link href="Content/bootstrap.css" rel="stylesheet" />
 
     <script src="Scripts/angular-bootstrap-toggle.js"></script>
@@ -37,9 +36,7 @@
 
     <script src="/signalr/hubs"></script>
     <script src="SPA/app.js"></script>
-
-    <!-- <script src="SPA/routes.js"></script>-->
-    <!-- <script src="SPA/mapApp.js"></script>-->
+ 
 
     <style>
         html, body {
@@ -59,6 +56,7 @@
             border: 1px solid blue;
             border-right: 1px solid blue;*/
             max-width:80%;
+            height:inherit;
         }
         .slow .toggle-group {
             transition: left 0.7s;
@@ -244,47 +242,76 @@
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span> 
                             <span class="icon-bar"></span>
                         </button>
                     </div>
                    
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">    
                         <ul class="nav navbar-nav">
-                            <li class="nav-item ">
-                                <a target="_blank" class="callhplink"  href="http://boeweb/mainweb/default.aspx" >Call Center </a>
-                            </li>
+                        <li class="nav-item ">
+                            <a target="_blank" class="callhplink"  href="http://boeweb/mainweb/default.aspx" >Call Center</a>
+                        </li>
+                        </ul>
+                        <div class="navbar-default navbar-right">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown nav-item">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" ng-show='loggedin==true' aria-expanded="false"><i class="glyphicon glyphicon-user"></i> {{username}} <span class="caret"></span></a>
+                                    <a class="dropdown-toggle" ng-show='loggedin==false' ng-click="login()"><i class="glyphicon glyphicon-user"></i> Login</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'" ng-click="register()"><a>Add Users</a></li>
+                                        <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'"><a href="#!/ElectionSetup">Election Setup</a></li>
+                                        <li ng-click="logout()"><a>Logout</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                            <div class=" navbar-default navbar-right ">
-                                <ul class="nav navbar-nav ">
-                                    <li class="dropdown nav-item">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" ng-show='loggedin==true' aria-expanded="false"><i class="glyphicon glyphicon-user"></i> {{username}} <span class="caret"></span></a>
-                                        <a class="dropdown-toggle" ng-show='loggedin==false' ng-click="login()"><i class="glyphicon glyphicon-user"></i> Login</a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'" ng-click="register()"><a>Add Users</a></li>
-                                            <li ng-show="Role =='Admin' || Role =='Manager' || Role =='Supervisor'"><a href="#!/ElectionSetup">Election Setup</a></li>
-                                            <li ng-click="logout()"><a>Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="colorBar" ng-show='loggedin==true'>                    
                 </div>              
             </nav>
+            <!-- Top information badges with number of locations, and statuses with location not ready -->
             <div class="col-lg-12 " ng-show="loggedin==true && infoTop == true ">
                 <div class="badgeGrp">                    
                     <span class="badge badge-primary">Locations: {{(locCountInfo).length}} </span>
-                    <span class="badge badge-primary active" id="Monday_Delivery" ng-click="setActive('Monday_Delivery')" >Monday Delivery: {{(locCountInfo | filter :  { Monday_Delivery: 'warning' } : true).length   }}</span>
-                    <span class="badge badge-primary" id="Monday_Arrival" ng-click="setActive('Monday_Arrival')">Monday Arrival: {{(locCountInfo | filter :  { Monday_Arrival: 'warning' } : true).length }}</span>
-                    <span class="badge badge-primary" id="Monday_Close" ng-click="setActive('Monday_Close')">Monday Close: {{(locCountInfo | filter : { Monday_Close: 'warning' } : true).length }}</span>
-                    <span class="badge badge-primary" id="Building_Open" ng-click="setActive('Building_Open')">Building Open: {{(locCountInfo  | filter : { Building_Open: 'warning' } : true).length}} </span>
-                    <span class="badge badge-primary" id="Tuesday_Arrival" ng-click="setActive('Tuesday_Arrival')">Tuesday Arrival: {{(locCountInfo  | filter : { Tuesday_Arrival: 'warning' } : true).length}} </span>
-                    <span class="badge badge-primary" id="Open_Ready" ng-click="setActive('Open_Ready')">Open Ready: {{(locCountInfo  | filter : { Open_Ready: 'warning' } : true).length}} </span>
-                    <span class="badge badge-primary" id="Close_Poll_Report" ng-click="setActive('Close_Poll_Report')">Close Poll Report: {{(locCountInfo | filter : { Close_Poll_Report: 'warning' } : true).length}}</span>
-                    <button class="btn btn-primary glyphBtton " ng-click="changeView()" ng-show="gridView==false"><span class="glyphicon glyphicon-list"></span></button>
-                    <button class="btn btn-primary glyphBtton" ng-click="changeView()" ng-show="gridView==true && Role != 'Phone Operator' "><span class="glyphicon glyphicon-map-marker"></span></button>
+
+                    <span class="badge badge-primary active" id="Monday_Delivery" ng-click="setActive('Monday_Delivery')">
+                        Monday Delivery: {{(locCountInfo | filter :  { Monday_Delivery: 'warning' } : true).length   }}
+                    </span>
+
+                    <span class="badge badge-primary" id="Monday_Arrival" ng-click="setActive('Monday_Arrival')">
+                        Monday Arrival: {{(locCountInfo | filter :  { Monday_Arrival: 'warning' } : true).length }}
+                    </span>
+
+                    <span class="badge badge-primary" id="Monday_Close" ng-click="setActive('Monday_Close')">
+                        Monday Close: {{(locCountInfo | filter : { Monday_Close: 'warning' } : true).length }}
+                    </span>
+
+                    <span class="badge badge-primary" id="Building_Open" ng-click="setActive('Building_Open')">
+                        Building Open: {{(locCountInfo  | filter : { Building_Open: 'warning' } : true).length}} 
+                    </span>
+
+                    <span class="badge badge-primary" id="Tuesday_Arrival" ng-click="setActive('Tuesday_Arrival')">
+                        Tuesday Arrival: {{(locCountInfo  | filter : { Tuesday_Arrival: 'warning' } : true).length}} 
+                    </span>
+
+                    <span class="badge badge-primary" id="Open_Ready" ng-click="setActive('Open_Ready')">
+                        Open Ready: {{(locCountInfo  | filter : { Open_Ready: 'warning' } : true).length}} 
+                    </span>
+
+                    <span class="badge badge-primary" id="Close_Poll_Report" ng-click="setActive('Close_Poll_Report')">
+                        Close Poll Report: {{(locCountInfo | filter : { Close_Poll_Report: 'warning' } : true).length}}
+                    </span>
+
+                    <button class="btn btn-primary glyphBtton " ng-click="changeView()" ng-show="gridView==false">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </button>
+
+                    <button class="btn btn-primary glyphBtton" ng-click="changeView()" ng-show="gridView==true && Role != 'Phone Operator' ">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                    </button>
+
                 </div>
             </div>
             <div>

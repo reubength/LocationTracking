@@ -135,7 +135,6 @@ namespace LocationTracking.Controllers
                     }
                 }
             }
-
             // return StatusCode(HttpStatusCode.NoContent);
             else
             { 
